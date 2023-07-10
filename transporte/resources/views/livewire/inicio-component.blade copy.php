@@ -13,15 +13,15 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid bg-warning">
-        <a class="navbar-brand text-center justify-center" href="#">
-            <img src="/img/logo/logomaxbus.png" alt="" width="80" height="65" class="d-inline-block align-text-bottom ml-3 pl-5">
-        </a>
+        <a class="navbar-brand" href="#">
+            <img src="/public/img/logo/logomaxbus.png" alt="" width="30" height="24"
+                class="d-inline-block align-text-top">Max Bus</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Inicio</a>
@@ -29,7 +29,8 @@
                 <li class="nav-item">
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Productos</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Paquetes</a></li>
                         <li><a class="dropdown-item" href="#">Escapadas</a></li>
@@ -133,64 +134,62 @@
 
     <!-- INICIA CARDS -->
 
-    <div class="row col-12 py-2 justify-content-center">
+    <div class="row col-12">
 
         <!-- CARD 1 -->
-
-            <div class="card p-2 m-2 shadow" style="width: 25rem; max-height: 100%">
-                <img src="/img/productos/ny.png" class="card-img-top w-100 h-100 rounded-md" alt="...">
+        <div class="col xs-12 ms-4 md-4 lg-4 xl-3" style="height: 25rem;">
+            <div class="card" style="width: 25rem; max-height: 100%">
+                <img src="/img/productos/ny.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         cards content.</p>
                     <h3 class="text-center">12 Cuotas de $ 4300</h3>
-                    <div class="text-right">
-                        <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
-                    </div>
+                    <a href="#" class="btn btn-primary">Comprar</a>
                 </div>
             </div>
-
+        </div>
 
         <!-- CARD 2 -->
-
-            <div class="card p-2 m-2 shadow" style="width: 25rem; max-height: 100%;">
-                <img src="/img/productos/ny2.png" class="card-img-top w-100 h-100 rounded-md" alt="...">
+        <div class="col xs-12 ms-4 md-4 lg-4 xl-3">
+            <div class="card" style="width: 25rem; max-height: 100%;">
+                <img src="/img/productos/ny2.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         cards content.</p>
                     <h3 class="text-center">12 Cuotas de $ 4300</h3>
-                    <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                    <a href="#" class="btn btn-primary">Comprar</a>
                 </div>
             </div>
 
             <!-- CARD 3 -->
-
-                <div class="card p-2 m-2 shadow" style="width: 25rem; max-height: 100%">
-                    <img src="/img/productos/mexico.jpg" class="card-img-top w-100 h-100 rounded-md" alt="...">
+            <div class="col xs-12 ms-4 md-4 lg-4 xl-3" style="height: 25rem">
+                <div class="card" style="width: 25rem; max-height: 100%">
+                    <img src="/img/productos/mexico.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the cards content.</p>
                         <h3 class="text-center">12 Cuotas de $ 4300</h3>
-                        <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                        <a href="#" class="btn btn-primary">Comprar</a>
                     </div>
                 </div>
-
+            </div>
 
             <!-- CARD 4 -->
-
-                <div class="card p-2 m-2 shadow" style="width: 25rem; max-height: 100%;">
-                    <img src="/img/productos/rio.jpg" class="card-img-top w-100 h-100 rounded-md" alt="...">
+            <div class="col xs-12 ms-4 md-4 lg-4 xl-3" style="height: 25rem;">
+                <div class="card" style="width: 25rem; max-height: 100%;">
+                    <img src="/img/productos/rio.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the cards content.</p>
                         <h3 class="text-center">12 Cuotas de $ 4300</h3>
-                        <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                        <a href="#" class="btn btn-primary">Comprar</a>
                     </div>
                 </div>
-
+            </div>
 
 
 
