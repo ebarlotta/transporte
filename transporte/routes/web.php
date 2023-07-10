@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ClienteComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('livewire.inicio-component');
 });
+
+Route::get('clientes',ClienteComponent::class)->name('clientes');
 
 Route::middleware([
     'auth:sanctum',
