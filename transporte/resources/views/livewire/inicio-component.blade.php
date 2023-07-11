@@ -64,6 +64,9 @@
                 <li class="nav-item">
                     <a class="nav-link disabled">Apagado</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('clientes') }}">Clientes</a>
+                </li>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Buscador" aria-label="Search">

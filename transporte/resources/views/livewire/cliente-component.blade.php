@@ -1,9 +1,9 @@
 <div>
     <div id="page-wrapper">
-        <div class="container-fluid">
+        <div class="containergit">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="hstyle">Clientes</h2>
+                    <h2 class="style">Clientes</h2>
                     <a href="#" class="btn btn-celeste"><span class="glyphicon glyphicon-plus"
                             aria-hidden="true"></span> Nuevo</a>
                 </div>
@@ -35,10 +35,10 @@
                                         @if($cliente->direccion) <td>{{ $cliente->direccion }}</td> @else <td class="xl:none">-</td> @endif
                                         @if($cliente->telefono)  <td>{{ $cliente->telefono }}</td>  @else <td>-</td> @endif
                                         @if($cliente->email)     <td>{{ $cliente->email }}</td> @else <td>-</td> @endif
-                                        <td>{{ $cliente->dni }}</td>                                            
-                                        <td>{{ $cliente->nacionalidad->nombre }}</td>                                            
-                                        <td>{{ $cliente->provincia->nombre}}</td>                                            
-                                        <td>{{ $cliente->localidad->nombre }}</td>                                            
+                                        <td>{{ $cliente->dni }}</td>
+                                        <td>{{ $cliente->nacionalidad->nombre }}</td>
+                                        <td>{{ $cliente->provincia->nombre}}</td>
+                                        <td>{{ $cliente->localidad->nombre }}</td>
                                         <td>
                                             <div class='wrapper text-center'>
                                                 <div class="btn-group" role="group">
