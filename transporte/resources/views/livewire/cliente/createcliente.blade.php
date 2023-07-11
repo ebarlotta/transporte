@@ -92,8 +92,8 @@
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
                         <button class="btn btn-default" wire:click="isModalCreateChange()">Cerrar</button>
-                        <a wire:click="isModalCreateChange()" class="btn btn-default bg-red-400"><span class="glyphicon glyphicon-plus"
-                           aria-hidden="true"></span> Cerrar2</a>
+                        <a wire:click="store()" class="btn btn-default bg-red-400"><span class="glyphicon glyphicon-plus"
+                           aria-hidden="true"></span> Modificar</a>
                     </div>
                 </form>
             </div>
