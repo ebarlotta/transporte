@@ -38,6 +38,7 @@
 
                         <li><a class="dropdown-item" href="#">Alquileres</a></li>
                         <li><a class="dropdown-item" href="#">Algo Mas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('clientes')}}">Clientes</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
