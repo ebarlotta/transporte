@@ -4,8 +4,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="hstyle">Clientes</h2>
-                    <a href="#" class="btn btn-celeste"><span class="glyphicon glyphicon-plus"
-                            aria-hidden="true"></span> Nuevo</a>
+                    {{-- <button wire:click="create()" class="bg-green-300 hover:bg-green-400 text-white-900 font-bold py-2 px-4 rounded my-3"></button> --}}
+                    <a wire:click="isModalCreateChange()" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</a>
+                    @if ($isModalCreate)
+                        @include('livewire.cliente.createcliente')
+                    @endif
                 </div>
             </div>
             <hr>
@@ -18,13 +21,13 @@
                             <thead>
                                 <tr>
                                     <th>Nombre y Apellido</th>
-                                    <th>Dirección</th>
+                                    <th class="d-none d-lg-inline align-bottom">Dirección</th>
                                     <th>Teléfono</th>
                                     <th>E-mail</th>
                                     <th>DNI</th>
-                                    <th>Nacionalidad</th>
-                                    <th>Provincia</th>
-                                    <th>Localidad</th>
+                                    <th class="d-none d-lg-inline">Nacionalidad</th>
+                                    <th class="d-none d-lg-inline">Provincia</th>
+                                    <th class="d-none d-lg-inline">Localidad</th>
                                     <th class="text-center">Acciones</th>
                                 </tr>
                             </thead>
@@ -32,13 +35,13 @@
                                 @foreach ($clientes as $cliente)
                                     <tr>
                                         <td>{{ $cliente->apellido }}, {{ $cliente->nombre }}</td>
-                                        @if($cliente->direccion) <td>{{ $cliente->direccion }}</td> @else <td class="xl:none">-</td> @endif
+                                        @if($cliente->direccion) <td class="d-none d-lg-inline">{{ $cliente->direccion }}</td> @else <td class="d-none d-lg-inline">-</td> @endif
                                         @if($cliente->telefono)  <td>{{ $cliente->telefono }}</td>  @else <td>-</td> @endif
                                         @if($cliente->email)     <td>{{ $cliente->email }}</td> @else <td>-</td> @endif
                                         <td>{{ $cliente->dni }}</td>                                            
-                                        <td>{{ $cliente->nacionalidad->nombre }}</td>                                            
-                                        <td>{{ $cliente->provincia->nombre}}</td>                                            
-                                        <td>{{ $cliente->localidad->nombre }}</td>                                            
+                                        <td class="d-none d-lg-inline">{{ $cliente->nacionalidad->nombre }}</td>                                            
+                                        <td class="d-none d-lg-inline">{{ $cliente->provincia->nombre}}</td>                                            
+                                        <td class="d-none d-lg-inline">{{ $cliente->localidad->nombre }}</td>                                            
                                         <td>
                                             <div class='wrapper text-center'>
                                                 <div class="btn-group" role="group">
