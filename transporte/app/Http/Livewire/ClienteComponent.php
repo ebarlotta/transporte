@@ -23,7 +23,7 @@ class ClienteComponent extends Component
         $this->nacionalidades = Nacionalidad::all();
         $this->provincias = Provincia::all();
         $this->localidades = Localidad::all();
-        return view('livewire.cliente.cliente-component');
+        return view('livewire.cliente.cliente-component')->extends('layouts.adminlte');
     }
 
     public function isModalCreateChange() {
@@ -37,6 +37,24 @@ class ClienteComponent extends Component
             $this->isModalConsultar =false;
         }
     }
+
+    // public function create() {
+        
+    //     $this->apellido = '';
+    //     $this->nombre = $cliente->nombre;
+    //     $this->direccion = $cliente->direccion;
+    //     $this->dni = $cliente->dni;
+    //     $this->telefono = $cliente->telefono;
+    //     $this->email = $cliente->email;
+    //     $this->fechanacimiento = $cliente->fechanacimiento;
+    //     $this->nacionalidad_id = $cliente->nacionalidad_id;
+    //     $this->provincia_id = $cliente->provincia_id;
+    //     $this->localidad_id = $cliente->localidad_id;
+    //     // $this->isModalCreate = true;
+    //     // dd($this->isModalCreate);
+    //     $this->cliente_id = $id;
+    //     //$this->isModalCreateChange();
+    // }
 
     public function edit($id) {
         $cliente = Cliente::find($id);
@@ -53,7 +71,7 @@ class ClienteComponent extends Component
         // $this->isModalCreate = true;
         // dd($this->isModalCreate);
         $this->cliente_id = $id;
-        $this->isModalCreateChange();
+        //$this->isModalCreateChange();
     }
 
     public function delete() {
