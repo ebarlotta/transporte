@@ -775,7 +775,7 @@
                                             @if ($cliente->email)
                                                 <td>{{ $cliente->email }}</td>
                                             @else
-                                                <td>-</td>
+                                                <td>-</td>/home/casa-pc/transporte/transporte/public/img/logo
                                             @endif
                                             <td>{{ $cliente->dni }}</td>
                                             <td>{{ $cliente->nacionalidad->nombre }}</td>
@@ -784,24 +784,18 @@
                                             <td>
                                                 <div class='wrapper text-center'>
                                                     <div class="btn-group" role="group">
-                                                        <button type="button" class="btn btn-info"
-                                                            data-toggle="modal"
-                                                            data-target="#ModalEstadoCuentaPrueba"><i
-                                                                class="fa-solid fa-pen-to-square"></i> Estado de
-                                                            cuenta</button>
-                                                        <button type="button" class="btn btn-info"
-                                                            data-toggle="modal" data-target="#ModalEstadoCuenta"><i
-                                                                class="fa-solid fa-pen-to-square"></i> Estado de
-                                                            cuenta</button>
-                                                        <button wire:click="edit({{ $cliente->id }})" type="button"
-                                                            class="btn btn-warning" data-toggle="modal"
-                                                            data-target="#exampleModal"><i
-                                                                class="fa-solid fa-pen-to-square"></i> Editar</button>
-
-                                                        <button wire:click="isModalConsultar({{ $cliente->id }})"
-                                                            class="btn btn-danger">
-                                                            <i class="fa-regular fa-circle-xmark"></i>
-                                                            Eliminar</button>
+                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalEstadoCuentaPrueba">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Estado de cuenta
+                                                        </button>
+                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalEstadoCuenta">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Estado de cuenta
+                                                        </button>
+                                                        <button wire:click="edit({{ $cliente->id }})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Editar
+                                                        </button>
+                                                        <button wire:click="isModalConsultar({{ $cliente->id }})" class="btn btn-danger">
+                                                            <i class="fa-regular fa-circle-xmark"></i> Eliminar
+                                                        </button>
 
                                                         {{-- <a wire:click="edit({{$cliente->id}})" href="#" class="btn btn-warning" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                         <button class="btn btn-danger" wire:click="isModalConsultar({{$cliente->id}})" title="Eliminar">
@@ -815,6 +809,8 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{-- Para dispositivos de otro tamaño de pantalla --}}
+                        {{-- ============================================ --}}
                         <div>
                             <table class="tabla table table-striped table-hover table-condensed" cellspacing="0"
                                 width="100%">
@@ -845,19 +841,15 @@
                                             <td>
                                                 <div class='wrapper text-center'>
                                                     <div class="btn-group" role="group">
-                                                        <button type="button" class="btn btn-info"
-                                                            data-toggle="modal" data-target="#ModalDetalleCuotas"><i
-                                                                class="fa-solid fa-pen-to-square"></i> Estado de
-                                                            cuenta</button>
-                                                        <button wire:click="edit({{ $cliente->id }})" type="button"
-                                                            class="btn btn-warning" data-toggle="modal"
-                                                            data-target="#exampleModal"><i
-                                                                class="fa-solid fa-pen-to-square"></i> Editar</button>
-
-                                                        <button wire:click="isModalConsultar({{ $cliente->id }})"
-                                                            class="btn btn-danger">
-                                                            <i class="fa-regular fa-circle-xmark"></i>
-                                                            Eliminar</button>
+                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalDetalleCuotas">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Estado de cuenta
+                                                        </button>
+                                                        <button wire:click="edit({{ $cliente->id }})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                                                            <i class="fa-solid fa-pen-to-square"></i>Editar
+                                                        </button>
+                                                        <button wire:click="isModalConsultar({{ $cliente->id }})" class="btn btn-danger">
+                                                            <i class="fa-regular fa-circle-xmark"></i>Eliminar
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </td>

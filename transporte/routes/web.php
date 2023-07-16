@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\ClienteComponent;
+use App\Http\Livewire\Servicios\ServiciosComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('clientes',ClienteComponent::class)->name('clientes');
+Route::get('servicios',ServiciosComponent::class)->name('servicios');
 
 Route::middleware([
     'auth:sanctum',
