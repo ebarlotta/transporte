@@ -17,6 +17,8 @@ class ClienteComponent extends Component
 
     public $nacionalidades, $provincias, $localidades;
 
+    public $cuotas;
+
     public function render()
     {
         $this->clientes = Cliente::all();
@@ -116,5 +118,10 @@ class ClienteComponent extends Component
     ]);
         session()->flash('message', $this->cliente_id ? 'Cliente Actualizado.' : 'Cliente Creado.');
         $this->isModalCreateChange();
+    }
+
+    public function DevolverCuotas($id) {
+        $this->cuotas = ['cuota 1' => 100, 'cuota 2' => 100, 'cuota 3' => 100];
+        $this->cuotas = json_encode($this->cuotas);
     }
 }
