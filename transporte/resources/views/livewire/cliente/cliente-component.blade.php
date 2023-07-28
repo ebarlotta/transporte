@@ -151,7 +151,7 @@
                     </div>
 
 
-                    {{-- Modal Estado de cuenta PRUEBA --}}
+                    {{-- M odal Estado de cuenta PRUEBA --}}
                     {{-- ====================== --}}
                     <head>
                         <style>
