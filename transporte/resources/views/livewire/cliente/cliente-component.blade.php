@@ -7,13 +7,6 @@
                         style="font-family:RobotoDraft, sans-serif; font-weight: 400; color: #5E738B; font-size: 30px; margin-top: 20px;
                     margin-bottom: 10px; line-height: 1.1; box-sizing: border-box;">
                         Clientes</h2>
-                    {{-- <button wire:click="create()" class="bg-green-300 hover:bg-green-400 text-white-900 font-bold py-2 px-4 rounded my-3"></button> --}}
-                    {{-- <a wire:click="isModalCreateChange()" class="btn btn-primary h-3" style="height: 60%; align-content: center; display: flex;"> --}}
-                    {{-- <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  --}}
-                    {{-- <i class="fa-duotone fa-plus"></i> --}}
-                    {{-- <img src="{{ asset('img/logo/plus.png') }}" alt="" width="10px" height="10px" sizes="10px"> --}}
-                    {{-- <i class="fa-regular fa-plus"></i>Nuevo --}}
-                    {{-- </a> --}}
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         <i class="fa-regular fa-plus"></i>Nuevo</button>
 
@@ -722,7 +715,6 @@
                     @if (session()->has('message'))
                         <div class="border-t-4  rounded-b px-4 py-3 shadow-md my-3 bg-lime-700" role="alert"
                             style="background-color: lightgreen;">
-                            {{-- <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert"> --}}
                             <div class="flex">
                                 <div>
                                     <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
@@ -775,7 +767,7 @@
                                             @if ($cliente->email)
                                                 <td>{{ $cliente->email }}</td>
                                             @else
-                                                <td>-</td>/home/casa-pc/transporte/transporte/public/img/logo
+                                                <td>-</td>
                                             @endif
                                             <td>{{ $cliente->dni }}</td>
                                             <td>{{ $cliente->nacionalidad->nombre }}</td>
