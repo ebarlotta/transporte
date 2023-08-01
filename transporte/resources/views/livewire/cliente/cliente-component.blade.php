@@ -6,7 +6,7 @@
                     <h2 class="hstyle"
                         style="font-family:RobotoDraft, sans-serif; font-weight: 400; color: #5E738B; font-size: 30px; margin-top: 20px;
                     margin-bottom: 10px; line-height: 1.1; box-sizing: border-box;">
-                        Clientes</h2>
+                        Clientes***</h2>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         <i class="fa-regular fa-plus"></i>Nuevo</button>
 
