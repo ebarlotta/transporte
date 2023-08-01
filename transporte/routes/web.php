@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\ClienteComponent;
 use App\Http\Livewire\Servicios\ServiciosComponent;
+use App\Http\Livewire\Alojamientos\AlojamientoComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ Route::get('/', function () {
 
 Route::get('clientes',ClienteComponent::class)->name('clientes');
 Route::get('servicios',ServiciosComponent::class)->name('servicios');
+Route::get('alojamientos',AlojamientoComponent::class)->name('alojamientos');
 
 Route::middleware([
     'auth:sanctum',
