@@ -9,6 +9,13 @@ class Alojamiento extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'descripcion',
+        'ubicaciongps',
+        'fotourl',
+        'precio'
+    ];
+
     //Relación muchos a muchos polimórfica
 
     public function servicios() {

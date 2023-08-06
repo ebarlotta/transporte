@@ -16,7 +16,7 @@
             <div wire:ignore.self class="modal fade" id="ModalEstadoCuentaPrueba" tabindex="-1"
             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
-                {{-- <div class="modal-dialog" role="document"  style="width: 1000px"> --}}
+
                 <div class="modal-content" style="width: inherit">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Alta de Alojamientos</h5>
@@ -24,42 +24,36 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" style="height: auto;">
-                        <div class="container flex d-flex wrapper1">
-                            <div class="scrolls1">
 
 
-                                <div class="input-group">
-                                    <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea"></textarea>
-                                </div>
-
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">$</span>
-                                    <input type="text" wire:model="precio" class="form-control" aria-label="Amount (to the nearest dollar)">
-                                    <span class="input-group-text">.00</span>
-                                </div>
-
-
-                                <div class="mb-3">
-                                    <label for="basic-url" class="form-label">Your vanity URL</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon3">Foto</span>
-                                        <input wire:model="fotourl" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-                                    </div>
-                                    <div class="form-text" id="basic-addon4">Example help text goes outside the input group.</div>
-                                    </div>
-
-                                <div class="mb-3">
-                                    <label for="basic-url" class="form-label">Your vanity URL</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon3">Ubicación</span>
-                                        <input wire:model="ubicaciongps" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-                                    </div>
-                                    <div class="form-text" id="basic-addon4">Example help text goes outside the input group.</div>
-                                </div>
-
+                    <div class="container">
+                        <form action="">
+                            <div class="mb-3 mt-3">
+                                <label class="form-label" for="descripcion">Descripción</label>
+                                <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea" rows="5"></textarea>
                             </div>
-                        </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="precio">Precio</label>
+                                <input wire:model="precio" class="form-control" name="precio" type="text" id="precio">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="foto">Foto</label>
+                                <input wire:model="fotourl" class="form-control" name="foto" type="text" id="foto">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="ubicaciongps">Ubicacion GPS</label>
+                                <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps">
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                                <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
+                                <button class="btn btn-primary" type="button" wire:click="store()" data-dismiss="modal">Guardar</button>
+                            </div>
+
+                        </form>
                     </div>
 
                 </div>
@@ -84,9 +78,6 @@
                             @foreach ($alojamientos as $alojamiento)
                                 <tr>
                                     <td>{{ $alojamiento->descripcion }}</td>
-                                    {{-- @if($alojamiento->direccion) <td>{{ $alojamiento->direccion }}</td> @else <td class="xl:none">-</td> @endif
-                                    @if($alojamiento->telefono)  <td>{{ $alojamiento->telefono }}</td>  @else <td>-</td> @endif
-                                    @if($alojamiento->email)     <td>{{ $alojamiento->email }}</td> @else <td>-</td> @endif --}}
                                     <td>{{ $alojamiento->precio }}</td>
                                     <td>{{ $alojamiento->ubicaciongps }}</td>
                                     <td>{{ $alojamiento->fotourl}}</td>
@@ -94,10 +85,10 @@
                                         <div class='wrapper text-center'>
                                             <div class="btn-group" role="group">
                                                 <a href="" class="btn btn-warning" data-toggle="tooltip" title="Editar">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar
                                                 </a>
                                                 <button class="btn btn-danger" onclick="eliminar" data-toggle="tooltip" title="Eliminar">
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar
                                                 </button>
                                             </div>
                                         </div>
