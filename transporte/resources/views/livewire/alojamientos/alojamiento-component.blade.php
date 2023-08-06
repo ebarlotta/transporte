@@ -15,7 +15,7 @@
 
             <div wire:ignore.self class="modal fade" id="ModalEstadoCuentaPrueba" tabindex="-1"
             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document" style="width: 100%; margin-right: 50px; max-width: 100%">
+            <div class="modal-dialog modal-lg" role="document">
                 {{-- <div class="modal-dialog" role="document"  style="width: 1000px"> --}}
                 <div class="modal-content" style="width: inherit">
                     <div class="modal-header">
@@ -27,11 +27,41 @@
                     <div class="modal-body" style="height: auto;">
                         <div class="container flex d-flex wrapper1">
                             <div class="scrolls1">
-                                Espacio para solicitar los datos del alojamiento
+
+
+                                <div class="input-group">
+                                    <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea"></textarea>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" wire:model="precio" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Your vanity URL</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3">Foto</span>
+                                        <input wire:model="fotourl" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+                                    </div>
+                                    <div class="form-text" id="basic-addon4">Example help text goes outside the input group.</div>
+                                    </div>
+
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Your vanity URL</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3">Ubicación</span>
+                                        <input wire:model="ubicaciongps" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+                                    </div>
+                                    <div class="form-text" id="basic-addon4">Example help text goes outside the input group.</div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

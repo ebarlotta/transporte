@@ -8,7 +8,7 @@ use Livewire\Component;
 class AlojamientoComponent extends Component
 {
     public $alojamientos;
-    public $descripcion, $precio, $ubicaciongps, $fotour;
+    public $descripcion, $precio, $ubicaciongps, $fotourl;
 
     public $alojamiento_id;
 
@@ -23,7 +23,7 @@ class AlojamientoComponent extends Component
             'descripcion' => 'required',
             'precio' => 'required',
             'ubicaciongps' => 'required',
-            // 'fotour' => 'required|integer',
+            // 'fotourl' => 'required|integer',
         ]);
 
         Alojamiento::updateOrCreate(['id' => $this->alojamiento_id], [
@@ -39,7 +39,7 @@ class AlojamientoComponent extends Component
         $this->descripcion = $alojamiento->descripcion;
         $this->precio = $alojamiento->precio;
         $this->ubicaciongps = $alojamiento->ubicaciongps;
-        $this->fotour = $alojamiento->fotour;
+        $this->fotourl = $alojamiento->fotourl;
 
         $this->alojamiento_id = $id;
     }
