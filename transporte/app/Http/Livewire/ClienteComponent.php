@@ -28,36 +28,6 @@ class ClienteComponent extends Component
         return view('livewire.cliente.cliente-component')->extends('layouts.adminlte');
     }
 
-    public function isModalCreateChange() {
-        $this->isModalCreate = !$this->isModalCreate;
-    }
-    public function isModalConsultar($id) {
-        if($id<>0) {
-        $this->isModalConsultar = !$this->isModalConsultar;
-        $this->Consultar($id);
-        } else {
-            $this->isModalConsultar =false;
-        }
-    }
-
-    // public function create() {
-        
-    //     $this->apellido = '';
-    //     $this->nombre = $cliente->nombre;
-    //     $this->direccion = $cliente->direccion;
-    //     $this->dni = $cliente->dni;
-    //     $this->telefono = $cliente->telefono;
-    //     $this->email = $cliente->email;
-    //     $this->fechanacimiento = $cliente->fechanacimiento;
-    //     $this->nacionalidad_id = $cliente->nacionalidad_id;
-    //     $this->provincia_id = $cliente->provincia_id;
-    //     $this->localidad_id = $cliente->localidad_id;
-    //     // $this->isModalCreate = true;
-    //     // dd($this->isModalCreate);
-    //     $this->cliente_id = $id;
-    //     //$this->isModalCreateChange();
-    // }
-
     public function edit($id) {
         $cliente = Cliente::find($id);
         $this->apellido = $cliente->apellido;
@@ -70,31 +40,10 @@ class ClienteComponent extends Component
         $this->nacionalidad_id = $cliente->nacionalidad_id;
         $this->provincia_id = $cliente->provincia_id;
         $this->localidad_id = $cliente->localidad_id;
-        // $this->isModalCreate = true;
-        // dd($this->isModalCreate);
-        $this->cliente_id = $id;
-        //$this->isModalCreateChange();
-    }
-
-    public function delete() {
-        $cliente = Cliente::find($this->cliente_id);
-        // dd($this->cliente_id);
-        $cliente->destroy($this->cliente_id);
-        $this->isModalConsultar(0);
-//        dd($cliente);
-        //$cliente->destroy($this->cliente_id);
-    }
-
-    public function Consultar($id) {
-        $cliente = Cliente::find($id);
-        //dd($cliente);
-        $this->nombre = $cliente->nombre;
-        $this->apellido = $cliente->apellido;
         $this->cliente_id = $id;
     }
 
     public function store() {
-    
         $this->validate([
             'apellido' => 'required',
             'nombre' => 'required',
@@ -120,8 +69,34 @@ class ClienteComponent extends Component
         $this->isModalCreateChange();
     }
 
+    public function delete() {
+        $cliente = Cliente::find($this->cliente_id);
+        $cliente->destroy($this->cliente_id);
+        $this->isModalConsultar(0);
+    }
+    
     public function DevolverCuotas($id) {
         $this->cuotas = ['cuota 1' => 100, 'cuota 2' => 100, 'cuota 3' => 100];
         $this->cuotas = json_encode($this->cuotas);
     }
+
+    public function Consultar($id) {
+        $cliente = Cliente::find($id);
+        $this->nombre = $cliente->nombre;
+        $this->apellido = $cliente->apellido;
+        $this->cliente_id = $id;
+    }
+        public function isModalCreateChange() {
+        $this->isModalCreate = !$this->isModalCreate;
+    }
+
+    public function isModalConsultar($id) {
+        if($id<>0) {
+        $this->isModalConsultar = !$this->isModalConsultar;
+        $this->Consultar($id);
+        } else {
+            $this->isModalConsultar =false;
+        }
+    }
+
 }

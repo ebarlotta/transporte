@@ -38,7 +38,6 @@
 
                         <li><a class="dropdown-item" href="#">Alquileres</a></li>
                         <li><a class="dropdown-item" href="#">Algo Mas</a></li>
-                        <li><a class="dropdown-item" href="{{ route('clientes')}}">Clientes</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -64,12 +63,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled">Apagado</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('clientes') }}">Clientes</a>
-                </li>
-                <li>
-                <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Login</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
