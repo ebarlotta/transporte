@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Paquete extends Model
 {
     use HasFactory;
+
+    protected $fillable=[
+        'nombre',
+        'descripcion',
+        'duraciontotal',
+        'presupuestoestimado',
+        'fechasdisponibles',
+        'fotourl',
+    ];
 }

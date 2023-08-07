@@ -9,6 +9,18 @@ class Destino extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'nombre',
+        'descripcion',
+        'clima',
+        'mejorepocaparavisitar',
+        'ubicaciongps',
+        'presupuestoestimado',
+        'otrosenlaces',
+        'pais_id',
+        'fotourl',
+    ];
+
     //Relación muchos a muchos polimórfica inversa
 
     public function alojamientos() {

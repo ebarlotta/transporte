@@ -9,6 +9,11 @@ class Comentario extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'comentario',
+        'user_id',
+    ];
+    
     public function destinos() {
         return $this->morphToMany('App\Models\Destino','destinosable');
     }

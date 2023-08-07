@@ -320,8 +320,48 @@ return [
         ],
         ['header' => 'account_settings'],
         [
+            'text' => 'Alojamientos',
+            'url'  => 'alojamientos',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Comida',
+            'url'  => 'comidas',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'Clientes',
             'url'  => 'clientes',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Destinos',
+            'url'  => 'destinos',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Localidades',
+            'url'  => 'localidades',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Nacionalidades',
+            'url'  => 'nacionalidades',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Paquetes',
+            'url'  => 'paquetes',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Provincias',
+            'url'  => 'provincias',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Restricciones',
+            'url'  => 'restricciones',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -330,15 +370,10 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Alojamientos',
-            'url'  => 'alojamientos',
+            'text' => 'Transportes',
+            'url'  => 'transportes',
             'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Alojamientos Privados',
-            'url'  => 'alojamientosprivados',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+        ],        
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',

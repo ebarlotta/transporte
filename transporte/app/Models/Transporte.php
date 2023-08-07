@@ -9,6 +9,16 @@ class Transporte extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'descripcion',
+        'precio',
+        'ubicaciongps',
+        'fotourl',
+        'salida',
+        'llegada',
+        'devolverenotrodestino',
+    ];
+
     public function servicios() {
         return $this->morphToMany('App\Models\Servicio','servicioable');
     }

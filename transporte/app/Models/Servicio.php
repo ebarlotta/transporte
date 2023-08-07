@@ -9,6 +9,12 @@ class Servicio extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'descripcion',
+        'fotourl',
+    ];
+
+
     //Relación muchos a muchos polimórfica inversa
 
     public function alojamientos() {

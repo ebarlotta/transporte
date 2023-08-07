@@ -9,6 +9,13 @@ class Comida extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'descripcion',
+        'precio',
+        'ubicaciongps',
+        'fotourl',
+    ];
+
     public function servicios() {
         return $this->morphToMany('App\Models\Servicio','servicioable');
     }

@@ -13,7 +13,7 @@ class Alojamiento extends Model
         'descripcion',
         'ubicaciongps',
         'fotourl',
-        'precio'
+        'precio',
     ];
 
     //Relación muchos a muchos polimórfica
