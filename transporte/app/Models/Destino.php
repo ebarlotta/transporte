@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\JsonDecoder;
 
 class Destino extends Model
 {
@@ -42,4 +43,16 @@ class Destino extends Model
     public function transportes() {
         return $this->morphedByMany('App\Models\Transporte', 'destinosable');
     }
+
+    // public function getPais() {
+    //     $codigo = Nacionalidad::where('id','=',1)->get();
+    //     dd($codigo);
+    //     $nombre = $codigo->nombre;
+    //     // return $this->belongsTo(Nacionalidad::class,'codigopais','pais_id');
+    //     // return encode  $codigo;
+
+    //     return response()->json([
+    //         'pais' => $codigo .' - '. $nombre,
+    //     ]);
+    // }
 }

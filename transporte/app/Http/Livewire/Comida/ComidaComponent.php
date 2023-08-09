@@ -16,7 +16,7 @@ class ComidaComponent extends Component
     public function render()
     {
         $this->comidas = Comida::all();
-        return view('livewire.comida.comida-component');
+        return view('livewire.comida.comida-component')->extends('layouts.adminlte');;
     }
 
     public function store() {

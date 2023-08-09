@@ -15,7 +15,7 @@ class NacionalidadComponent extends Component
     public function render()
     {
         $this->nacionalidades = Nacionalidad::all();
-        return view('livewire.nacionalidades.nacionalidad-component');
+        return view('livewire.nacionalidades.nacionalidad-component')->extends('layouts.adminlte');
     }
 
     public function store() {

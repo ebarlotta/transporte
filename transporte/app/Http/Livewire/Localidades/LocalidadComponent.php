@@ -14,7 +14,7 @@ class LocalidadComponent extends Component
     public function render()
     {
         $this->localidades = Localidad::all();
-        return view('livewire.localidades.localidad-component');
+        return view('livewire.localidades.localidad-component')->extends('layouts.adminlte');
     }
 
     public function store() {

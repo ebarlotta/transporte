@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Destinos;
 
 use Livewire\Component;
 use App\Models\Destino;
+use App\Models\Nacionalidad;
+
 class DestinoComponent extends Component
 {
     public $destinos;
@@ -11,10 +13,14 @@ class DestinoComponent extends Component
     public $nombre, $mejorepocaparavisitar, $presupuestoestimado, $otrosenlaces, $pais_id;  
     public $destino_id;
 
+    public $paises;
+
     public function render()
     {
+        $this->paises = Nacionalidad::all();
+        //dd($this->paises);
         $this->destinos = Destino::all();
-        return view('livewire.destinos.destino-component');
+        return view('livewire.destinos.destino-component')->extends('layouts.adminlte');
     }
 
     public function store() {
@@ -28,8 +34,8 @@ class DestinoComponent extends Component
             'otrosenlaces' => 'required',
             'pais_id' => 'required',
         ]);
-
         Destino::updateOrCreate(['id' => $this->destino_id], [
+        'nombre' => $this->nombre,
         'descripcion' => $this->descripcion,
         'clima' => $this->clima,
         'ubicaciongps' => $this->ubicaciongps,
@@ -43,6 +49,7 @@ class DestinoComponent extends Component
 
     public function edit($id) {
         $destino = Destino::find($id);
+        $this->nombre = $destino->nombre;
         $this->descripcion = $destino->descripcion;
         $this->clima = $destino->clima;
         $this->ubicaciongps = $destino->ubicaciongps;

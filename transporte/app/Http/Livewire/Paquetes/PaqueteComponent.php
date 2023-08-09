@@ -10,11 +10,11 @@ class PaqueteComponent extends Component
     public function render()
     {
         $this->paquetes = Paquete::all();
-        return view('livewire.paquetes.paquete-component');
+        return view('livewire.paquetes.paquete-component')->extends('layouts.adminlte');
     }
 
     public $paquetes;
-    public $descripcion, $precio, $duraciontotal, $presupuestoestimado, $fechasdisponibles, $fotourl;
+    public $nombre, $descripcion, $precio, $duraciontotal, $presupuestoestimado, $fechasdisponibles, $fotourl;
 
     public $paquete_id;
 
@@ -29,6 +29,7 @@ class PaqueteComponent extends Component
         ]);
 
         Paquete::updateOrCreate(['id' => $this->paquete_id], [
+        'nombre' => $this->nombre,
         'descripcion' => $this->descripcion,
         'precio' => $this->precio,
         'duraciontotal' => $this->duraciontotal,
@@ -41,6 +42,7 @@ class PaqueteComponent extends Component
 
     public function edit($id) {
         $paquete = Paquete::find($id);
+        $this->nombre = $paquete->nombre;
         $this->descripcion = $paquete->descripcion;
         $this->precio = $paquete->precio;
         $this->duraciontotal = $paquete->duraciontotal;
