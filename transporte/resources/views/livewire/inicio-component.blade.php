@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en">
+    <lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inicio Trasporte</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Inicio Trasporte</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    </head>
 
 <!-- INICIA NAVBAR -->
 
@@ -76,7 +76,6 @@
 <!-- FINALIZA NAVBAR -->
 
 <body>
-    <!-- <h3>Inicio Trasporte</h3> -->
 
     <!-- CARRUCEL INICIO -->
 
@@ -125,95 +124,167 @@
     </div>
 
     <!-- CARRUCEL FIN -->
-    <div class="container">
 
-
-    </div>
     <br>
 
     <!-- INICIA CARDS -->
 
-    <div class="row col-12 py-2 justify-content-center">
+    <style>
+        img {
+            .max-width: 100%;
+        }
+    .card {
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
 
-        <!-- CARD 1 -->
+    .card-boby {
+        border-radius: 15px;
+        padding: 25%;
+        margin-top: -5px;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
+    </style>
 
-            <div class="card p-2 m-2 shadow" style="width: 25rem; max-height: 100%">
-                <img src="/img/productos/ny.png" class="card-img-top w-100 h-100 rounded-md" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        cards content.</p>
-                    <h3 class="text-center">12 Cuotas de $ 4300</h3>
-                    <div class="text-right">
-                        <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+    <div class="container-fluid">
+
+
+
+            <div class="d-flex justify-content-center row row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6">
+
+
+                <!-- CARD 1 -->
+
+                    <div class="card p-2 m-3 shadow">
+                        <img src="/img/productos/ny.png" class="card-img-top h-100 w-100 rounded-md" stalt="...">
+                        <div class="card-body">
+                            <h6 class="card-title">Card title</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                cards content.</p>
+                            <h5 class="text-center">12 Cuotas de $ 4300</h5>
+                            <div class="text-right">
+                                <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                <!-- CARD 2 -->
+
+                    <div class="card p-2 m-3 shadow">
+                        <img src="/img/productos/ny2.png" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <div class="card-body">
+                            <h6 class="card-title">Card title</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                cards content.</p>
+                            <h5 class="text-center">12 Cuotas de $ 4300</h5>
+                            <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                        </div>
+                    </div>
+
+                <!-- CARD 3 -->
+
+                    <div class="card p-2 m-3 shadow">
+                        <img src="/img/productos/mexico.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <div class="card-body">
+                            <h6 class="card-title">Card title</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                                    the cards content.</p>
+                            <h5 class="text-center">12 Cuotas de $ 4300</h5>
+                            <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                        </div>
+                    </div>
+
+                <!-- CARD 4 -->
+
+                    <div class="card p-2 m-3 shadow">
+                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <div class="card-body">
+                            <h6 class="card-title">Card title</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                                    the cards content.</p>
+                            <h5 class="text-center">12 Cuotas de $ 4300</h5>
+                            <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                        </div>
+                    </div>
+
+                <!-- CARD 5 -->
+
+                    <div class="card p-2 m-3 shadow">
+                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <div class="card-body">
+                            <h6 class="card-title">Card title</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                                the cards content.</p>
+                            <h5 class="text-center">12 Cuotas de $ 4300</h5>
+                            <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                        </div>
+                    </div>
+
+                <!-- CARD 6 -->
+
+                    <div class="card p-2 m-3 shadow">
+                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <div class="card-body">
+                            <h6 class="card-title">Card title</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                                the cards content.</p>
+                            <h5 class="text-center">12 Cuotas de $ 4300</h5>
+                                <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                        </div>
+                    </div>
+
+                <!-- CARD 7 -->
+
+                    <div class="card p-2 m-3 shadow">
+                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <div class="card-body">
+                            <h6 class="card-title">Card title</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                                the cards content.</p>
+                            <h5 class="text-center">12 Cuotas de $ 4300</h5>
+                            <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                        </div>
+                    </div>
+
+                <!-- CARD 8 -->
+
+                    <div class="card p-2 m-3 shadow">
+                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <div class="card-body">
+                            <h6 class="card-title">Card title</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                                the cards content.</p>
+                            <h5 class="text-center">12 Cuotas de $ 4300</h5>
+                            <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
+                        </div>
+                    </div>
             </div>
 
+    </div>
 
-        <!-- CARD 2 -->
-
-            <div class="card p-2 m-2 shadow" style="width: 25rem; max-height: 100%;">
-                <img src="/img/productos/ny2.png" class="card-img-top w-100 h-100 rounded-md" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        cards content.</p>
-                    <h3 class="text-center">12 Cuotas de $ 4300</h3>
-                    <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
-                </div>
-            </div>
-
-            <!-- CARD 3 -->
-
-                <div class="card p-2 m-2 shadow" style="width: 25rem; max-height: 100%">
-                    <img src="/img/productos/mexico.jpg" class="card-img-top w-100 h-100 rounded-md" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the cards content.</p>
-                        <h3 class="text-center">12 Cuotas de $ 4300</h3>
-                        <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
-                    </div>
-                </div>
+    <!-- FIN DE CARDS -->
 
 
-            <!-- CARD 4 -->
 
-                <div class="card p-2 m-2 shadow" style="width: 25rem; max-height: 100%;">
-                    <img src="/img/productos/rio.jpg" class="card-img-top w-100 h-100 rounded-md" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the cards content.</p>
-                        <h3 class="text-center">12 Cuotas de $ 4300</h3>
-                        <a href="#" class="btn btn-primary justify-content-right">Comprar</a>
-                    </div>
-                </div>
+    <!-- INICIA FOOTER -->
 
 
 
 
-        </div>
-
-        <!-- INICIA CARDS -->
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
-        </script>
-
-</body>
-
-<!-- CREO QUE ACA VA Footer -->
+    <!-- INICIA FOOTER -->
 
 
 
 
-<!-- FIN DEL Footer -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+            </script>
+
+    </body>
 
 
-</body>
-
-</html>
 
 </html>

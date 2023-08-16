@@ -8,13 +8,13 @@ class ProvinciaComponent extends Component
 {
     public $provincias;
     public $nombre;
-    
+
     public $provincia_id;
 
     public function render()
     {
         $this->provincias = Provincia::all();
-        return view('livewire.provincias.provincia-component');
+        return view('livewire.provincias.provincia-component')->extends('layouts.adminlte');
     }
 
     public function store() {
