@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Localidades;
 
 use Livewire\Component;
 use App\Models\Localidad;
+use App\Models\Cliente;
 class LocalidadComponent extends Component
 {
     public $localidades;
@@ -36,9 +37,24 @@ class LocalidadComponent extends Component
 
     public function delete() {
         $localidad = Localidad::find($this->localidad_id);
-        $localidad->destroy($this->localidad_id);
-        //$this->isModalConsultar(0); // PARA HACER
-
-        session()->flash('message', $this->localidad_id ? 'Localidad Eliminada.' : 'No ha seleccionado una localidad a eliminar.');
+        $clientes = Cliente::where('localidad_id','=', $this->localidad_id)->get();
+        if(count($clientes)) {
+            session()->flash('messageBad', ' No se puede eliminar la Localidad ya que pertenece a otra tabla');
+        } else {
+            $localidad->destroy($this->localidad_id);
+            session()->flash('message', $this->localidad_id ? 'Localidad Eliminada.' : 'No ha seleccionado una localidad a eliminar.');
+        }
     }
+
+    public function new() {
+        $this->localidad_id = null;
+        $this->nombre = '';
+    }
+
+    public function BuscarDatosLocalidad($id) {
+        $localidad = Localidad::find($id);
+        $this->nombre = $localidad->nombre;
+        $this->localidad_id = $id;
+    }
+
 }

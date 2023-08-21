@@ -4,8 +4,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="style">Clientes</h2>
-                    <a href="#" class="btn btn-celeste"><span class="glyphicon glyphicon-plus"
-                            aria-hidden="true"></span> Nuevo</a>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalEstadoCuentaPrueba">
+                    <i class="fa-regular fa-plus"></i> Nuevo </button>
+                    {{-- <a href="#" class="btn btn-celeste"><span class="glyphicon glyphicon-plus"
+                            aria-hidden="true"></span> Nuevo</a> --}}
                 </div>
             </div>
             <hr>

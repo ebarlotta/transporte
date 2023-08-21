@@ -9,7 +9,7 @@ class TransporteComponent extends Component
     public function render()
     {
         $this->transportes = Transporte::all();
-        return view('livewire.transportes.transporte-component');
+        return view('livewire.transportes.transporte-component')->extends('layouts.adminlte');
     }
 
     public $transportes;

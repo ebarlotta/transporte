@@ -4,11 +4,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="style">Nacionalidades</h2>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalNuevaNacionalidad">
-                        Nuevo
-                    </button>
-                    {{-- <a href="#" class="btn btn-celeste"><span class="glyphicon glyphicon-plus"
-                            aria-hidden="true"></span>Nuevo</a> --}}
+                    <button type="button" class="btn btn-info" wire:click="new()" data-toggle="modal" data-target="#ModalNuevaNacionalidad">
+                        <i class="fa-regular fa-plus"></i> Nuevo </button>
                 </div>
             </div>
             <hr>
@@ -39,7 +36,11 @@
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                                 <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
-                                <button class="btn btn-primary" type="button" wire:click="store()" data-dismiss="modal">Guardar</button>
+                                @if($nacionalidad_id)
+										<button class="btn btn-primary" type="button" wire:click="store()" data-dismiss="modal">Actualizar</button>	
+									@else
+                  	                    <button class="btn btn-primary" type="button" wire:click="store()" data-dismiss="modal">Guardar</button>
+									@endif
                             </div>
                         </form>
                     </div>
@@ -68,11 +69,11 @@
                                     <td>
                                         <div class='wrapper text-center'>
                                             <div class="btn-group" role="group">
-                                                <a href="" class="btn btn-warning" data-toggle="tooltip" title="Editar">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar
-                                                </a>
-                                                <button class="btn btn-danger" onclick="eliminar" data-toggle="tooltip" title="Eliminar">
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar
+                                                <button wire:click="edit({{ $nacionalidad->id }})" type="button" class="btn btn-warning"  data-toggle="modal" data-target="#ModalNuevaNacionalidad">
+                                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                                </button>
+                                                <button wire:click="isModalConsultar({{ $nacionalidad->id }})" class="btn btn-danger">
+                                                    <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                 </button>
                                             </div>
                                         </div>

@@ -9,7 +9,7 @@ class RestriccionComponent extends Component
     public function render()
     {
         $this->restricciones = Restriccion::all();
-        return view('livewire.restricciones.restriccion-component');
+        return view('livewire.restricciones.restriccion-component')->extends('layouts.adminlte');
     }
 
     public $restricciones;

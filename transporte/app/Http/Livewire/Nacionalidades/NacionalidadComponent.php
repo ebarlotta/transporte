@@ -45,4 +45,10 @@ class NacionalidadComponent extends Component
 
         session()->flash('message', $this->nacionalidad_id ? 'Nacionalidad Eliminada.' : 'No ha seleccionado una nacionalidad a eliminar.');
     }
+
+    public function new() {
+        $this->nombre = '';
+        $this->codigopais = null;
+        $this->nacionalidad_id = null;
+    }
 }

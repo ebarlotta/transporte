@@ -3,12 +3,9 @@
             <div class="containergit">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="style">Lugares de comidas</h2>
+                        <h2 class="style">Lugares Para Comer</h2>
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalNuevaComida">
-                            Nuevo
-                        </button>
-                        {{-- <a href="#" class="btn btn-celeste"><span class="glyphicon glyphicon-plus"
-                                aria-hidden="true"></span>Nuevo</a> --}}
+                            <i class="fa-regular fa-plus"></i> Nuevo </button>
                     </div>
                 </div>
                 <hr>
@@ -84,11 +81,16 @@
                                         <td>
                                             <div class='wrapper text-center'>
                                                 <div class="btn-group" role="group">
-                                                    <a href="" class="btn btn-warning" data-toggle="tooltip" title="Editar">
-                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar
-                                                    </a>
-                                                    <button class="btn btn-danger" onclick="eliminar" data-toggle="tooltip" title="Eliminar">
-                                                        <i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar
+                                                    <button wire:click="edit({{ $comida->id }})" type="button"
+                                                        class="btn btn-warning" data-toggle="modal"
+                                                        
+                                                        data-target="#exampleModal">
+                                                        <i class="fa-solid fa-pen-to-square"></i> Editar
+                                                    </button>
+                                                    <button wire:click="isModalConsultar({{ $comida->id }})"
+                                                        class="btn btn-danger"
+                                                        >
+                                                        <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                     </button>
                                                 </div>
                                             </div>

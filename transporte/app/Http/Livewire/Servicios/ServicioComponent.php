@@ -10,7 +10,7 @@ class ServicioComponent extends Component
     public function render()
     {
         $this->servicios = Servicio::all();
-        return view('livewire.servicios.servicio-component');
+        return view('livewire.servicios.servicio-component')->extends('layouts.adminlte');
     }
 
     public $servicios;

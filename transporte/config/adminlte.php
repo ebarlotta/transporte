@@ -325,7 +325,7 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Comida',
+            'text' => 'Lugares Para Comer',
             'url'  => 'comidas',
             'icon' => 'fas fa-fw fa-user',
         ],
