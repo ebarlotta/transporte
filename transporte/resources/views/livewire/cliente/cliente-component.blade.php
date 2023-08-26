@@ -641,6 +641,50 @@
                                 </div>
                             </div>
                         </div>
+                        <table>
+                            <tr class="bg-green-500">
+                                <td>Fecha</td>
+                                <td>Descripción</td>
+                                <td>Vencimiento</td>
+                                <td>Monto</td>
+                                <td>Estado</td>
+                                <td>Acciones</td>
+                            </tr>
+                            <tr>
+                                <td>10/10/2023</td>
+                                <td>Cuota 1</td>
+                                <td>12/10/2023</td>
+                                <td>$ 1000</td>
+                                <td>Pagado</td>
+                                <td>
+                                    <button class="btn-info disabled" >Pagar</button>
+                                    <button class="btn-info">Guardar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10/10/2023</td>
+                                <td>Cuota 2</td>
+                                <td>12/10/2023</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <button class="btn-info">Pagar</button>
+                                    <button class="btn-info">Guardar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10/10/2023</td>
+                                <td>Cuota 3</td>
+                                <td>12/10/2023</td>
+                                <td>-</td>
+                                <td>-</td>
+
+                                <td>
+                                    <button class="btn-info">Pagar</button>
+                                    <button class="btn-info">Guardar</button>
+                                </td>
+                            </tr>
+                        </table>
                         {!! $cuotas !!}
                     </div>
                 </div>
