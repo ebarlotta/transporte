@@ -17,6 +17,43 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/svg-with-js.min.css" rel="stylesheet" />
 
+<title>Simple Marker</title>
+{{-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOApHGNbLGntMdhoCPR5XstY2ggi73N_Q&callback=initMap&libraries=&v=weekly" defer></script> --}}
+    {{-- <link rel="stylesheet" href="./style.css"/> --}}
+    {{-- <script src="./app.js"></script> --}}
+<script>
+    "use strict";
+function initMap() {
+//   const myLatLng = {
+//     lat: -32.889259338378906,
+//     lng: -68.84587097167969
+//   };
+//   const myLatLng1 = {
+//     lat: -32.8880613,
+//     lng: -68.8572878
+//   };
+//   const map = new google.maps.Map(document.getElementById("gmp-map"), {
+//     zoom: 14,
+//     center: myLatLng,
+//     fullscreenControl: false,
+//     zoomControl: true,
+//     streetViewControl: false
+//   });
+//   new google.maps.Marker({
+//     position: myLatLng,
+//     map,
+//     title: "My location",
+//     width:5,
+//     opacity:0.5,
+//     size:0.2
+//   });
+}
+</script>
+
+
+
+
     <!-- Tailwind -->
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}

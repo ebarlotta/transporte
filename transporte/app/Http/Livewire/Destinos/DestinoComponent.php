@@ -6,12 +6,17 @@ use Livewire\Component;
 use App\Models\Destino;
 use App\Models\Nacionalidad;
 
+use Livewire\WithFileUploads;
+
 class DestinoComponent extends Component
 {
+    use WithFileUploads;
+
     public $destinos;
     public $descripcion, $clima, $ubicaciongps, $fotourl;
     public $nombre, $mejorepocaparavisitar, $presupuestoestimado, $otrosenlaces, $pais_id;  
     public $destino_id;
+    public $nombreparaeliminar;
 
     public $paises;
 
@@ -28,16 +33,19 @@ class DestinoComponent extends Component
             'descripcion' => 'required',
             'clima' => 'required',
             'ubicaciongps' => 'required',
-            //'fotourl' => 'required|integer',
+            'fotourl' => 'image|max:2048',
             'mejorepocaparavisitar' => 'required',
             'presupuestoestimado' => 'required|integer',
             'otrosenlaces' => 'required',
             'pais_id' => 'required',
         ]);
+        $imagenurl = $this->fotourl->store('destino');
+        //dd($imagenurl);
         Destino::updateOrCreate(['id' => $this->destino_id], [
         'nombre' => $this->nombre,
         'descripcion' => $this->descripcion,
         'clima' => $this->clima,
+        'fotourl'=> $imagenurl,
         'ubicaciongps' => $this->ubicaciongps,
         'mejorepocaparavisitar' => $this->mejorepocaparavisitar,
         'presupuestoestimado' => $this->presupuestoestimado,
@@ -62,10 +70,27 @@ class DestinoComponent extends Component
         $this->destino_id = $id;
     }
 
+    
+    public function BuscarDatosDestinoParaEliminar($id) {
+        $destino = Destino::find($id);
+        $this->nombreparaeliminar = $destino->nombre;
+        $this->destino_id = $id;
+    }
+
+    // public function delete() {
+    //     $localidad = Localidad::find($this->localidad_id);
+    //     $clientes = Cliente::where('localidad_id','=', $this->localidad_id)->get();
+    //     if(count($clientes)) {
+    //         session()->flash('messageBad', ' No se puede eliminar la Localidad ya que pertenece a otra tabla');
+    //     } else {
+    //         $localidad->destroy($this->localidad_id);
+    //         session()->flash('message', $this->localidad_id ? 'Localidad Eliminada.' : 'No ha seleccionado una localidad a eliminar.');
+    //     }
+    // }
+
     public function delete() {
         $destino = Destino::find($this->destino_id);
         $destino->destroy($this->destino_id);
-        //$this->isModalConsultar(0); // PARA HACER
 
         session()->flash('message', $this->destino_id ? 'Destino Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
     }

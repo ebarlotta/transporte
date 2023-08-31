@@ -70,9 +70,7 @@
                                             <td>
                                                 {{-- <div class='wrapper text-center'> --}}
                                                     {{-- <div class="btn-group" role="group"> --}}
-                                                        <button type="button" class=" btn-info" data-toggle="modal"
-                                                            data-target="#ModalEstadoCuentaPrueba"
-                                                            >
+                                                        <button type="button" class=" btn-info" data-toggle="modal" data-target="#ModalEstadoCuenta">
                                                             <i class="fa-solid fa-pen-to-square"></i> Estado de cuenta
                                                         </button>
                                                         {{-- <button type="button" class=" btn-info" data-toggle="modal"
@@ -80,15 +78,10 @@
                                                             >
                                                             <i class="fa-solid fa-pen-to-square"></i> Estado de cuenta
                                                         </button> --}}
-                                                        <button wire:click="edit({{ $cliente->id }})" type="button"
-                                                            class=" btn-warning" data-toggle="modal"
-                                                            
-                                                            data-target="#exampleModal">
+                                                        <button wire:click="edit({{ $cliente->id }})" type="button" class=" btn-warning" data-toggle="modal" data-target="#exampleModal">
                                                             <i class="fa-solid fa-pen-to-square"></i> Editar
                                                         </button>
-                                                        <button wire:click="isModalConsultar({{ $cliente->id }})"
-                                                            class=" btn-danger"
-                                                            >
+                                                        <button wire:click="isModalConsultar({{ $cliente->id }})" class=" btn-danger">
                                                             <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                         </button>
 
@@ -157,13 +150,13 @@
                 </div>
             </div>
 
-            <!-- Modal -->
+            <!-- Modal Altas/Modificaciones -->
             <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Gestión de Clientes</h5>
+                            <h5 class="modal-title">Gestión de Clientes - Altas/Modificaciones</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -435,13 +428,16 @@
                     }
                 </style>
             </head>
-            <div wire:ignore.self class="modal fade" id="ModalEstadoCuentaPrueba" tabindex="-1" role="dialog"
+
+
+            <!-- Modal Estado De Cuentas -->
+            <div wire:ignore.self class="modal fade" id="ModalEstadoCuenta" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document" style="width: 1000px; max-width: 100%">
                     {{-- <div class="modal-dialog" role="document"  style="width: 1000px"> --}}
                     <div class="modal-content" style="width: inherit">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Gestión de Clientes</h5>
+                            <h5 class="modal-title">Gestión de Clientes</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -449,195 +445,29 @@
                         <div class="modal-body" style="height: auto;">
                             <div class="container flex d-flex wrapper1">
                                 <div class="scrolls1">
-                                    <div class="cardcontainer" wire:click="DevolverCuotas(1)">
-                                        <h5 style="width:200px;">News Card</h5>
-                                        <div class="photo">
-                                            <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
-                                                width="100px" height="100px">
-                                            <div class="photos">Photos</div>
+                                    {{-- @foreach() 
+                                        <div class="cardcontainer" wire:click="DevolverCuotas(1)">
+                                            <h5 style="width:200px;">News Card</h5>
+                                            <div class="photo">
+                                                <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
+                                                    width="100px" height="100px">
+                                                <div class="photos">Photos</div>
+                                            </div>
+                                            <div class="content">
+                                                <p class="txt4">City Lights In Newyork</p>
+                                                <p class="txt5">A city that never sleeps</p>
+                                                <p class="txt3">Texto</p>
+                                            </div>
+                                            <div class="footer">
+                                                <p><a class="waves-effect waves-light btn" href="#">Read
+                                                        More</a><a id="heart"><span class="like"><i
+                                                                class="fab fa-gratipay"></i>Like</span></a></p>
+                                                <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
+                                                        class="comments"><i class="fas fa-comments"></i>45
+                                                        Comments</span></p>
+                                            </div>
                                         </div>
-                                        <div class="content">
-                                            <p class="txt4">City Lights In Newyork</p>
-                                            <p class="txt5">A city that never sleeps</p>
-                                            <p class="txt3">Texto</p>
-                                        </div>
-                                        <div class="footer">
-                                            <p><a class="waves-effect waves-light btn" href="#">Read
-                                                    More</a><a id="heart"><span class="like"><i
-                                                            class="fab fa-gratipay"></i>Like</span></a></p>
-                                            <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
-                                                    class="comments"><i class="fas fa-comments"></i>45
-                                                    Comments</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="cardcontainer">
-                                        <h5 style="width:200px;">News Card</h5>
-                                        <div class="photo">
-                                            <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
-                                                width="100px" height="100px">
-                                            <div class="photos">Photos</div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="txt4">City Lights In Newyork</p>
-                                            <p class="txt5">A city that never sleeps</p>
-                                            <p class="txt3">Texto</p>
-                                        </div>
-                                        <div class="footer">
-                                            <p><a class="waves-effect waves-light btn" href="#">Read
-                                                    More</a><a id="heart"><span class="like"><i
-                                                            class="fab fa-gratipay"></i>Like</span></a></p>
-                                            <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
-                                                    class="comments"><i class="fas fa-comments"></i>45
-                                                    Comments</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="cardcontainer">
-                                        <h5 style="width:200px;">News Card</h5>
-                                        <div class="photo">
-                                            <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
-                                                width="100px" height="100px">
-                                            <div class="photos">Photos</div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="txt4">City Lights In Newyork</p>
-                                            <p class="txt5">A city that never sleeps</p>
-                                            <p class="txt3">Texto</p>
-                                        </div>
-                                        <div class="footer">
-                                            <p><a class="waves-effect waves-light btn" href="#">Read
-                                                    More</a><a id="heart"><span class="like"><i
-                                                            class="fab fa-gratipay"></i>Like</span></a></p>
-                                            <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
-                                                    class="comments"><i class="fas fa-comments"></i>45
-                                                    Comments</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="cardcontainer">
-                                        <h5 style="width:200px;">News Card</h5>
-                                        <div class="photo">
-                                            <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
-                                                width="100px" height="100px">
-                                            <div class="photos">Photos</div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="txt4">City Lights In Newyork</p>
-                                            <p class="txt5">A city that never sleeps</p>
-                                            <p class="txt3">Texto</p>
-                                        </div>
-                                        <div class="footer">
-                                            <p><a class="waves-effect waves-light btn" href="#">Read
-                                                    More</a><a id="heart"><span class="like"><i
-                                                            class="fab fa-gratipay"></i>Like</span></a></p>
-                                            <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
-                                                    class="comments"><i class="fas fa-comments"></i>45
-                                                    Comments</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="cardcontainer">
-                                        <h5 style="width:200px;">News Card</h5>
-                                        <div class="photo">
-                                            <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
-                                                width="100px" height="100px">
-                                            <div class="photos">Photos</div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="txt4">City Lights In Newyork</p>
-                                            <p class="txt5">A city that never sleeps</p>
-                                            <p class="txt3">Texto</p>
-                                        </div>
-                                        <div class="footer">
-                                            <p><a class="waves-effect waves-light btn" href="#">Read
-                                                    More</a><a id="heart"><span class="like"><i
-                                                            class="fab fa-gratipay"></i>Like</span></a></p>
-                                            <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
-                                                    class="comments"><i class="fas fa-comments"></i>45
-                                                    Comments</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="cardcontainer">
-                                        <h5 style="width:200px;">News Card</h5>
-                                        <div class="photo">
-                                            <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
-                                                width="100px" height="100px">
-                                            <div class="photos">Photos</div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="txt4">City Lights In Newyork</p>
-                                            <p class="txt5">A city that never sleeps</p>
-                                            <p class="txt3">Texto</p>
-                                        </div>
-                                        <div class="footer">
-                                            <p><a class="waves-effect waves-light btn" href="#">Read
-                                                    More</a><a id="heart"><span class="like"><i
-                                                            class="fab fa-gratipay"></i>Like</span></a></p>
-                                            <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
-                                                    class="comments"><i class="fas fa-comments"></i>45
-                                                    Comments</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="cardcontainer">
-                                        <h5 style="width:200px;">News Card</h5>
-                                        <div class="photo">
-                                            <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
-                                                width="100px" height="100px">
-                                            <div class="photos">Photos</div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="txt4">City Lights In Newyork</p>
-                                            <p class="txt5">A city that never sleeps</p>
-                                            <p class="txt3">Texto</p>
-                                        </div>
-                                        <div class="footer">
-                                            <p><a class="waves-effect waves-light btn" href="#">Read
-                                                    More</a><a id="heart"><span class="like"><i
-                                                            class="fab fa-gratipay"></i>Like</span></a></p>
-                                            <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
-                                                    class="comments"><i class="fas fa-comments"></i>45
-                                                    Comments</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="cardcontainer">
-                                        <h5 style="width:200px;">News Card</h5>
-                                        <div class="photo">
-                                            <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
-                                                width="100px" height="100px">
-                                            <div class="photos">Photos</div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="txt4">City Lights In Newyork</p>
-                                            <p class="txt5">A city that never sleeps</p>
-                                            <p class="txt3">Texto</p>
-                                        </div>
-                                        <div class="footer">
-                                            <p><a class="waves-effect waves-light btn" href="#">Read
-                                                    More</a><a id="heart"><span class="like"><i
-                                                            class="fab fa-gratipay"></i>Like</span></a></p>
-                                            <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
-                                                    class="comments"><i class="fas fa-comments"></i>45
-                                                    Comments</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="cardcontainer">
-                                        <h5 style="width:200px;">News Card</h5>
-                                        <div class="photo">
-                                            <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"
-                                                width="100px" height="100px">
-                                            <div class="photos">Photos</div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="txt4">City Lights In Newyork</p>
-                                            <p class="txt5">A city that never sleeps</p>
-                                            <p class="txt3">Texto</p>
-                                        </div>
-                                        <div class="footer">
-                                            <p><a class="waves-effect waves-light btn" href="#">Read
-                                                    More</a><a id="heart"><span class="like"><i
-                                                            class="fab fa-gratipay"></i>Like</span></a></p>
-                                            <p class="txt3"><i class="far fa-clock"></i>10 Minutes Ago <span
-                                                    class="comments"><i class="fas fa-comments"></i>45
-                                                    Comments</span></p>
-                                        </div>
-                                    </div>
+                                    @endforeach --}}
                                 </div>
                             </div>
                         </div>
@@ -729,12 +559,13 @@
                     margin-bottom: 10px;
                 }
             </style> --}}
+
             <div wire:ignore.self class="modal fade" id="ModalEstadoCuenta" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document" style="width: 1000px">
                     <div class="modal-content" style="width: inherit">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Gestión de Clientes</h5>
+                            <h5 class="modal-title">Gestión de Clientessss</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
