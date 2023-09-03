@@ -6,11 +6,13 @@ use App\Http\Livewire\Comida\ComidaComponent;
 use App\Http\Livewire\Destinos\DestinoComponent;
 use App\Http\Livewire\Localidades\LocalidadComponent;
 use App\Http\Livewire\Nacionalidades\NacionalidadComponent;
+use App\Http\Livewire\Pagos\PagosComponent;
 use App\Http\Livewire\Paquetes\PaqueteComponent;
 use App\Http\Livewire\Provincias\ProvinciaComponent;
 use App\Http\Livewire\Restricciones\RestriccionComponent;
 use App\Http\Livewire\Servicios\ServicioComponent;
 use App\Http\Livewire\Transportes\TransporteComponent;
+use App\Http\Livewire\Ventas\VentasComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +41,8 @@ Route::get('restricciones',RestriccionComponent::class)->name('restricciones');
 Route::get('servicios',ServicioComponent::class)->name('servicios');
 Route::get('transportes',TransporteComponent::class)->name('transportes');
 Route::get('paquetes',PaqueteComponent::class)->name('paquetes');
+Route::get('ventas',VentasComponent::class)->name('ventas');
+Route::get('pagos',PagosComponent::class)->name('pagos');
 
 Route::middleware([
     'auth:sanctum',

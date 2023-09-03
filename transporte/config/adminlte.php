@@ -373,7 +373,17 @@ return [
             'text' => 'Transportes',
             'url'  => 'transportes',
             'icon' => 'fas fa-fw fa-user',
-        ],        
+        ],
+        [
+            'text' => 'Ventas',
+            'url'  => 'ventas',
+            'icon' => 'fas fa-fw fa-user',
+        ],    
+        [
+            'text' => 'Pagos',
+            'url'  => 'pagos',
+            'icon' => 'fas fa-fw fa-user',
+        ],   
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
