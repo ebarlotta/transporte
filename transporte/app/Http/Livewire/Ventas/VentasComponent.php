@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Ventas;
 
 use App\Models\Cliente;
+use App\Models\Destino;
 use App\Models\Venta;
 use Livewire\Component;
 use App\Models\Pago;
@@ -23,10 +24,16 @@ class VentasComponent extends Component
     public $ocultarClientes=false;
     public $ocultarVenta=true;
 
-    public $FechaVencimiento, $CantidadCuotas;
+    public $FechaVencimiento, $PrecioDelPaquete;
+    public $CantidadCuotas=1;
+
+    public $ContClientes, $ContDestinos, $ContVentas;
 
     public function render()
     {
+        $this->ContClientes=Cliente::all()->count();
+        $this->ContDestinos=Destino::all()->count();
+        $this->ContVentas=Venta::all()->count();
         return view('livewire.ventas.ventas-component')->extends('layouts.adminlte');
     }
 
@@ -49,7 +56,9 @@ class VentasComponent extends Component
         //dd($id);
         $pago = Pago::find($id);
         $pago->fechapago = date("Y-m-d");
-        $pago->montopagado=1000;
+        $pieces = explode("-", $pago->descripcion); //extrae el monto de la cuota que se encuentra en la descripción
+        $pago->montopagado=substr(trim($pieces[1]),1);
+        //dd($pago->montopagado);
         $pago->estado="Pagada";
         $pago->save();
         $this->CargarIdVenta($this->idVenta);
@@ -58,6 +67,7 @@ class VentasComponent extends Component
     public function ConstructorVenta() {
         $this->listadoPaquetes=Paquete::all();
         $this->listadoClientes=Cliente::all();
+        $this->FechaVencimiento = date('Y-m-d'); 
     }
 
     public function SeleccionoPaquete($id) {
@@ -77,20 +87,19 @@ class VentasComponent extends Component
     public function RealizarVenta() {
         $venta = new Venta;
         $venta->fecha = date("Y-m-d");
-        $venta->total = $this->precioPaqueteSeleccionado;
+        $venta->total = $this->precioPaqueteSeleccionado/$this->CantidadCuotas;
         $venta->cliente_id=$this->comprarCliente;
         //dd($venta);
         $venta->save();    
-
-        $date=date('y-m-d');
+        //dd($this->FechaVencimiento);
+        $date=$this->FechaVencimiento;
         for($cont=1; $cont<=$this->CantidadCuotas;$cont++) {
             $pago = new Pago;
-            $pago->descripcion = "Cuota ".  $cont;
+            $pago->descripcion = "Cuota ".  $cont . " - $" . number_format($this->precioPaqueteSeleccionado/$this->CantidadCuotas,2);
             $pago->venta_id=$venta->id;
             $pago->montopagado=0;
             $mod_date = strtotime($date."+ 30 days");
-            $pago->fechavencimiento=date('Y-m-d',$mod_date);
-            $date=$pago->fechavencimiento; //Toma la fecha para la siguiente cuota
+            $pago->fechavencimiento=date('y-m-d',strtotime($mod_date));
             $pago->fechapago =null;
             $pago->estado="Impaga";
             $pago->save();
