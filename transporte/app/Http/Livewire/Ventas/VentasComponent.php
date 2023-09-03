@@ -6,13 +6,24 @@ use App\Models\Cliente;
 use App\Models\Venta;
 use Livewire\Component;
 use App\Models\Pago;
+use App\Models\Paquete;
+
 
 class VentasComponent extends Component
 {
     public $mostrarventas=false;
     public $listadoVentas;
+    public $listadoPaquetes;
+    public $listadoClientes;
     public $pagos;
     public $idVenta;
+    public $comprarPaquete, $comprarCliente, $precioPaqueteSeleccionado;
+
+    public $ocultarPaquetes=false;
+    public $ocultarClientes=false;
+    public $ocultarVenta=true;
+
+    public $FechaVencimiento, $CantidadCuotas;
 
     public function render()
     {
@@ -42,5 +53,48 @@ class VentasComponent extends Component
         $pago->estado="Pagada";
         $pago->save();
         $this->CargarIdVenta($this->idVenta);
+    }
+
+    public function ConstructorVenta() {
+        $this->listadoPaquetes=Paquete::all();
+        $this->listadoClientes=Cliente::all();
+    }
+
+    public function SeleccionoPaquete($id) {
+        $this->comprarPaquete=$id;
+        $paquete =  Paquete::where('id','=',$id)->get('presupuestoestimado');
+        //dd($paquete[0]['presupuestoestimado']);
+        $this->precioPaqueteSeleccionado = $paquete[0]['presupuestoestimado'];
+    }
+
+    public function SeleccionoCliente($id) {
+        $this->comprarCliente=$id;
+        $this->ocultarPaquetes=!$this->ocultarPaquetes;
+        $this->ocultarClientes=!$this->ocultarClientes;
+        $this->ocultarVenta=!$this->ocultarVenta;
+    }
+
+    public function RealizarVenta() {
+        $venta = new Venta;
+        $venta->fecha = date("Y-m-d");
+        $venta->total = $this->precioPaqueteSeleccionado;
+        $venta->cliente_id=$this->comprarCliente;
+        //dd($venta);
+        $venta->save();    
+
+        $date=date('y-m-d');
+        for($cont=1; $cont<=$this->CantidadCuotas;$cont++) {
+            $pago = new Pago;
+            $pago->descripcion = "Cuota ".  $cont;
+            $pago->venta_id=$venta->id;
+            $pago->montopagado=0;
+            $mod_date = strtotime($date."+ 30 days");
+            $pago->fechavencimiento=date('Y-m-d',$mod_date);
+            $date=$pago->fechavencimiento; //Toma la fecha para la siguiente cuota
+            $pago->fechapago =null;
+            $pago->estado="Impaga";
+            $pago->save();
+            
+        }
     }
 }

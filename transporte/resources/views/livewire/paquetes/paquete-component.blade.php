@@ -56,7 +56,7 @@
                             <div class="mb-3">
                                 <div>
                                     <label class="form-label">Destinos Relacionados</label>
-                                    <button class="btn btn-info" data-dismiss="modal" type="button" data-toggle="modal" data-target="#ModalNueaRelacion"><i class="fa-regular fa-plus"></i>Agregar Destino</button>
+                                    <button class="btn btn-info" data-dismiss="modal" type="button" wire:click="ConstructorDestinos()" data-toggle="modal" data-target="#ModalNueaRelacion"><i class="fa-regular fa-plus"></i>Agregar Destino</button>
                                 </div>
                                 <div class="d-flex">
                                     @if(($destinospaquete))
@@ -177,7 +177,7 @@
                                         @if("Sin_imagen.jpg"==$paquete->fotourl) 
                                             <img src="img/sin_imagen.jpg" alt="" style="width: 100px; height:100px;">
                                         @else 
-                                            {{-- <img src="{{ asset($paquete->fotourl) }}" alt="" style="width: 100px; height:100px;"> --}}
+                                            <img src="{{ asset($paquete->fotourl) }}" alt="" style="width: 100px; height:100px;">
                                         @endif
                                     </td>
                                     <td>

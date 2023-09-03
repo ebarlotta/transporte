@@ -36,7 +36,7 @@ class PaqueteComponent extends Component
             'fotourl' => 'required',
         ]);
 
-        $this->fotourl = $this->fotourl->store('paquetes');
+        $this->fotourl = $this->fotourl->store('destino/paquetes');
         Paquete::updateOrCreate(['id' => $this->paquete_id], [
         'nombre' => $this->nombre,
         'descripcion' => $this->descripcion,
@@ -79,7 +79,7 @@ class PaqueteComponent extends Component
 
         $this->paquete_id = $id;
 
-        $this->destinosposibles = Destino::all(); // Se utiliza para llenar el combo con los distintos destinos para ser relacionados con el paquete
+        $this->ConstructorDestinos();
     }
 
     public function EliminarRelacion() {
@@ -102,5 +102,9 @@ class PaqueteComponent extends Component
 
     public function setDestinoAEliminar($destino_id) {
         $this->destinoaeliminar = $destino_id;
+    }
+
+    public function ConstructorDestinos() {
+        $this->destinosposibles = Destino::all();  // Se utiliza para llenar el combo con los distintos destinos para ser relacionados con el paquete
     }
 }

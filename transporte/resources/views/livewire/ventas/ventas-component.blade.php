@@ -277,6 +277,11 @@
                                         <span>Monthly blog posts</span>
                                     </div>
                                     <div class="align-self-center">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" wire:click="ConstructorVenta()" data-target="#ModalGestionVentas">
+                                        Gestionar Ventas 
+                                        </button>
+                                    </div>
+                                    <div class="align-self-center">
                                         <h1>18,000</h1>
                                     </div>
                                 </div>
@@ -304,7 +309,7 @@
                                             </tr>
                                             @foreach ($listadoVentas as $venta)
                                             <tr>
-                                                <td>{{ $venta->fecha}}</td>
+                                                <td>{{ date('d-m-Y',strtotime($venta->fecha))}}</td>
                                                 <td>{{ $venta->apellido . ', ' . $venta->nombre }}</td>
                                                 <td>{{ $venta->total}}</td>
                                                 <td>
@@ -325,6 +330,8 @@
             @endif
 
 
+            <!-- Modal Gestión de pagos -->
+            <!-- ====================== -->
             <div wire:ignore.self class="modal fade" id="ModalGestionPagos" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document" style="width: 1000px; max-width: 100%">
@@ -347,10 +354,10 @@
                             @if($pagos)
                                 @foreach ($pagos as $pago)
                                     <tr>
-                                        <td>{{ $pago->fechavencimiento }}</td>
+                                        <td>{{ date('d-m-Y',strtotime($pago->fechavencimiento)) }}</td>
                                         <td>{{ $pago->descripcion }}</td>
                                         <td>{{ $pago->montopagado }}</td>
-                                        <td>{{ $pago->fechapago }}</td>
+                                        <td>{{ date('d-m-Y',strtotime($pago->fechapago)) }}</td>
                                         <td>{{ $pago->estado }}</td>
                                         <td>
                                             @if($pago->estado == "Pagada") 
@@ -371,93 +378,169 @@
                 </div>
             </div>
 
-            {{-- <div class="row">
-                <div class="col-xl-6 col-md-12">
-                    <div class="card overflow-hidden">
-                        <div class="card-content">
-                            <div class="card-body cleartfix">
-                                <div class="media align-items-stretch">
-                                    <div class="align-self-center">
-                                        <i class="icon-pencil primary font-large-2 mr-2"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Total Posts</h4>
-                                        <span>Monthly blog posts</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <h1>18,000</h1>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Modal Gestión de Ventas -->
+            <!-- ====================== -->
+            <div wire:ignore.self class="modal fade" id="ModalGestionVentas" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="width: 1000px; max-width: 100%">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Gestión de Ventas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-xl-6 col-md-12">
-                    <div class="card card-resalte">
-                        <div class="card-content">
-                            <div class="card-body cleartfix">
-                                <div class="media align-items-stretch">
-                                    <div class="align-self-center">
-                                        <i class="icon-speech warning font-large-2 mr-2"></i>
+                        <div class="row">
+                            <div class="col-xl-5 col-md-5 m-4">
+                                <div class="card overflow-hidden card-resalte">
+                                    <div class="card-content">
+                                        <div class="card-body cleartfix">
+                                            <div class="media align-items-stretch">
+                                                <div class="align-self-center">
+                                                    <i class="icon-pencil primary font-large-2 mr-2"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4>Paquetes Turísticos</h4>
+                                                    Aca van los datos
+                                                    <span>Monthly blog posts</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="media-body">
-                                        <h4>Total Comments</h4>
-                                        <span>Monthly blog comments</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <h1>84,695</h1>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-md-5 m-4">
+                                <div class="card overflow-hidden card-resalte">
+                                    <div class="card-content">
+                                        <div class="card-body cleartfix">
+                                            <div class="media align-items-stretch">
+                                                <div class="align-self-center">
+                                                    <i class="icon-pencil primary font-large-2 mr-2"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4>Viajes Aéreos</h4>
+                                                    Aca van los datos
+                                                    <span>Monthly blog posts</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <input class="form-control mx-3 btn col-11 align-self-center bg-red-200" type="text" value="" placeholder="Buscar Paquete">
+                        <div class="row">
+                            <div class="col-xl-4 col-md-4 m-4">
+                                @if($listadoPaquetes)
+                                    @foreach ($listadoPaquetes as $paquete)
+                                        <div class="card overflow-hidden card-resalte" wire:click="SeleccionoPaquete({{$paquete->id}})">
+                                            <div class="card-content" style="background-color: #cda3a3;">
+                                                <div class="card-body cleartfix">
+                                                    <div class="media align-items-stretch">
+                                                        <div class="align-self-center">
+                                                            <i class="icon-pencil primary font-large-2 mr-2"></i>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6>{{ $paquete->nombre }}</h6>
+                                                            <span>{{ $paquete->descripcion}}</span>
+                                                        </div>
+                                                        <div class="align-self-center">
+                                                            <img class="m-2" src="{{ asset($paquete->fotourl)}}" alt="" style="width: 50px; height:50px ;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="col-xl-4 col-md-4 m-4">
+                                @if($comprarPaquete)
+                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200" type="text" value="" placeholder="Buscar Persona">
+
+                                    @foreach($listadoClientes as $cliente)
+                                    <div class="col-xl-12 col-md-12 m-4">
+                                                <div class="card overflow-hidden card-resalte" wire:click="SeleccionoCliente({{$cliente->id}})">
+                                                    <div class="card-content" style="background-color: #a6c49a;">
+                                                        <div class="card-body cleartfix">
+                                                            <div class="media align-items-stretch">
+                                                                <div class="media-body">
+                                                                    <h6>{{ $cliente->apellido }}, {{ $cliente->nombre }}</h6>
+                                                                    {{-- <span>{{ $paquete->descripcion}}</span> --}}
+                                                                </div>
+                                                                {{-- <div class="align-self-center">
+                                                                    <img class="m-2" src="{{ asset('fotourl')}}" alt="" style="width: 50px; height:50px ;">
+                                                                </div> --}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                        
+                                    </div>
+                                    @endforeach
+                                @else
+                                    Seleccione un paquete
+                                @endif
+                            </div>
+                            <div class="col-xl-12 col-md-12 m-4">
+                                @if($comprarPaquete>0 && $comprarCliente>0 and $precioPaqueteSeleccionado>0)
+                                    @if(!$ocultarVenta)
+                                    <table>
+                                        <tr>
+                                            <td>Fecha Vencimiento</td>
+                                            <td>Cantidad Cuotas</td>
+                                            <td>Acción</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input class="form-control" type="date" name="FechaVencimiento" id="FechaVencimiento" wire:model="FechaVencimiento">
+                                            </td>
+                                            <td>
+                                                <select  class="form-control" name="CantidadCuotas" id="CantidadCuotas" wire:model="CantidadCuotas">
+                                                    <option value="0" selected>-</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button class="form-control" type="button" class="btn btn-info" wire:click="RealizarVenta()" data-toggle="modal" data-target="#ModalVentasExitosa">
+                                                    Realizar Venta </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    @endif
+
+                                @else
+                                    Debe seleccionar un paquete y una persona
+                                @endif
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xl-6 col-md-12">
-                    <div class="card card-resalte">
-                        <div class="card-content">
-                            <div class="card-body cleartfix">
-                                <div class="media align-items-stretch">
-                                    <div class="align-self-center">
-                                        <h1 class="mr-2">$76,456.00</h1>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Total Sales</h4>
-                                        <span>Monthly Sales Amount</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="icon-heart danger font-large-2"></i>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Modal Felicitando la compra -->
+            <!-- =========================== -->
+            <div wire:ignore.self class="modal fade" id="ModalVentasExitosa" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="width: 1000px; max-width: 100%">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Felicitaciones</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                        Felicitaciones!!!
                     </div>
                 </div>
+            </div>
 
-                <div class="col-xl-6 col-md-12">
-                    <div class="card card-resalte">
-                        <div class="card-content">
-                            <div class="card-body cleartfix">
-                                <div class="media align-items-stretch">
-                                    <div class="align-self-center">
-                                        <h1 class="mr-2">$36,000.00</h1>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Total Cost</h4>
-                                        <span>Monthly Cost</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="icon-wallet success font-large-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+
         </section>
     </div>
 </div>
