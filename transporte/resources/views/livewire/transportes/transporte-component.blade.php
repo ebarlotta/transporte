@@ -10,6 +10,7 @@
             </div>
             <hr>
 
+            <!-- Modal Nuevo/Modificar transporte -->
             <div wire:ignore.self class="modal fade" id="ModalNuevaTransporte" tabindex="-1"
             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -107,10 +108,7 @@
                                     <td>
                                         <div class='wrapper text-center'>
                                             <div class="btn-group" role="group">
-                                                <button wire:click="edit({{ $transporte->id }})" type="button"
-                                                    class="btn btn-warning" data-toggle="modal"
-                                                    
-                                                    data-target="#exampleModal">
+                                                <button wire:click="edit({{ $transporte->id }})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaTransporte">
                                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                                 </button>
                                                 <button wire:click="isModalConsultar({{ $transporte->id }})"

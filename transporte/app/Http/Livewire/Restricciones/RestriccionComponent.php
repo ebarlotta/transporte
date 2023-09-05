@@ -21,10 +21,9 @@ class RestriccionComponent extends Component
         $this->validate([
             'descripcion' => 'required',
         ]);
-
         Restriccion::updateOrCreate(['id' => $this->restriccion_id], [
-        'descripcion' => $this->descripcion,
-    ]);
+            'descripcion' => $this->descripcion,
+        ]);
         session()->flash('message', $this->restriccion_id ? 'Restriccion Actualizada.' : 'Restriccion Creada.');
     }
 

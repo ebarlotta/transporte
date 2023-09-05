@@ -57,6 +57,7 @@ class VentasComponent extends Component
         $pago = Pago::find($id);
         $pago->fechapago = date("Y-m-d");
         $pieces = explode("-", $pago->descripcion); //extrae el monto de la cuota que se encuentra en la descripción
+        //dd(floatval(substr(trim($pieces[1]),1)));
         $pago->montopagado=substr(trim($pieces[1]),1);
         //dd($pago->montopagado);
         $pago->estado="Pagada";
@@ -87,23 +88,22 @@ class VentasComponent extends Component
     public function RealizarVenta() {
         $venta = new Venta;
         $venta->fecha = date("Y-m-d");
-        $venta->total = $this->precioPaqueteSeleccionado/$this->CantidadCuotas;
+        $venta->total = $this->precioPaqueteSeleccionado; //$this->CantidadCuotas;
         $venta->cliente_id=$this->comprarCliente;
         //dd($venta);
         $venta->save();    
-        //dd($this->FechaVencimiento);
         $date=$this->FechaVencimiento;
         for($cont=1; $cont<=$this->CantidadCuotas;$cont++) {
             $pago = new Pago;
-            $pago->descripcion = "Cuota ".  $cont . " - $" . number_format($this->precioPaqueteSeleccionado/$this->CantidadCuotas,2);
+            $pago->descripcion = "Cuota ".  $cont . " - $" . number_format($this->precioPaqueteSeleccionado/$this->CantidadCuotas,2, '.', '');
             $pago->venta_id=$venta->id;
             $pago->montopagado=0;
+            $pago->fechavencimiento=$date;
             $mod_date = strtotime($date."+ 30 days");
-            $pago->fechavencimiento=date('y-m-d',strtotime($mod_date));
+            $date=date('Y-m-d',$mod_date);
             $pago->fechapago =null;
             $pago->estado="Impaga";
             $pago->save();
-            
         }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Alojamientos;
 
 use App\Models\Alojamiento;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class AlojamientoComponent extends Component
 {
@@ -11,6 +12,8 @@ class AlojamientoComponent extends Component
     public $descripcion, $precio, $ubicaciongps, $fotourl;
 
     public $alojamiento_id;
+
+    use WithFileUploads;
 
     public function render()
     {
@@ -23,13 +26,15 @@ class AlojamientoComponent extends Component
             'descripcion' => 'required',
             'precio' => 'required',
             'ubicaciongps' => 'required',
-            // 'fotourl' => 'required|integer',
+            'fotourl' => 'required',
         ]);
-
+        $this->fotourl = $this->fotourl->store('destino/alojamiento');
+        
         Alojamiento::updateOrCreate(['id' => $this->alojamiento_id], [
         'descripcion' => $this->descripcion,
         'precio' => $this->precio,
         'ubicaciongps' => $this->ubicaciongps,
+        'fotourl' => $this->fotourl,
     ]);
         session()->flash('message', $this->alojamiento_id ? 'Alojamiento Actualizado.' : 'Alojamiento Creado.');
     }

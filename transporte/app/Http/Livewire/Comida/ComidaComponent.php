@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Comida;
 
 use Livewire\Component;
 use App\Models\Comida;
+use Livewire\WithFileUploads;
+
 
 class ComidaComponent extends Component
 {
@@ -13,6 +15,8 @@ class ComidaComponent extends Component
 
     public $comida_id;
 
+    use WithFileUploads;
+
     public function render()
     {
         $this->comidas = Comida::all();
@@ -20,18 +24,20 @@ class ComidaComponent extends Component
     }
 
     public function store() {
+        
         $this->validate([
             'descripcion' => 'required',
             'precio' => 'required',
             'ubicaciongps' => 'required',
-            // 'fotourl' => 'required|integer',
+            'fotourl' => 'required',
         ]);
-
+        $this->fotourl = $this->fotourl->store('destino/comidas');
         Comida::updateOrCreate(['id' => $this->comida_id], [
-        'descripcion' => $this->descripcion,
-        'precio' => $this->precio,
-        'ubicaciongps' => $this->ubicaciongps,
-    ]);
+            'descripcion' => $this->descripcion,
+            'precio' => $this->precio,
+            'ubicaciongps' => $this->ubicaciongps,
+            'fotourl' => $this->fotourl,
+        ]);
         session()->flash('message', $this->comida_id ? 'Lugar Actualizado.' : 'Lugar Creado.');
     }
 

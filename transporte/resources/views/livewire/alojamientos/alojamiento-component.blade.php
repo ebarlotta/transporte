@@ -10,8 +10,8 @@
             </div>
             <hr>
 
-            <div wire:ignore.self class="modal fade" id="ModalEstadoCuentaPrueba" tabindex="-1"
-            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Modal Alta/Modificación -->
+            <div wire:ignore.self class="modal fade" id="ModalEstadoCuentaPrueba" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
 
                 <div class="modal-content" style="width: inherit">
@@ -37,7 +37,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label" for="foto">Foto</label>
-                                <input wire:model="fotourl" class="form-control" name="foto" type="text" id="foto">
+                                <input wire:model="fotourl" class="form-control" name="foto" type="file" id="foto">
                             </div>
 
                             <div class="mb-3">
@@ -77,14 +77,12 @@
                                     <td>{{ $alojamiento->descripcion }}</td>
                                     <td>{{ $alojamiento->precio }}</td>
                                     <td>{{ $alojamiento->ubicaciongps }}</td>
-                                    <td>{{ $alojamiento->fotourl}}</td>
+                                    <td><img src="{{ $alojamiento->fotourl}}" alt="" style="width: 100px; height:100px;"></td>
                                     <td>
                                         <div class='wrapper text-center'>
                                             <div class="btn-group" role="group">
                                                 <button wire:click="edit({{ $alojamiento->id }})" type="button"
-                                                    class="btn btn-warning" data-toggle="modal"
-                                                    
-                                                    data-target="#exampleModal">
+                                                    class="btn btn-warning" data-toggle="modal" data-target="#ModalEstadoCuentaPrueba">
                                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                                 </button>
                                                 <button wire:click="isModalConsultar({{ $alojamiento->id }})"

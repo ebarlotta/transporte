@@ -9,7 +9,7 @@
                 </div>
             </div>
             <hr>
-
+            <!-- modal Alta/Modificacion de Servicios -->
             <div wire:ignore.self class="modal fade" id="ModalNuevaServicio" tabindex="-1"
             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -30,7 +30,10 @@
                             </div>
                             <div class="mb-3 mt-3">
                                 <label class="form-label" for="fotourl">Foto</label>
-                                <input wire:model="fotourl" class="form-control" name="fotourl" type="text" id="fotourl">
+                                <input wire:model="fotourl" class="form-control" name="fotourl" type="file" id="fotourl">
+                                @if($fotourl)
+                                    <img src="{{ $fotourl }}" alt="" style="width: 100px; height:100px;">
+                                @endif
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
@@ -61,10 +64,7 @@
                                     <td>
                                         <div class='wrapper text-center'>
                                             <div class="btn-group" role="group">
-                                                <button wire:click="edit({{ $servicio->id }})" type="button"
-                                                    class="btn btn-warning" data-toggle="modal"
-                                                    
-                                                    data-target="#exampleModal">
+                                                <button wire:click="edit({{ $servicio->id }})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaServicio">
                                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                                 </button>
                                                 <button wire:click="isModalConsultar({{ $servicio->id }})"

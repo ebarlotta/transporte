@@ -10,6 +10,7 @@
                 </div>
                 <hr>
     
+                <!-- Modal Alta/Modificacion comidas -->
                 <div wire:ignore.self class="modal fade" id="ModalNuevaComida" tabindex="-1"
                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
@@ -37,7 +38,7 @@
     
                                 <div class="mb-3">
                                     <label class="form-label" for="foto">Foto</label>
-                                    <input wire:model="fotourl" class="form-control" name="foto" type="text" id="foto">
+                                    <input wire:model="fotourl" class="form-control" name="foto" type="file" id="foto">
                                 </div>
     
                                 <div class="mb-3">
@@ -77,19 +78,14 @@
                                         <td>{{ $comida->descripcion }}</td>
                                         <td>{{ $comida->precio }}</td>
                                         <td>{{ $comida->ubicaciongps }}</td>
-                                        <td>{{ $comida->fotourl}}</td>
+                                        <td><img src="{{ $comida->fotourl}}" alt="" style="width: 100px; height:100px;"></td>
                                         <td>
                                             <div class='wrapper text-center'>
                                                 <div class="btn-group" role="group">
-                                                    <button wire:click="edit({{ $comida->id }})" type="button"
-                                                        class="btn btn-warning" data-toggle="modal"
-                                                        
-                                                        data-target="#exampleModal">
+                                                    <button wire:click="edit({{ $comida->id }})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaComida">
                                                         <i class="fa-solid fa-pen-to-square"></i> Editar
                                                     </button>
-                                                    <button wire:click="isModalConsultar({{ $comida->id }})"
-                                                        class="btn btn-danger"
-                                                        >
+                                                    <button wire:click="isModalConsultar({{ $comida->id }})" class="btn btn-danger">
                                                         <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                     </button>
                                                 </div>

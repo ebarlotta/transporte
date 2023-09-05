@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Servicios;
 
 use Livewire\Component;
 use App\Models\Servicio;
+use Livewire\WithFileUploads;
 
 class ServicioComponent extends Component
 {
+    use WithFileUploads;
+
     public function render()
     {
         $this->servicios = Servicio::all();
@@ -21,9 +24,11 @@ class ServicioComponent extends Component
     public function store() {
         $this->validate([
             'descripcion' => 'required',
-            'fotourl' => 'required|integer',
+            'fotourl' => 'required',
         ]);
 
+        $this->fotourl = $this->fotourl->store('destino/servicios');
+        
         Servicio::updateOrCreate(['id' => $this->servicio_id], [
         'descripcion' => $this->descripcion,
         'fotourl' => $this->fotourl,
