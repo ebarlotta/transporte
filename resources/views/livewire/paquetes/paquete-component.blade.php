@@ -58,7 +58,7 @@
                                     <label class="form-label">Destinos Relacionados</label>
                                     <button class="btn btn-info" data-dismiss="modal" type="button" wire:click="ConstructorDestinos()" data-toggle="modal" data-target="#ModalNueaRelacion"><i class="fa-regular fa-plus"></i>Agregar Destino</button>
                                 </div>
-                                <div class="d-flex">
+                                <div class="d-flex flex-wrap align-self-center">
                                     @if(($destinospaquete))
                                         @foreach ($destinospaquete as $destino)
                                             <div class="card m-2 p-2" style="min-width: 100px; box-shadow: 5px 5px lightslategray; border-style: solid; border-width: 2px;">
@@ -151,10 +151,58 @@
         <!-- Fin Modal -->
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="d-sm-none">
+                    @foreach ($paquetes as $paquete)
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card card-resalte">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="primary">{{ $paquete->descripcion }}</h3>
+                                            <span>{{ $paquete->descripcion }}</span>
+                                            <span>{{ $paquete->duraciontotal }}</span>
+                                        </div>
+                                        <div class="align-self-center">
+                                            @if("Sin_imagen.jpg"==$paquete->fotourl) 
+                                                <img src="img/sin_imagen.jpg" alt="" style="width: 100px; height:100px;">
+                                            @else 
+                                                <img src="{{ asset($paquete->fotourl) }}" alt="" style="width: 100px; height:100px;">
+                                            @endif
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="icon-book-open primary font-large-2 float-right"></i>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="progress mt-1 mb-0" style="height: 7px;">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
+                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div> --}}
+                                    <div class='mt-3 text-center'>
+                                        <div class="btn-group" role="group">
+                                            <button wire:click="edit({{ $paquete->id }})" type="button" class="btn btn-warning"  data-toggle="modal" data-target="#ModalNuevoDestino">
+                                                <i class="fa-solid fa-pen-to-square"></i> Editar
+                                            </button>
+                                            <button wire:click="isModalConsultar({{ $paquete->id }})"
+                                                class="btn btn-danger"
+                                                >
+                                                <i class="fa-regular fa-circle-xmark"></i> Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                        
+                    @endforeach
+                </div>
+                
+                <div class="d-none d-sm-block col-lg-12">
+                {{-- <div class="visible-lg visible-xl col-lg-12"> --}}
                     <div class="table-responsive">
-                        <table class="tabla table table-striped table-hover table-condensed" cellspacing="0"
-                            width="100%">
+                        <table class="tabla table table-striped table-hover table-condensed" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
