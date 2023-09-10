@@ -153,7 +153,7 @@
             <!-- Modal Altas/Modificaciones -->
             <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Gestión de Clientes - Altas/Modificaciones</h5>
@@ -433,7 +433,7 @@
             <!-- Modal Estado De Cuentas -->
             <div wire:ignore.self class="modal fade" id="ModalEstadoCuenta" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document" style="width: 1000px; max-width: 100%">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document" >
                     {{-- <div class="modal-dialog" role="document"  style="width: 1000px"> --}}
                     <div class="modal-content" style="width: inherit">
                         <div class="modal-header">
@@ -445,7 +445,7 @@
                         <div class="modal-body" style="height: auto;">
                             <div class="container flex d-flex wrapper1">
                                 <div class="scrolls1">
-                                    {{-- @foreach() 
+                                    {{-- @foreach()
                                         <div class="cardcontainer" wire:click="DevolverCuotas(1)">
                                             <h5 style="width:200px;">News Card</h5>
                                             <div class="photo">
@@ -471,7 +471,7 @@
                                 </div>
                             </div>
                         </div>
-                        <table>
+                        <table class="mx-5 mb-3">
                             <tr class="bg-green-500">
                                 <td>Fecha</td>
                                 <td>Descripción</td>
@@ -514,8 +514,10 @@
                                     <button class="btn-info">Guardar</button>
                                 </td>
                             </tr>
+
                         </table>
                         {!! $cuotas !!}
+                        <br>
                     </div>
                 </div>
             </div>

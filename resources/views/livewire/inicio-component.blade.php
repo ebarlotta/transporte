@@ -62,7 +62,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled">Apagado</a>
+                    <a class="nav-link" href="clientes">Clientes***</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
