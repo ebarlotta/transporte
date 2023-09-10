@@ -1,4 +1,4 @@
-<div>    
+<div>
     <link rel="stylesheet" type="text/css" href="{{asset('css/ventas/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/ventas/bootstrap-extended.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/ventas/style.min.css')}}">
@@ -279,7 +279,7 @@
                                     </div>
                                     <div class="align-self-center">
                                         <button type="button" class="btn btn-info mr-4" data-toggle="modal" wire:click="ConstructorVenta()" data-target="#ModalGestionVentas">
-                                        Gestionar Ventas 
+                                        Gestionar Ventas
                                         </button>
                                     </div>
                                     <div class="align-self-center">
@@ -315,13 +315,13 @@
                                                 <td>$ {{ number_format($venta->total,2)}}</td>
                                                 <td>
                                                     <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-info" data-toggle="modal" data-target="#ModalGestionPagos">
-                                                        Gestionar Pagos 
+                                                        Gestionar Pagos
                                                     </button>
                                                     {{-- <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-warning" data-toggle="modal" data-target="#ModalGestionPagos">
-                                                        Imprimir chequera 
+                                                        Imprimir chequera
                                                     </button> --}}
                                                 </td>
-                                            </tr>                                            
+                                            </tr>
                                             @endforeach
                                         </table>
                                     </div>
@@ -338,7 +338,7 @@
             <!-- ====================== -->
             <div wire:ignore.self class="modal fade" id="ModalGestionPagos" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document" style="width: 1000px; max-width: 100%">
+                <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                     <div class="modal-content" style="width: inherit">
                         <div class="modal-header">
                             <h5 class="modal-title">Gestión de Pagos</h5>
@@ -368,7 +368,7 @@
                                         @endif
                                         <td>{{ $pago->estado }}</td>
                                         <td>
-                                            @if($pago->estado == "Pagada") 
+                                            @if($pago->estado == "Pagada")
                                                 <button class="btn bg-slate-500" disabled >Registrar Pago</button>
                                                 <button class="btn-primary" wire:click="ImprimirComprobante({{ $pago->id }})">Imprimir Comp.</button>
                                             @else
@@ -391,8 +391,8 @@
             <!-- ====================== -->
             <div wire:ignore.self class="modal fade" id="ModalGestionVentas" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document" style="width: 1000px; max-width: 100%">
-                    <div class="modal-content" style="width: inherit">
+                <div class="modal-dialog modal-dialog" role="document" style="width: 1000px; max-width: 100%">
+                    <div class="modal-content " style="width: inherit">
                         <div class="modal-header">
                             <h5 class="modal-title">Gestión de Ventas</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -495,8 +495,8 @@
                                                         </div>
                                                     </div>
                                                 </div> --}}
-                                            
-                                        
+
+
                                     </div>
                                     @endforeach
                                 @else
