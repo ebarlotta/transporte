@@ -27,7 +27,7 @@ class VentasComponent extends Component
     public $FechaVencimiento, $PrecioDelPaquete;
     public $CantidadCuotas=1;
 
-    public $ContClientes, $ContDestinos, $ContVentas;
+    public $ContClientes=0, $ContDestinos=0, $ContVentas=0;
 
     public function render()
     {
