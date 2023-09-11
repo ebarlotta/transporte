@@ -14,7 +14,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid bg-warning">
         <a class="navbar-brand text-center justify-center" href="#">
-            <img src="/img/logo/logomaxbus.png" alt="" width="80" height="65" class="d-inline-block align-text-bottom ml-3 pl-5">
+            <img src="img/logo/logomaxbus.png" alt="" width="80" height="65" class="d-inline-block align-text-bottom ml-3 pl-5">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -90,21 +90,21 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/img/slider/slider1.jpg" class="d-block w-100" style="height: 350px" alt="...">
+                <img src="img/slider/slider1.jpg" class="d-block w-100" style="height: 350px" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Nombre de la 1° Imagen</h5>
                     <p>Texto que describe la primer imagen</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="/img/slider/slider2.jpg" class="d-block w-100" style="height: 350px" alt="...">
+                <img src="img/slider/slider2.jpg" class="d-block w-100" style="height: 350px" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
                     <p>Some representative placeholder content for the second slide.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="/img/slider/slider3.jpg" class="d-block w-100" style="height: 350px" alt="...">
+                <img src="img/slider/slider3.jpg" class="d-block w-100" style="height: 350px" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
                     <p>Some representative placeholder content for the third slide.</p>
@@ -159,7 +159,7 @@
                 <!-- CARD 1 -->
 
                     <div class="card p-2 m-3 shadow">
-                        <img src="/img/productos/ny.png" class="card-img-top h-100 w-100 rounded-md" stalt="...">
+                        <img src="img/productos/ny.png" class="card-img-top h-100 w-100 rounded-md" stalt="...">
                         <div class="card-body">
                             <h6 class="card-title">Card title</h6>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
@@ -174,7 +174,7 @@
                 <!-- CARD 2 -->
 
                     <div class="card p-2 m-3 shadow">
-                        <img src="/img/productos/ny2.png" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <img src="img/productos/ny2.png" class="card-img-top h-100 w-100 rounded-md" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">Card title</h6>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
@@ -187,7 +187,7 @@
                 <!-- CARD 3 -->
 
                     <div class="card p-2 m-3 shadow">
-                        <img src="/img/productos/mexico.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <img src="img/productos/mexico.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">Card title</h6>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of
@@ -200,7 +200,7 @@
                 <!-- CARD 4 -->
 
                     <div class="card p-2 m-3 shadow">
-                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <img src="img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">Card title</h6>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of
@@ -213,7 +213,7 @@
                 <!-- CARD 5 -->
 
                     <div class="card p-2 m-3 shadow">
-                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <img src="img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">Card title</h6>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of
@@ -226,7 +226,7 @@
                 <!-- CARD 6 -->
 
                     <div class="card p-2 m-3 shadow">
-                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <img src="img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">Card title</h6>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of
@@ -239,7 +239,7 @@
                 <!-- CARD 7 -->
 
                     <div class="card p-2 m-3 shadow">
-                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <img src="img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">Card title</h6>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of
@@ -252,7 +252,7 @@
                 <!-- CARD 8 -->
 
                     <div class="card p-2 m-3 shadow">
-                        <img src="/img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
+                        <img src="img/productos/rio.jpg" class="card-img-top h-100 w-100 rounded-md" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">Card title</h6>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of
