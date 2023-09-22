@@ -27,14 +27,18 @@ class VentasComponent extends Component
     public $FechaVencimiento, $PrecioDelPaquete;
     public $CantidadCuotas=1;
 
-    public $ContClientes=0, $ContDestinos=0, $ContVentas=0;
+    public $ContClientes=0;
+    public $ContDestinos=0;
+    public $ContVentas=0;
 
     public function render()
     {
-        $this->ContClientes=Cliente::all()->count();
-        $this->ContDestinos=Destino::all()->count();
-        $this->ContVentas=Venta::all()->count();
-        return view('livewire.ventas.ventas-component')->extends('layouts.adminlte');
+        // $this->ContClientes=Cliente::all()->count();
+        // $this->ContDestinos=Destino::all()->count();
+        // $this->ContVentas=Venta::all()->count();
+    //dd($this->ContClientes);
+    $this->ContDestinos = 0;
+        return view('livewire.ventas.ventas-component')->with(['ContClientes'=>$this->ContClientes, 'ContDestinos' => $this->ContDestinos, 'ContVentas'=>$this->ContVentas])->extends('layouts.adminlte');
     }
 
     public function MostrarListado() {

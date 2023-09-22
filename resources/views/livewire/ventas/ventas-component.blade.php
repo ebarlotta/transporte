@@ -32,7 +32,9 @@
                                         <i class="icon-pointer danger font-large-2 float-left"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <h3>{{ $ContDestinos}}</h3>
+                                        @if($ContDestinos)
+                                        {{-- <h3>{{ $ContDestinos }}</h3> --}}
+                                        @endif
                                         <span>Destinos</span>
                                     </div>
                                 </div>
@@ -47,7 +49,7 @@
                             <div class="card-body">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <h3 class="success">{{ $ContClientes }}</h3>
+                                        {{-- <h3 class="success">{{ $ContClientes }}</h3> --}}
                                         <span>Clientes</span>
                                     </div>
                                     <div class="align-self-center">
@@ -67,7 +69,7 @@
                                         <i class="icon-graph success font-large-2 float-left"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        <h3>{{ $ContVentas }}</h3>
+                                        {{-- <h3>{{ $ContVentas }}</h3> --}}
                                         <span>Ventas Realizas</span>
                                     </div>
                                 </div>

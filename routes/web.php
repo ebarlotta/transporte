@@ -14,6 +14,7 @@ use App\Http\Livewire\Servicios\ServicioComponent;
 use App\Http\Livewire\Transportes\TransporteComponent;
 use App\Http\Livewire\Ventas\VentasComponent;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\InicioComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::get('/', function () {
     return view('livewire.inicio-component');
 });
 
+Route::get('inicio',InicioComponent::class)->name('inicio');
+
+Route::group(['middleware' => 'admin'], function () {
 Route::get('alojamientos',AlojamientoComponent::class)->name('alojamientos');
 Route::get('comidas',ComidaComponent::class)->name('comidas');
 Route::get('clientes',ClienteComponent::class)->name('clientes');
@@ -43,6 +47,7 @@ Route::get('transportes',TransporteComponent::class)->name('transportes');
 Route::get('paquetes',PaqueteComponent::class)->name('paquetes');
 Route::get('ventas',VentasComponent::class)->name('ventas');
 Route::get('pagos',PagosComponent::class)->name('pagos');
+});
 
 Route::middleware([
     'auth:sanctum',

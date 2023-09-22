@@ -81,7 +81,13 @@
                                     <td>{{ $alojamiento->descripcion }}</td>
                                     <td>{{ $alojamiento->precio }}</td>
                                     <td>{{ $alojamiento->ubicaciongps }}</td>
-                                    <td><img src="{{ $alojamiento->fotourl}}" alt="" style="width: 100px; height:100px;"></td>
+                                    <td>
+                                        @if($alojamiento->fotourl <> 'Sin_imagen.jpg')
+                                            <img src="{{ $alojamiento->fotourl}}" alt="" style="width: 100px; height:100px;">
+                                        @else
+                                            <img src="/img/sin_imagen.jpg" alt="" style="width: 100px; height:100px;">
+                                        @endif
+                                    </td>
                                     <td>
                                         <div class='wrapper text-center'>
                                             <div class="btn-group" role="group">

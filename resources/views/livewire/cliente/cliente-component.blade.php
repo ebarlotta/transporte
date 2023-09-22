@@ -92,60 +92,11 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $datos->links() }}
                         </div>
                         {{-- Para dispositivos de otro tamaño de pantalla --}}
                         {{-- ============================================ --}}
-                        <div>
-                            <table class="tabla table table-striped table-hover table-condensed" cellspacing="0"
-                                width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre y Apellido</th>
-                                        <th>Teléfono</th>
-                                        <th>E-mail</th>
-                                        <th>DNI</th>
-                                        <th class="text-center">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($clientes as $cliente)
-                                        <tr>
-                                            <td>{{ $cliente->apellido }}, {{ $cliente->nombre }}</td>
-                                            @if ($cliente->telefono)
-                                                <td>{{ $cliente->telefono }}</td>
-                                            @else
-                                                <td>-</td>
-                                            @endif
-                                            @if ($cliente->email)
-                                                <td>{{ $cliente->email }}</td>
-                                            @else
-                                                <td>-</td>
-                                            @endif
-                                            <td>{{ $cliente->dni }}</td>
-                                            <td>
-                                                {{-- <div class='wrapper text-center'> --}}
-                                                    {{-- <div class="btn-group" role="group"> --}}
-                                                        <button type="button" class="btn btn-info" data-toggle="modal"
-                                                            data-target="#ModalDetalleCuotas">
-                                                            <i class="fa-solid fa-pen-to-square"></i> Estado de cuenta
-                                                        </button>
-                                                        <button wire:click="edit({{ $cliente->id }})" type="button"
-                                                            class="btn btn-warning" data-toggle="modal"
-                                                            data-target="#exampleModal">
-                                                            <i class="fa-solid fa-pen-to-square"></i>Editar
-                                                        </button>
-                                                        <button wire:click="isModalConsultar({{ $cliente->id }})"
-                                                            class="btn btn-danger">
-                                                            <i class="fa-regular fa-circle-xmark"></i>Eliminar
-                                                        </button>
-                                                    {{-- </div> --}}
-                                                {{-- </div> --}}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -251,19 +202,23 @@
                                     @error('estadocivil')
                                         <span class="text-red-500">{{ $message }}</span>
                                     @enderror
-                                    <button class="btn btn-default" wire:click="isModalCreateChange()">Cerrar</button>
-                                    <a wire:click="store()" class="btn btn-default bg-red-400"><span
-                                            class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        Modificar</a>
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-warning" wire:click="isModalCreateChange()">Cerrar</button>
+                                        <a wire:click="store()" class="btn btn-primary bg-red-400" data-dismiss="modal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            Modificar
+                                        </a>
+                                    </div>
                                 </div>
                             </form>
 
                         </div>
-                        <div class="modal-footer">
+                        {{-- <div class="modal-footer">
                             <button type="button" class=" btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button type="button" class=" btn-primary">Guardar</button>
                             <button type="button" class=" btn-primary">Actualizar</button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

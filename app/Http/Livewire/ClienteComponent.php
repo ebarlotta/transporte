@@ -7,9 +7,12 @@ use App\Models\Cliente;
 use App\Models\Localidad;
 use App\Models\Nacionalidad;
 use App\Models\Provincia;
+use Livewire\WithPagination;
 
 class ClienteComponent extends Component
 {
+    use WithPagination;
+ 
     public $clientes, $cliente_id;
     public $isModalCreate=false;
     public $isModalConsultar=false; 
@@ -21,11 +24,13 @@ class ClienteComponent extends Component
 
     public function render()
     {
-        $this->clientes = Cliente::all();
+        $this->clientes = Cliente::paginate(10);
+        $links = $this->clientes;
+        $this->clientes = collect($this->clientes->items());
         $this->nacionalidades = Nacionalidad::all();
         $this->provincias = Provincia::all();
         $this->localidades = Localidad::all();
-        return view('livewire.cliente.cliente-component')->extends('layouts.adminlte');
+        return view('livewire.cliente.cliente-component',['clientes' => $this->clientes, 'datos'=> $links])->extends('layouts.adminlte');
     }
 
     public function edit($id) {
@@ -66,7 +71,9 @@ class ClienteComponent extends Component
         'localidad_id' => $this->localidad_id,
     ]);
         session()->flash('message', $this->cliente_id ? 'Cliente Actualizado.' : 'Cliente Creado.');
-        $this->isModalCreateChange();
+        //$this->isModalCreateChange();
+        $this->isModalCreate =false;
+
     }
 
     public function delete() {
