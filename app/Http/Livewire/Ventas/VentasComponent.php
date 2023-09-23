@@ -26,18 +26,22 @@ class VentasComponent extends Component
 
     public $FechaVencimiento, $PrecioDelPaquete;
     public $CantidadCuotas=1;
+    public $Parcial;
+    public $idcuotadepagoparcial;
 
     public $ContClientes=0;
     public $ContDestinos=0;
     public $ContVentas=0;
 
+    public $FiltroCliente;
+
     public function render()
     {
-        // $this->ContClientes=Cliente::all()->count();
-        // $this->ContDestinos=Destino::all()->count();
-        // $this->ContVentas=Venta::all()->count();
+        $this->ContClientes=Cliente::all()->count();
+        $this->ContDestinos=Destino::all()->count();
+        $this->ContVentas=Venta::all()->count();
     //dd($this->ContClientes);
-    $this->ContDestinos = 0;
+    // $this->ContDestinos = 0;
         return view('livewire.ventas.ventas-component')->with(['ContClientes'=>$this->ContClientes, 'ContDestinos' => $this->ContDestinos, 'ContVentas'=>$this->ContVentas])->extends('layouts.adminlte');
     }
 
@@ -66,6 +70,40 @@ class VentasComponent extends Component
         //dd($pago->montopagado);
         $pago->estado="Pagada";
         $pago->save();
+        $this->CargarIdVenta($this->idVenta);
+    }
+
+    public function CapturarIdPago($id) {
+        $this->idcuotadepagoparcial = $id;
+    }
+    public function RegistrarPagoParcial() {
+        //dd($id);
+                
+        // Ahora modifica la cuota original disminuyendo el saldo que queda por pagar
+        $pago = Pago::find($this->idcuotadepagoparcial);
+        $pieces = explode("-", $pago->descripcion); //extrae el monto de la cuota que se encuentra en la descripción
+        
+        $pago->montopagado=substr(trim($pieces[1]),1);
+        $descripcion = trim($pieces[0]) . ' - $' . (substr(trim($pieces[1]),1)-$this->Parcial);
+        $pago->descripcion = $descripcion;
+        $pago->fechapago = date("Y-m-d");
+        $pago->montopagado=$this->Parcial;
+        $this->idVenta = $pago->venta_id;
+        $fechavencimiento = $pago->fechavencimiento;
+        $pago->save();
+        //dd($pago);
+
+        //Genera un nuevo registro con el pago parcial de la cuota
+        $pago = new Pago;
+        $pago->fechapago = date("Y-m-d");
+        $pago->montopagado = $this->Parcial;
+        $pago->estado="Pagada";
+        //$pieces = explode("-", $pago->descripcion); //extrae el monto de la cuota que se encuentra en la descripción
+        $pago->descripcion = '*    ' . trim($pieces[0]) . ' - ' . trim($pieces[1]) . " A cta" . " - $" .$this->Parcial;
+        $pago->venta_id = $this->idVenta;
+        $pago->fechavencimiento = $fechavencimiento;
+        $pago->save();
+
         $this->CargarIdVenta($this->idVenta);
     }
 
@@ -109,5 +147,9 @@ class VentasComponent extends Component
             $pago->estado="Impaga";
             $pago->save();
         }
+    }
+
+    public function LeerParcial($dato) {
+        $this->Parcial = $dato;
     }
 }

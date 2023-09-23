@@ -23,20 +23,16 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid bg-warning">
         <a class="navbar-brand text-center justify-center" href="#">
-            <img src="img/logo/logomaxbus.png" alt="" width="80" height="65" class="d-inline-block align-text-bottom ml-3 pl-5">
+            <img src="img/logo/logomaxbus.png" alt="" width="80px;" height="65px;" class="d-inline-block align-text-bottom ml-3 pl-5">
         </a>
-        @if(Auth::check())
-            <a class="nav-link" href="clientes">Clientes ;-)</a>
-        @else
-            <a class="nav-link" href="login">Login</a>
-        @endif
+        
         {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button> --}}
-        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+        <div class="d-flex" id="navbarSupportedContent" style="width:100%">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                <li class="nav-item ml-5">
                     <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                 </li>
                 <li class="nav-item">
@@ -75,11 +71,15 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="clientes">Clientes ;-)</a>
+                    @if(Auth::check())
+                        <a class="nav-link" href="{{ route('ventas') }}">Clientes ;-)</a>
+                    @else
+                        <a class="nav-link" href="login">Login</a>
+                    @endif
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscador" aria-label="Search">
+                <input class="form-control me-2" type="search" placeholder="Buscador" aria-label="Search" style="width: 200px;">
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
         </div>

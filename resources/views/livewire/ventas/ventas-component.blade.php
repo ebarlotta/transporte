@@ -32,9 +32,9 @@
                                         <i class="icon-pointer danger font-large-2 float-left"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        @if($ContDestinos)
-                                        {{-- <h3>{{ $ContDestinos }}</h3> --}}
-                                        @endif
+                                        {{-- @if($ContDestinos) --}}
+                                        <h3>{{ $ContDestinos }}</h3>
+                                        {{-- @endif --}}
                                         <span>Destinos</span>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                             <div class="card-body">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        {{-- <h3 class="success">{{ $ContClientes }}</h3> --}}
+                                        <h3 class="success">{{ $ContClientes }}</h3>
                                         <span>Clientes</span>
                                     </div>
                                     <div class="align-self-center">
@@ -69,7 +69,7 @@
                                         <i class="icon-graph success font-large-2 float-left"></i>
                                     </div>
                                     <div class="media-body text-right">
-                                        {{-- <h3>{{ $ContVentas }}</h3> --}}
+                                        <h3>{{ $ContVentas }}</h3>
                                         <span>Ventas Realizas</span>
                                     </div>
                                 </div>
@@ -348,7 +348,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <table class="table table-hover text-nowrap">
+                        <table class="table table-hover text-nowrap mx-2">
                             <tr class="bg-green-500">
                                 <th>Vencimiento</th>
                                 <th>Descripción</th>
@@ -359,10 +359,19 @@
                             </tr>
                             @if($pagos)
                                 @foreach ($pagos as $pago)
-                                    <tr>
+                                    {{-- Si la cuota aparece pagada entonces la pinta e verde --}}
+                                    @if($pago->estado=="Pagada")
+                                        <tr style="background-color: lightgreen;">
+                                    @else
+                                        @if($pago->fechavencimiento>now()) 
+                                            <tr style="background-color: beige;">
+                                        @else
+                                            <tr style="background-color: pink;">
+                                        @endif
+                                    @endif
                                         <td>{{ date('d-m-Y',strtotime($pago->fechavencimiento)) }}</td>
                                         <td>{{ $pago->descripcion }}</td>
-                                        <td>$ {{ $pago->montopagado }}</td>
+                                        <td style="text-align: right">$ <label>{{ $pago->montopagado }}</label></td>
                                         @if($pago->fechapago)
                                             <td>{{ date('d-m-Y',strtotime($pago->fechapago)) }}</td>
                                         @else
@@ -371,10 +380,11 @@
                                         <td>{{ $pago->estado }}</td>
                                         <td>
                                             @if($pago->estado == "Pagada")
-                                                <button class="btn bg-slate-500" disabled >Registrar Pago</button>
-                                                <button class="btn-primary" wire:click="ImprimirComprobante({{ $pago->id }})">Imprimir Comp.</button>
+                                                {{-- <button class="btn bg-slate-500" disabled >Registrar Pago</button> --}}
+                                                <button class="btn-warning" wire:click="ImprimirComprobante({{ $pago->id }})">Imprimir Comp.</button>
                                             @else
-                                                    <button class="btn-primary" wire:click="RegistrarPago({{ $pago->id }})">Registrar Pago</button>
+                                                <button class="btn-primary" wire:click="RegistrarPago({{ $pago->id }})">Registrar Pago</button>
+                                                <button class="btn-primary" data-toggle="modal" data-target="#ModalAsentandoPagosParciales" wire:click="CapturarIdPago({{ $pago->id }})">Pago Parcial</button>
                                             @endif
                                         </td>
                                     </tr>
@@ -385,6 +395,28 @@
                                 </tr>
                             @endif
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Asentando Pagos Parciales -->
+            <!-- =============================== -->
+            <div wire:ignore.self class="modal fade" id="ModalAsentandoPagosParciales" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Pago parcial de cuota</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <p class="my-3 mx-auto">
+                            Ingrese el monto a abonar por la cuota seleccionada:
+                            <input type="text" wire:model="Parcial" style="text-align: right;">
+                        </p>
+                        <button type="button" class="btn btn-info m-2" wire:click="RegistrarPagoParcial()" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="ModalVentasExitosa" data-target="ModalGestionVentas" >Registrar Pago</button>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -442,10 +474,11 @@
                                 </div>
                             </div>
                         </div>
-                        <input class="form-control mx-3 btn col-11 align-self-center bg-red-200" type="text" value="" placeholder="Buscar Paquete">
+                        
                         <div class="row">
                             <!-- listado de paquetes -->
                             <div class="col-xl-4 col-md-4 m-4">
+                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2" type="text" value="" placeholder="Buscar Paquete" wire:model="FiltroCliente">
                                 @if($ocultarPaquetes)
                                 @else
                                 @if($listadoPaquetes)
@@ -474,6 +507,7 @@
                             </div>
                             <!-- listado de clientes -->
                             <div class="col-xl-4 col-md-4 m-4">
+                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2" type="text" value="" placeholder="Buscar Cliente">
                                 @if($ocultarClientes)
                                 @else
                                 @if($comprarPaquete)
