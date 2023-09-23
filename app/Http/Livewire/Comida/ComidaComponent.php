@@ -31,7 +31,9 @@ class ComidaComponent extends Component
             'ubicaciongps' => 'required',
             'fotourl' => 'required',
         ]);
-        $this->fotourl = $this->fotourl->store('destino/comidas');
+        if($this->fotourl) {}
+        else { $this->fotourl = $this->fotourl->store('destino/comidas'); }
+        
         Comida::updateOrCreate(['id' => $this->comida_id], [
             'descripcion' => $this->descripcion,
             'precio' => $this->precio,

@@ -36,7 +36,9 @@ class PaqueteComponent extends Component
             'fotourl' => 'required',
         ]);
 
-        $this->fotourl = $this->fotourl->store('destino/paquetes');
+        if($this->fotourl) {}
+        else { $this->fotourl = $this->fotourl->store('destino/paquetes'); }
+        
         Paquete::updateOrCreate(['id' => $this->paquete_id], [
         'nombre' => $this->nombre,
         'descripcion' => $this->descripcion,

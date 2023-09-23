@@ -28,8 +28,9 @@ class AlojamientoComponent extends Component
             'ubicaciongps' => 'required',
             'fotourl' => 'required',
         ]);
-        $this->fotourl = $this->fotourl->store('destino/alojamiento');
-        
+        if($this->fotourl) {}
+        else { $this->fotourl = $this->fotourl->store('destino/alojamiento'); }
+
         Alojamiento::updateOrCreate(['id' => $this->alojamiento_id], [
         'descripcion' => $this->descripcion,
         'precio' => $this->precio,

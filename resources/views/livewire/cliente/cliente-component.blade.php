@@ -169,8 +169,7 @@
                                         <div class="col-5 m-2">
                                             <label
                                                 class="block text-gray-700 text-sm font-bold mb-2">Nacionalidad</label>
-                                            <select name="nacionalidad_id" id=""
-                                                wire:model="nacionalidad_id">
+                                            <select name="nacionalidad_id" id="" wire:model="nacionalidad_id">
                                                 <option value="" selected>-</option>
                                                 @foreach ($nacionalidades as $nacionalidad)
                                                     <option value="{{ $nacionalidad->id }}">
@@ -190,7 +189,7 @@
                                         </div>
                                         <div class="col-5 m-2">
                                             <label class="block text-gray-700 text-sm font-bold mb-2">Localidad</label>
-                                            <select name="localidad_id" id="" wire:model="localidad_id">
+                                            <select wire:model="localidad_id">
                                                 <option value="" selected>-</option>
                                                 @foreach ($localidades as $localidad)
                                                     <option value="{{ $localidad->id }}">

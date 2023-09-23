@@ -27,7 +27,7 @@ class ServicioComponent extends Component
             'fotourl' => 'required',
         ]);
 
-        $this->fotourl = $this->fotourl->store('destino/servicios');
+        if($this->fotourl) {} else {$this->fotourl = $this->fotourl->store('destino/servicios'); }
         
         Servicio::updateOrCreate(['id' => $this->servicio_id], [
         'descripcion' => $this->descripcion,

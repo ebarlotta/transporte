@@ -11,5 +11,14 @@ class Provincia extends Model
 
     protected $fillable=[
         'nombre',
+        'apellido',
+        'direccion',
+        'dni',
+        'telefono',
+        'email',
+        'fechanacimiento',
+        'nacionalidad_id',
+        'provincia_id',
+        'localidad_id',
     ];
 }

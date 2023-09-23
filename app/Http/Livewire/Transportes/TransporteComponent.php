@@ -17,6 +17,15 @@ class TransporteComponent extends Component
 
     public $transporte_id;
 
+    public function nuevo() {
+        $this->descripcion = '';
+        $this->precio = 0;
+        $this->ubicaciongps = '';
+        $this->fotourl = null;
+        $this->salida = null;
+        $this->llegada = null;
+        $this->devolverenotrodestino = true;
+    }
     public function store() {
         $this->validate([
             'descripcion' => 'required',
