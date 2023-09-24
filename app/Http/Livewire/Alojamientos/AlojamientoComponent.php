@@ -13,6 +13,8 @@ class AlojamientoComponent extends Component
 
     public $alojamiento_id;
 
+    public $AlojamientoAEliminar;
+
     use WithFileUploads;
 
     public function render()
@@ -28,14 +30,17 @@ class AlojamientoComponent extends Component
             'ubicaciongps' => 'required',
             'fotourl' => 'required',
         ]);
-        if($this->fotourl) {}
-        else { $this->fotourl = $this->fotourl->store('destino/alojamiento'); }
 
+        $imagenurl = $this->fotourl->store('destino/alojamiento');
+
+        // if($this->fotourl) {}
+        // else { $this->fotourl = $this->fotourl->store('destino/alojamiento'); }
+        // dd($this->fotourl);
         Alojamiento::updateOrCreate(['id' => $this->alojamiento_id], [
         'descripcion' => $this->descripcion,
         'precio' => $this->precio,
         'ubicaciongps' => $this->ubicaciongps,
-        'fotourl' => $this->fotourl,
+        'fotourl' => $imagenurl,
     ]);
         session()->flash('message', $this->alojamiento_id ? 'Alojamiento Actualizado.' : 'Alojamiento Creado.');
     }
@@ -54,7 +59,20 @@ class AlojamientoComponent extends Component
         $alojamiento = Alojamiento::find($this->alojamiento_id);
         $alojamiento->destroy($this->alojamiento_id);
         //$this->isModalConsultar(0); // PARA HACER
-
         session()->flash('message', $this->alojamiento_id ? 'Alojamiento Eliminado.' : 'No ha seleccionado un alojamiento a eliminar.');
     }
+
+    public function nuevo() {
+        $this->descripcion = '';
+        $this->precio = '';
+        $this->ubicaciongps = '';
+        $this->fotourl = null;
+    }
+
+    public function isModalConsultar($id) {
+        $alojamiento = Alojamiento::find($id);
+        $this->AlojamientoAEliminar = $alojamiento->descripcion;
+        $this->alojamiento_id = $id;
+    }
+
 }

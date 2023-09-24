@@ -4,15 +4,24 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="style">Alojamientos</h2>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalEstadoCuentaPrueba">
+                    <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalEstadoCuentaPrueba">
                         <i class="fa-regular fa-plus"></i> Nuevo </button>
                 </div>
             </div>
-            <hr>
+            @if (session()->has('message'))
+                <div class="border-t-4  rounded-b px-4 py-3 shadow-md my-3 bg-lime-700" role="alert"
+                    style="background-color: lightgreen;">
+                    <div class="flex">
+                        <div>
+                            <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <!-- Modal Alta/Modificación -->
             <div wire:ignore.self class="modal fade" id="ModalEstadoCuentaPrueba" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-lg" role="document">
 
                 <div class="modal-content" style="width: inherit">
                     <div class="modal-header">
@@ -21,8 +30,6 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-
-
                     <div class="container">
                         <form action="">
                             <div class="mb-3 mt-3">
@@ -58,9 +65,36 @@
                     </div>
 
                 </div>
+                </div>
             </div>
-        </div>
 
+            <!-- Modal Consulta eliminar -->
+            <div wire:ignore.self class="modal fade" id="ModalEliminarAlojamiento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+    
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Eliminar Alojamiento</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="container">
+                            <form action="">
+                                <div class="mb-3 mt-3">
+                                    Está seguro de eliminar el Alojamiento: <label>{{ $AlojamientoAEliminar }} ?</label>
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                                    <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
+                                    <button class="btn btn-danger" type="button" wire:click="delete()" data-dismiss="modal">Eliminar</button>
+                                </div>
+                            </form>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+    
 
             <div class="row">
                 <div class="col-lg-12">
@@ -95,9 +129,7 @@
                                                     class="btn btn-warning" data-toggle="modal" data-target="#ModalEstadoCuentaPrueba">
                                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                                 </button>
-                                                <button wire:click="isModalConsultar({{ $alojamiento->id }})"
-                                                    class="btn btn-danger"
-                                                    >
+                                                <button wire:click="isModalConsultar({{ $alojamiento->id }})" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarAlojamiento">
                                                     <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                 </button>
                                             </div>

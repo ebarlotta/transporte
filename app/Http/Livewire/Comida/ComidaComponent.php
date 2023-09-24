@@ -15,6 +15,8 @@ class ComidaComponent extends Component
 
     public $comida_id;
 
+    public $ComidaAEliminar;
+
     use WithFileUploads;
 
     public function render()
@@ -31,14 +33,16 @@ class ComidaComponent extends Component
             'ubicaciongps' => 'required',
             'fotourl' => 'required',
         ]);
+
         if($this->fotourl) {}
-        else { $this->fotourl = $this->fotourl->store('destino/comidas'); }
+        else { $imagenurl = $this->fotourl->store('destino/comidas'); //$this->fotourl = $this->fotourl->store('destino/comidas'); 
+        }
         
         Comida::updateOrCreate(['id' => $this->comida_id], [
             'descripcion' => $this->descripcion,
             'precio' => $this->precio,
             'ubicaciongps' => $this->ubicaciongps,
-            'fotourl' => $this->fotourl,
+            'fotourl' => $imagenurl,
         ]);
         session()->flash('message', $this->comida_id ? 'Lugar Actualizado.' : 'Lugar Creado.');
     }
@@ -48,7 +52,9 @@ class ComidaComponent extends Component
         $this->descripcion = $comida->descripcion;
         $this->precio = $comida->precio;
         $this->ubicaciongps = $comida->ubicaciongps;
-        $this->fotourl = $comida->fotourl;
+        if(!$this->fotourl) {
+            $this->fotourl = $comida->fotourl;
+        }
 
         $this->comida_id = $id;
     }
@@ -59,5 +65,18 @@ class ComidaComponent extends Component
         //$this->isModalConsultar(0); // PARA HACER
 
         session()->flash('message', $this->comida_id ? 'Lugar Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
+    }
+
+    public function nuevo() {
+        $this->descripcion = '';
+        $this->precio = '';
+        $this->ubicaciongps = '';
+        $this->fotourl = null;
+    }
+
+    public function isModalConsultar($id) {
+        $comida = Comida::find($id);
+        $this->ComidaAEliminar = $comida->descripcion;
+        $this->comida_id = $id;
     }
 }
