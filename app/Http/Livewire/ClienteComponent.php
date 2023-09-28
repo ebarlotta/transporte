@@ -7,10 +7,14 @@ use App\Models\Cliente;
 use App\Models\Localidad;
 use App\Models\Nacionalidad;
 use App\Models\Provincia;
+
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
 
 class ClienteComponent extends Component
 {
+    use WithFileUploads;
     use WithPagination;
  
     public $clientes, $cliente_id;
@@ -33,7 +37,45 @@ class ClienteComponent extends Component
         return view('livewire.cliente.cliente-component',['clientes' => $this->clientes, 'datos'=> $links])->extends('layouts.adminlte');
     }
 
+    public function store() {
+        $this->validate([
+            'apellido' => 'required',
+            'nombre' => 'required',
+            'dni' => 'required',
+            'nacionalidad_id' => 'required|integer',
+            'provincia_id' => 'required|integer',
+            'localidad_id' =>  'required|integer',
+        ]);
+
+        if(Storage::exists($this->foto)){
+            $imagenurl = $this->foto;
+        }
+        else {
+            $imagenurl = $this->foto->store('destino/clientes');
+        }
+
+        Cliente::updateOrCreate(['id' => $this->cliente_id], [
+        'apellido' => $this->apellido,
+        'nombre' => $this->nombre,
+        'direccion' => $this->direccion,
+        'dni' => $this->dni,
+        'telefono' => $this->telefono,
+        'email' => $this->email,
+        'fechanacimiento' => $this->fechanacimiento,
+        'nacionalidad_id' => $this->nacionalidad_id,
+        'provincia_id' => $this->provincia_id,
+        'localidad_id' => $this->localidad_id,
+        'foto' => $imagenurl,
+    ]);
+        session()->flash('message', $this->cliente_id ? 'Cliente Actualizado.' : 'Cliente Creado.');
+        //$this->isModalCreateChange();
+        $this->reset();
+        $this->isModalCreate =false;
+
+    }
+
     public function edit($id) {
+        dd($this->provincia_id);
         $cliente = Cliente::find($id);
         $this->apellido = $cliente->apellido;
         $this->nombre = $cliente->nombre;
@@ -48,36 +90,9 @@ class ClienteComponent extends Component
         $this->cliente_id = $id;
     }
 
-    public function store() {
-        $this->validate([
-            'apellido' => 'required',
-            'nombre' => 'required',
-            'dni' => 'required',
-            'nacionalidad_id' => 'required|integer',
-            'provincia_id' => 'required|integer',
-            'localidad_id' =>  'required|integer',
-        ]);
-
-        Cliente::updateOrCreate(['id' => $this->cliente_id], [
-        'apellido' => $this->apellido,
-        'nombre' => $this->nombre,
-        'direccion' => $this->direccion,
-        'dni' => $this->dni,
-        'telefono' => $this->telefono,
-        'email' => $this->email,
-        'fechanacimiento' => $this->fechanacimiento,
-        'nacionalidad_id' => $this->nacionalidad_id,
-        'provincia_id' => $this->provincia_id,
-        'localidad_id' => $this->localidad_id,
-    ]);
-        session()->flash('message', $this->cliente_id ? 'Cliente Actualizado.' : 'Cliente Creado.');
-        //$this->isModalCreateChange();
-        $this->isModalCreate =false;
-
-    }
-
     public function delete() {
         $cliente = Cliente::find($this->cliente_id);
+        // Storage::delete($this->fotourl);
         $cliente->destroy($this->cliente_id);
         $this->isModalConsultar(0);
     }

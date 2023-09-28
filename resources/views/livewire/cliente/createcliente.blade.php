@@ -14,51 +14,47 @@
                         <div class="mb-4 d-flex flex-wrap">
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Apellido</label>
-                                <input type="text"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Ingrese Apellido" wire:model="apellido">
+                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese Apellido" wire:model="apellido">
+                                @error('apellido') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
-                                <input type="text"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Ingrese Nombre" wire:model="nombre">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Nombre</label><br>
+                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese Nombre" wire:model="nombre">
+                                @error('nombre') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">DNI</label>
                                 <input type="text"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     placeholder="Ingrese DNI" wire:model="dni">
+                                    @error('dni') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Dirección</label>
                                 <input type="text"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     placeholder="Ingrese Dirección" wire:model="direccion">
+                                    @error('direccion') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Teléfono</label>
-                                <input type="text"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Ingrese Teléfono" wire:model="telefono">
+                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese Teléfono" wire:model="telefono">
+                                    @error('telefono') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">E-Mail</label>
-                                <input type="text"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Ingrese E-Mail" wire:model="email">
+                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese E-Mail" wire:model="email">
+                                    @error('email') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Fecha de Nacimiento</label>
-                                <input type="date"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Ingrese Fecha de Nacimiento" wire:model="fechanacimiento">
+                                <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese Fecha de Nacimiento" wire:model="fechanacimiento">
+                                    @error('fechanacimiento') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Foto</label>
-                                <input type="file"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Ingrese foto" wire:model="foto">
+                                <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese foto" wire:model="foto">
+                                    @error('foto') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Nacionalidad</label>
@@ -68,6 +64,7 @@
                                         <option value="{{ $nacionalidad->id }}">{{ $nacionalidad->nombre }}</option>
                                     @endforeach
                                 </select>
+                                @error('nacionalidad_id') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Provincia</label>
@@ -77,6 +74,7 @@
                                         <option value="{{ $provincia->id }}">{{ $provincia->nombre }}</option>
                                     @endforeach
                                 </select>
+                                @error('provincia_id') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-5 m-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Localidad</label>
@@ -86,6 +84,7 @@
                                         <option value="{{ $localidad->id }}">{{ $localidad->nombre }}</option>
                                     @endforeach
                                 </select>
+                                @error('localidad_id') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
                         @error('estadocivil')

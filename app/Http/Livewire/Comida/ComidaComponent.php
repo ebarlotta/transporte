@@ -4,8 +4,10 @@ namespace App\Http\Livewire\Comida;
 
 use Livewire\Component;
 use App\Models\Comida;
-use Livewire\WithFileUploads;
 
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithPagination;
 
 class ComidaComponent extends Component
 {
@@ -18,11 +20,15 @@ class ComidaComponent extends Component
     public $ComidaAEliminar;
 
     use WithFileUploads;
+    use WithPagination;
 
     public function render()
     {
-        $this->comidas = Comida::all();
-        return view('livewire.comida.comida-component')->extends('layouts.adminlte');;
+        $this->comidas = Comida::paginate(2);
+        $links = $this->comidas;
+        $this->comidas = collect($this->comidas->items());
+        // $this->comidas = Comida::all();
+        return view('livewire.comida.comida-component',['alojamientos' => $this->comidas, 'datos'=> $links])->extends('layouts.adminlte');;
     }
 
     public function store() {
@@ -34,8 +40,11 @@ class ComidaComponent extends Component
             'fotourl' => 'required',
         ]);
 
-        if($this->fotourl) {}
-        else { $imagenurl = $this->fotourl->store('destino/comidas'); //$this->fotourl = $this->fotourl->store('destino/comidas'); 
+        if(Storage::exists($this->fotourl)){
+            $imagenurl = $this->fotourl;
+        }
+        else {
+            $imagenurl = $this->fotourl->store('destino/comidas');
         }
         
         Comida::updateOrCreate(['id' => $this->comida_id], [
@@ -45,33 +54,30 @@ class ComidaComponent extends Component
             'fotourl' => $imagenurl,
         ]);
         session()->flash('message', $this->comida_id ? 'Lugar Actualizado.' : 'Lugar Creado.');
+        $this->reset();
     }
 
     public function edit($id) {
+        $this->resetValidation();
         $comida = Comida::find($id);
         $this->descripcion = $comida->descripcion;
         $this->precio = $comida->precio;
         $this->ubicaciongps = $comida->ubicaciongps;
-        if(!$this->fotourl) {
-            $this->fotourl = $comida->fotourl;
-        }
+        $this->fotourl = $comida->fotourl;
 
         $this->comida_id = $id;
     }
 
     public function delete() {
         $comida = Comida::find($this->comida_id);
+        Storage::delete($this->fotourl);
         $comida->destroy($this->comida_id);
-        //$this->isModalConsultar(0); // PARA HACER
 
         session()->flash('message', $this->comida_id ? 'Lugar Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
     }
 
     public function nuevo() {
-        $this->descripcion = '';
-        $this->precio = '';
-        $this->ubicaciongps = '';
-        $this->fotourl = null;
+        $this->fotourl = "";
     }
 
     public function isModalConsultar($id) {

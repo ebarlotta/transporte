@@ -33,19 +33,26 @@
                                 <form action="">
                                     <div class="mb-3 mt-3">
                                         <label class="form-label" for="descripcion">Descripción</label>
-                                        <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea" rows="5"></textarea>
+                                        <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea" rows="5">{{ old('descripcion') }}</textarea>
+                                        @error('descripcion') <span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="precio">Precio</label>
-                                        <input wire:model="precio" class="form-control" name="precio" type="text" id="precio">
+                                        <input wire:model="precio" class="form-control" name="precio" type="text" id="precio" value="{{ old('precio') }}">
+                                        @error('precio') <span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label" for="foto">Foto</label>
-                                        <input wire:model="fotourl" class="form-control" name="foto" type="file" id="foto">
+                                        <div class="d-flex">
+                                            <label class="form-label" for="foto">Foto</label>
+                                            <input wire:model="fotourl" class="form-control" name="foto" type="file" id="foto">
+                                            @if($fotourl) <img src="{{ $fotourl }}" width="50px;">@endif
+                                        </div>
+                                        @error('fotourl') <span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="ubicaciongps">Ubicacion GPS</label>
-                                        <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps">
+                                        <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps" value="{{ old('ubicaciongps') }}">
+                                        @error('ubicaciongps') <span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                                         <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
@@ -102,7 +109,14 @@
                                     <tr>
                                         <td>{{ $comida->descripcion }}</td>
                                         <td>{{ $comida->precio }}</td>
-                                        <td>{{ $comida->ubicaciongps }}</td>
+                                        <td>
+                                            <?php 
+                                                $porciones = explode(",", $comida->ubicaciongps);
+                                                $altitud = $porciones[0];
+                                                $latitud = $porciones[1];
+                                            ?>
+                                            <iframe src="https://maps.google.com/?ll=<?php echo $altitud?>,<?php echo $latitud?>&z=14&t=m&output=embed"    frameborder="0" style="width: 300px;height: 100px;"></iframe>
+                                        </td>
                                         <td>
                                             @if($comida->fotourl <> 'Sin_imagen.jpg')
                                                 <img src="{{ $comida->fotourl}}" alt="" style="width: 100px; height:100px;">
@@ -125,6 +139,7 @@
                                     </tr>
                                 @endforeach
                             </table>
+                            {{ $datos->links() }}
                         </div>
                     </div>
                 </div>

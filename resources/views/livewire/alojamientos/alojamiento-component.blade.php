@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="style">Alojamientos</h2>
-                    <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalEstadoCuentaPrueba">
+                    <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevoAlojamiento">
                         <i class="fa-regular fa-plus"></i> Nuevo </button>
                 </div>
             </div>
@@ -20,7 +20,7 @@
             @endif
 
             <!-- Modal Alta/Modificación -->
-            <div wire:ignore.self class="modal fade" id="ModalEstadoCuentaPrueba" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div wire:ignore.self class="modal fade" id="ModalNuevoAlojamiento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
 
                 <div class="modal-content" style="width: inherit">
@@ -117,7 +117,14 @@
                                 <tr>
                                     <td>{{ $alojamiento->descripcion }}</td>
                                     <td>{{ $alojamiento->precio }}</td>
-                                    <td>{{ $alojamiento->ubicaciongps }}</td>
+                                    <td>
+                                        <?php 
+                                            $porciones = explode(",", $alojamiento->ubicaciongps);
+                                            $altitud = $porciones[0];
+                                            $latitud = $porciones[1];
+                                        ?>
+                                        <iframe src="https://maps.google.com/?ll=<?php echo $altitud?>,<?php echo $latitud?>&z=14&t=m&output=embed"    frameborder="0" style="width: 300px;height: 100px;"></iframe>
+                                    </td>
                                     <td>
                                         @if($alojamiento->fotourl <> 'Sin_imagen.jpg')
                                             <img src="{{ $alojamiento->fotourl}}" alt="" style="width: 100px; height:100px;">
@@ -129,7 +136,7 @@
                                         <div class='wrapper text-center'>
                                             <div class="btn-group" role="group">
                                                 <button wire:click="edit({{ $alojamiento->id }})" type="button"
-                                                    class="btn btn-warning" data-toggle="modal" data-target="#ModalEstadoCuentaPrueba">
+                                                    class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevoAlojamiento">
                                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                                 </button>
                                                 <button wire:click="isModalConsultar({{ $alojamiento->id }})" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarAlojamiento">
@@ -141,6 +148,7 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {{ $datos->links() }}
                     </div>
                 </div>
             </div>

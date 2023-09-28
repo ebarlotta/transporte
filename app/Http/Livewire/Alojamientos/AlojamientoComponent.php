@@ -4,8 +4,10 @@ namespace App\Http\Livewire\Alojamientos;
 
 use App\Models\Alojamiento;
 use Livewire\Component;
+
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Livewire\WithPagination;
 
 class AlojamientoComponent extends Component
 {
@@ -17,11 +19,15 @@ class AlojamientoComponent extends Component
     public $AlojamientoAEliminar;
 
     use WithFileUploads;
+    use WithPagination;
 
     public function render()
     {
-        $this->alojamientos = Alojamiento::all();
-        return view('livewire.alojamientos.alojamiento-component')->extends('layouts.adminlte');
+        $this->alojamientos = Alojamiento::paginate(2);
+        $links = $this->alojamientos;
+        $this->alojamientos = collect($this->alojamientos->items());
+        // $this->alojamientos = Alojamiento::all();
+        return view('livewire.alojamientos.alojamiento-component',['alojamientos' => $this->alojamientos, 'datos'=> $links])->extends('layouts.adminlte');
     }
 
     public function store() {
@@ -29,20 +35,16 @@ class AlojamientoComponent extends Component
             'descripcion' => 'required',
             'precio' => 'required',
             'ubicaciongps' => 'required',
-            'fotourl' => 'required|image',
+            'fotourl' => 'required',
         ]);
 
         if(Storage::exists($this->fotourl)){
-            //Storage::delete($this->fotourl);
             $imagenurl = $this->fotourl;
         }
         else {
             $imagenurl = $this->fotourl->store('destino/alojamiento');
         }
 
-        // if($this->fotourl) {}
-        // else { $this->fotourl = $this->fotourl->store('destino/alojamiento'); }
-        // dd($this->fotourl);
         Alojamiento::updateOrCreate(['id' => $this->alojamiento_id], [
         'descripcion' => $this->descripcion,
         'precio' => $this->precio,
@@ -67,17 +69,13 @@ class AlojamientoComponent extends Component
 
     public function delete() {
         $alojamiento = Alojamiento::find($this->alojamiento_id);
+        Storage::delete($this->fotourl);
         $alojamiento->destroy($this->alojamiento_id);
-        //$this->isModalConsultar(0); // PARA HACER
+
         session()->flash('message', $this->alojamiento_id ? 'Alojamiento Eliminado.' : 'No ha seleccionado un alojamiento a eliminar.');
     }
 
     public function nuevo() {
-        //$this->descripcion = '';
-        //$this->precio = '';
-        //$this->ubicaciongps = '';
-        //$this->reset('fotourl');
-        
         $this->fotourl = "";
     }
 
