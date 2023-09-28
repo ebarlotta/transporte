@@ -52,8 +52,8 @@ class AlojamientoComponent extends Component
         'fotourl' => $imagenurl,
     ]);
 
-        session()->flash('message', $this->alojamiento_id ? 'Alojamiento Actualizado.' : 'Alojamiento Creado.');
         $this->reset();
+        session()->flash('message', $this->alojamiento_id ? 'Alojamiento Actualizado.' : 'Alojamiento Creado.');
     }
 
     public function edit($id) {

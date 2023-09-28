@@ -25,38 +25,38 @@
                             <form action="">
                                 <div class="mb-3 mt-3">
                                     <label class="form-label" for="nombre">Nombre</label>
-                                    <input wire:model="nombre" class="form-control" name="nombre" type="text"
-                                        id="nombre">
+                                    <input wire:model="nombre" class="form-control" name="nombre" type="text" id="nombre">
+                                    @error('nombre') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="descripcion">Descripción</label>
-                                    <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea"
-                                        rows="5"></textarea>
+                                    <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea" rows="5"></textarea>
+                                    @error('descripcion') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="clima">Clima</label>
-                                    <input wire:model="clima" class="form-control" name="clima" type="text"
-                                        id="clima">
+                                    <input wire:model="clima" class="form-control" name="clima" type="text" id="clima">
+                                    @error('clima') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="mejorepocaparavisitar">Mejor épora para
-                                        visitar</label>
-                                    <input wire:model="mejorepocaparavisitar" class="form-control"
-                                        name="mejorepocaparavisitar" type="text" id="mejorepocaparavisitar">
+                                    <label class="form-label" for="mejorepocaparavisitar">Mejor épora para visitar</label>
+                                    <input wire:model="mejorepocaparavisitar" class="form-control" name="mejorepocaparavisitar" type="text" id="mejorepocaparavisitar">
+                                    @error('mejorepocaparavisitar') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="ubicaciongps">Ubicacion GPS</label>
                                     <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps">
+                                    @error('ubicaciongps') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="presupuestoestimado">Presupuesto estimado</label>
-                                    <input wire:model="presupuestoestimado" class="form-control"
-                                        name="presupuestoestimado" type="text" id="presupuestoestimado">
+                                    <input wire:model="presupuestoestimado" class="form-control" name="presupuestoestimado" type="text" id="presupuestoestimado">
+                                    @error('presupuestoestimado') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="otrosenlaces">Otros Enlaces</label>
-                                    <input wire:model="otrosenlaces" class="form-control" name="otrosenlaces"
-                                        type="text" id="otrosenlaces">
+                                    <input wire:model="otrosenlaces" class="form-control" name="otrosenlaces" type="text" id="otrosenlaces">
+                                    @error('otrosenlaces') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="pais_id">País</label>
@@ -66,17 +66,18 @@
                                             <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
                                         @endforeach
                                     </select>
+                                    @error('pais_id') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="foto">Foto</label>
-                                    <input wire:model="fotourl" class="form-control" name="foto" type="file"
-                                        id="foto" accept="image/*">
+                                    <input wire:model="fotourl" class="form-control" name="foto" type="file" id="foto" accept="image/*">
                                     <div wire:loading wire:target="fotourl">
                                         <strong class="font-bold">Imágen cargando!!</strong>
                                     </div>
                                     {{-- @if($fotourl) --}}
                                         {{-- <img src="{{ $fotourl->temporaryUrl() }}" alt="" style="height: 100px; width: 100px;"> --}}
                                     {{-- @endif --}}
+                                    @error('fotourl') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                                     <button class="btn btn-warning" data-dismiss="modal"
@@ -151,7 +152,8 @@
                                     </td>
                                     <td class="align-middle">{{ $destino->presupuestoestimado }}</td>
                                     <td class="align-middle">{{ $destino->otrosenlaces }}</td>
-                                    <td class="align-middle">{{ $destino->pais_id }}</td>
+                                    <td class="align-middle">{{$destino->pais['nombre']}}</td>
+                                    {{-- <td class="align-middle">{{ $destino->pais_id  }}</td> --}}
                                     <td class="align-middle">
                                         @if("Sin_imagen.jpg"==$destino->fotourl) 
                                             <img src="img/sin_imagen.jpg" alt="" style="width: 100px; height:100px;">
@@ -182,7 +184,7 @@
                                 </tr>
                             @endforeach
                         </table>
-                        
+                        {{ $datos->links() }}
                     </div>
                 </div>
             </div>

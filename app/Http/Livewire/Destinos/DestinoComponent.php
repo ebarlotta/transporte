@@ -7,10 +7,12 @@ use App\Models\Destino;
 use App\Models\Nacionalidad;
 
 use Livewire\WithFileUploads;
-
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithPagination;
 class DestinoComponent extends Component
 {
     use WithFileUploads;
+    use WithPagination;
 
     public $destinos;
     public $descripcion, $clima, $ubicaciongps, $fotourl;
@@ -22,10 +24,14 @@ class DestinoComponent extends Component
 
     public function render()
     {
+        $this->destinos = Destino::paginate(2);
+        $links = $this->destinos;
+        $this->destinos = collect($this->destinos->items());
+
         $this->paises = Nacionalidad::all();
         //dd($this->paises);
         $this->destinos = Destino::all();
-        return view('livewire.destinos.destino-component')->extends('layouts.adminlte');
+        return view('livewire.destinos.destino-component',['destinos' => $this->destinos, 'datos'=> $links])->extends('layouts.adminlte');
     }
 
     public function store() {
@@ -33,14 +39,21 @@ class DestinoComponent extends Component
             'descripcion' => 'required',
             'clima' => 'required',
             'ubicaciongps' => 'required',
-            'fotourl' => 'image|max:2048',
+            // 'fotourl' => 'image|max:2048',
+            'fotourl' => 'required',
             'mejorepocaparavisitar' => 'required',
             'presupuestoestimado' => 'required|integer',
             'otrosenlaces' => 'required',
             'pais_id' => 'required',
         ]);
-        $imagenurl = $this->fotourl->store('destino');
-        //dd($imagenurl);
+
+        if(Storage::exists($this->fotourl)){
+            $imagenurl = $this->fotourl;
+        }
+        else {
+            $imagenurl = $this->fotourl->store('destino/destino');
+        }
+
         Destino::updateOrCreate(['id' => $this->destino_id], [
         'nombre' => $this->nombre,
         'descripcion' => $this->descripcion,
@@ -52,6 +65,7 @@ class DestinoComponent extends Component
         'otrosenlaces' => $this->otrosenlaces,
         'pais_id' => $this->pais_id,
     ]);
+        $this->reset();
         session()->flash('message', $this->destino_id ? 'Destino Actualizado.' : 'Destino Creado.');
     }
 
@@ -90,6 +104,7 @@ class DestinoComponent extends Component
 
     public function delete() {
         $destino = Destino::find($this->destino_id);
+        Storage::delete($this->fotourl);
         $destino->destroy($this->destino_id);
 
         session()->flash('message', $this->destino_id ? 'Destino Eliminado.' : 'No ha seleccionado un lugar a eliminar.');

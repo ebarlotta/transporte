@@ -55,4 +55,9 @@ class Destino extends Model
     //         'pais' => $codigo .' - '. $nombre,
     //     ]);
     // }
+
+    public function pais()
+    {
+        return $this->hasOne(Nacionalidad::class,'id','pais_id');
+    }
 }
