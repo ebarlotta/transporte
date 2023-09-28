@@ -34,33 +34,36 @@
                         <form action="">
                             <div class="mb-3 mt-3">
                                 <label class="form-label" for="descripcion">Descripción</label>
-                                <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea" rows="5"></textarea>
-                                @error('descripcion') <span class="text-red-500">{{ $message }}</span>@enderror
+                                <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea" rows="5">{{ old('descripcion') }}</textarea>
+                                @error('descripcion') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="precio">Precio</label>
-                                <input wire:model="precio" class="form-control" name="precio" type="text" id="precio">
-                                @error('precio') <span class="text-red-500">{{ $message }}</span>@enderror
+                                <input wire:model="precio" class="form-control" name="precio" type="text" id="precio" value="{{ old('precio') }}">
+                                @error('precio') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="foto">Foto</label>
-                                <input wire:model="fotourl" class="form-control" name="foto" type="file" id="foto">
-                                @error('fotourl') <span class="text-red-500">{{ $message }}</span>@enderror
+                                <div class="d-flex">
+                                    <input wire:model="fotourl" class="form-control" name="foto" type="file" id="foto">
+                                    @if($fotourl) <img src="{{ $fotourl }}" width="50px;">@endif
+                                </div>
+                                @error('fotourl') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="ubicaciongps">Ubicacion GPS</label>
-                                <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps">
-                                @error('ubicaciongps') <span class="text-red-500">{{ $message }}</span>@enderror
+                                <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps" value="{{ old('ubicaciongps') }}">
+                                @error('ubicaciongps') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                                 <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
                                 <button class="btn btn-primary" type="button" wire:click="store()" data-dismiss="modal">Guardar</button>
                             </div>
-
+                            
                         </form>
                     </div>
 

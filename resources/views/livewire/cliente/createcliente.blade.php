@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         @error('estadocivil')
-                            <span class="text-red-500">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                         <button class="btn btn-default" wire:click="isModalCreateChange()">Cerrar</button>
                         <a wire:click="store()" class="btn btn-default bg-red-400"><span class="glyphicon glyphicon-plus"

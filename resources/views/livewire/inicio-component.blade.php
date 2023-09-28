@@ -72,13 +72,16 @@
                 </li>
                 <li class="nav-item">
                     @if(Auth::check())
-                        <a class="nav-link" href="{{ route('ventas') }}">Clientes ;-)</a>
+                        <a class="nav-link" href="{{ route('ventas') }}">Administración</a>
                     @else
-                        <a class="nav-link" href="login">Login</a>
+                        <a class="nav-link" href="login">Loguearse</a>
                     @endif
                 </li>
             </ul>
             <form class="d-flex" role="search">
+                @if(!Auth::check())
+                        <a class="me-2 btn btn-outline-success nav-link" href="{{ route('register') }}">Resgistrarse</a>
+                    @endif
                 <input class="form-control me-2" type="search" placeholder="Buscador" aria-label="Search" style="width: 200px;">
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>

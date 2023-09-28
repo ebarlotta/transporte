@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Alojamientos;
 use App\Models\Alojamiento;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class AlojamientoComponent extends Component
 {
@@ -28,10 +29,16 @@ class AlojamientoComponent extends Component
             'descripcion' => 'required',
             'precio' => 'required',
             'ubicaciongps' => 'required',
-            'fotourl' => 'required',
+            'fotourl' => 'required|image',
         ]);
 
-        $imagenurl = $this->fotourl->store('destino/alojamiento');
+        if(Storage::exists($this->fotourl)){
+            //Storage::delete($this->fotourl);
+            $imagenurl = $this->fotourl;
+        }
+        else {
+            $imagenurl = $this->fotourl->store('destino/alojamiento');
+        }
 
         // if($this->fotourl) {}
         // else { $this->fotourl = $this->fotourl->store('destino/alojamiento'); }
@@ -42,10 +49,13 @@ class AlojamientoComponent extends Component
         'ubicaciongps' => $this->ubicaciongps,
         'fotourl' => $imagenurl,
     ]);
+
         session()->flash('message', $this->alojamiento_id ? 'Alojamiento Actualizado.' : 'Alojamiento Creado.');
+        $this->reset();
     }
 
     public function edit($id) {
+        $this->resetValidation();
         $alojamiento = Alojamiento::find($id);
         $this->descripcion = $alojamiento->descripcion;
         $this->precio = $alojamiento->precio;
@@ -63,10 +73,12 @@ class AlojamientoComponent extends Component
     }
 
     public function nuevo() {
-        $this->descripcion = '';
-        $this->precio = '';
-        $this->ubicaciongps = '';
-        $this->fotourl = null;
+        //$this->descripcion = '';
+        //$this->precio = '';
+        //$this->ubicaciongps = '';
+        //$this->reset('fotourl');
+        
+        $this->fotourl = "";
     }
 
     public function isModalConsultar($id) {

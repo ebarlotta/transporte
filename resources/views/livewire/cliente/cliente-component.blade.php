@@ -199,7 +199,7 @@
                                         </div>
                                     </div>
                                     @error('estadocivil')
-                                        <span class="text-red-500">{{ $message }}</span>
+                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
 
                                     <div class="modal-footer">
