@@ -22,8 +22,8 @@ return new class extends Migration
             $table->date('fechanacimiento')->nullable();
             $table->string('foto')->nullable();
 
-            $table->unsignedBigInteger('nacionalidad_id');
-            $table->unsignedBigInteger('provincia_id');
+            $table->unsignedBigInteger('nacionalidad_id')->default(1);
+            $table->unsignedBigInteger('provincia_id')->default(1);
             $table->unsignedBigInteger('localidad_id')->default(1);
 
             $table->foreign('nacionalidad_id')->references('id')->on('nacionalidads');

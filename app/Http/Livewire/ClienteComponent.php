@@ -20,7 +20,7 @@ class ClienteComponent extends Component
     public $clientes, $cliente_id;
     public $isModalCreate=false;
     public $isModalConsultar=false; 
-    public $apellido, $nombre, $direccion, $dni, $telefono, $email, $fechanacimiento, $nacionalidad_id, $provincia_id, $localidad_id;
+    public $apellido, $nombre, $direccion, $dni, $telefono, $email, $fechanacimiento, $nacionalidad_id, $provincia_id, $localidad_id, $foto;
 
     public $nacionalidades, $provincias, $localidades;
 
@@ -46,7 +46,7 @@ class ClienteComponent extends Component
             'provincia_id' => 'required|integer',
             'localidad_id' =>  'required|integer',
         ]);
-
+        
         if(Storage::exists($this->foto)){
             $imagenurl = $this->foto;
         }
@@ -75,7 +75,7 @@ class ClienteComponent extends Component
     }
 
     public function edit($id) {
-        dd($this->provincia_id);
+        //dd($this->provincia_id);
         $cliente = Cliente::find($id);
         $this->apellido = $cliente->apellido;
         $this->nombre = $cliente->nombre;

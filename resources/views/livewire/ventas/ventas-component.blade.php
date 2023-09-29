@@ -24,7 +24,8 @@
             </div>
             <div class="row">
                 <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card card-resalte">
+                    <a href="{{route('destinos')}}">
+                        <div class="card card-resalte">
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="media d-flex">
@@ -40,13 +41,15 @@
                                 </div>
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
                 <!-- gg -->
                 <div class="col-xl-3 col-sm-6 col-12">
+                    <a href="{{route('clientes')}}">
                     <div class="card card-resalte">
                         <div class="card-content">
-                            <div class="card-body">
+                            <div class="card-body" href="clientes">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <h3 class="success">{{ $ContClientes }}</h3>
@@ -59,6 +62,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card card-resalte">
