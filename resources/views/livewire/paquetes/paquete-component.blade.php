@@ -150,6 +150,33 @@
         </div>
         <!-- Fin Modal -->
 
+
+        <!-- Modal Consulta eliminar Paquete-->
+        <div wire:ignore.self class="modal fade" id="ModalEliminarPaquete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+
+                <div class="modal-content" style="width: inherit">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Paquete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="container">
+                        <form action="">
+                            <div class="mb-3 mt-3">
+                                Está seguro de eliminar el Paquete: <label>{{ $PaqueteAEliminar }} ?</label>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                                <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
+                                <button class="btn btn-danger" type="button" wire:click="delete()" data-dismiss="modal">Eliminar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
             <div class="row">
                 <div class="d-sm-none">
                     @foreach ($paquetes as $paquete)
@@ -180,12 +207,10 @@
                                     </div> --}}
                                     <div class='mt-3 text-center'>
                                         <div class="btn-group" role="group">
-                                            <button wire:click="edit({{ $paquete->id }})" type="button" class="btn btn-warning"  data-toggle="modal" data-target="#ModalNuevoDestino">
+                                            <button wire:click="edit({{ $paquete->id }})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevoDestino">
                                                 <i class="fa-solid fa-pen-to-square"></i> Editar
                                             </button>
-                                            <button wire:click="isModalConsultar({{ $paquete->id }})"
-                                                class="btn btn-danger"
-                                                >
+                                            <button wire:click="isModalConsultar({{ $paquete->id }})" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarPaquete">
                                                 <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                             </button>
                                         </div>
@@ -234,9 +259,7 @@
                                                 <button wire:click="edit({{ $paquete->id }})" type="button" class="btn btn-warning"  data-toggle="modal" data-target="#ModalNuevoDestino">
                                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                                 </button>
-                                                <button wire:click="isModalConsultar({{ $paquete->id }})"
-                                                    class="btn btn-danger"
-                                                    >
+                                                <button wire:click="isModalConsultar({{ $paquete->id }})" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarPaquete">
                                                     <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                 </button>
                                             </div>

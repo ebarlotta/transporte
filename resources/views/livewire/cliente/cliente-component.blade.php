@@ -33,6 +33,7 @@
                                 width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Imágen</th>
                                         <th>Nombre y Apellido</th>
                                         <th>Dirección</th>
                                         <th>Teléfono</th>
@@ -47,6 +48,7 @@
                                 <tbody>
                                     @foreach ($clientes as $cliente)
                                         <tr>
+                                            <td><img src="{{$cliente->foto}}" style="border-radius: 50%;width: 38px;height: 38px;"></td>
                                             <td>{{ $cliente->apellido }}, {{ $cliente->nombre }}</td>
                                             @if ($cliente->direccion)
                                                 <td>{{ $cliente->direccion }}</td>
@@ -161,10 +163,11 @@
                                                 wire:model="fechanacimiento">
                                         </div>
                                         <div class="col-5 m-2">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2">Foto</label>
-                                            <input type="file" style="width: inherit;"
-                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                placeholder="Ingrese foto" wire:model="foto">
+                                            <div class="d-flex">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2">Foto</label>
+                                                <input type="file" style="width: inherit;" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese foto" wire:model="foto">
+                                                <img src="{{ $foto }}" width="50px;" style="border-radius: 50%;width: 38px;height: 38px;">
+                                            </div>
                                         </div>
                                         <div class="col-5 m-2">
                                             <label
@@ -206,7 +209,7 @@
                                         <button class="btn btn-warning" wire:click="isModalCreateChange()">Cerrar</button>
                                         <a wire:click="store()" class="btn btn-primary bg-red-400" data-dismiss="modal">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                            Modificar
+                                            Guardar
                                         </a>
                                     </div>
                                 </div>

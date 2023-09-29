@@ -6,17 +6,14 @@ use App\Models\Destino;
 use App\Models\DestinoPaquete;
 use Livewire\Component;
 use App\Models\Paquete;
-use Livewire\WithFileUploads;
 
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithPagination;
 class PaqueteComponent extends Component
 {
     use WithFileUploads;
-
-    public function render()
-    {
-        $this->paquetes = Paquete::all();
-        return view('livewire.paquetes.paquete-component')->extends('layouts.adminlte');
-    }
+    use WithPagination;
 
     public $paquetes;
     public $nombre, $descripcion, $precio, $duraciontotal, $presupuestoestimado, $fechasdisponibles, $fotourl;
@@ -25,8 +22,18 @@ class PaqueteComponent extends Component
 
     public $paquete_id;
 
+    public $PaqueteAEliminar;   //$isModalConsultar
+
+    public function render()
+    {
+        $this->paquetes = Paquete::paginate(10);
+        $links = $this->paquetes;
+        $this->paquetes = collect($this->paquetes->items());
+        // $this->paquetes = Paquete::all();
+        return view('livewire.paquetes.paquete-component',['paquetes' => $this->paquetes, 'datos'=> $links])->extends('layouts.adminlte');
+    }
+
     public function store() {
-    
         $this->validate([
             'nombre' => 'required',
             'descripcion' => 'required',
@@ -36,8 +43,12 @@ class PaqueteComponent extends Component
             'fotourl' => 'required',
         ]);
 
-        if($this->fotourl) {}
-        else { $this->fotourl = $this->fotourl->store('destino/paquetes'); }
+        if(Storage::exists($this->fotourl)){
+            $imagenurl = $this->fotourl;
+        }
+        else {
+            $imagenurl = $this->fotourl->store('destino/paquetes');
+        }
         
         Paquete::updateOrCreate(['id' => $this->paquete_id], [
         'nombre' => $this->nombre,
@@ -46,7 +57,7 @@ class PaqueteComponent extends Component
         'duraciontotal' => $this->duraciontotal,
         'presupuestoestimado' => $this->presupuestoestimado,
         'fechasdisponibles' => $this->fechasdisponibles,
-        'fotourl' => $this->fotourl,
+        'fotourl' => $imagenurl,
     ]);
         session()->flash('message', $this->paquete_id ? 'Paquete Actualizado.' : 'Paquete Creado.');
     }
@@ -109,4 +120,25 @@ class PaqueteComponent extends Component
     public function ConstructorDestinos() {
         $this->destinosposibles = Destino::all();  // Se utiliza para llenar el combo con los distintos destinos para ser relacionados con el paquete
     }
+
+    public function Consultar($id) {
+        $paquete = Paquete::find($id);
+        dd($paquete);
+        $this->nombre = $paquete->nombre;
+        $this->paquete_id = $id;
+    }
+    public function isModalConsultar($id) {
+        $paquete = Paquete::find($id);
+        $this->PaqueteAEliminar = $paquete->nombre;
+        $this->paquete_id = $id;
+    }
+
+    // public function isModalConsultar($id) {
+    //     if($id<>0) {
+    //     $this->isModalConsultar = !$this->isModalConsultar;
+    //     $this->Consultar($id);
+    //     } else {
+    //         $this->isModalConsultar =false;
+    //     }
+    // }
 }

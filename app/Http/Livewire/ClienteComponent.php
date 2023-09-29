@@ -83,6 +83,7 @@ class ClienteComponent extends Component
         $this->dni = $cliente->dni;
         $this->telefono = $cliente->telefono;
         $this->email = $cliente->email;
+        $this->foto = $cliente->foto;
         $this->fechanacimiento = $cliente->fechanacimiento;
         $this->nacionalidad_id = $cliente->nacionalidad_id;
         $this->provincia_id = $cliente->provincia_id;
