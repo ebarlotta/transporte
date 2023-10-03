@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Otra Página</title>
+</head>
+
+<body>
+    <h1>Posiciones de los Marcadores</h1>
+    <div id="posiciones"></div>
+
+    <script>
+        // Función para obtener los parámetros de la URL
+        function getUrlParams() {
+            var params = {};
+            var url = window.location.search.substring(1);
+            var paramPairs = url.split('&');
+            for (var i = 0; i < paramPairs.length; i++) {
+                var pair = paramPairs[i].split('=');
+                params[pair[0]] = decodeURIComponent(pair[1]);
+            }
+            return params;
+        }
+
+        // Obtiene los parámetros de la URL
+        var urlParams = getUrlParams();
+
+        // Verifica si existe el parámetro "positions" en la URL
+        if (urlParams.positions) {
+            // Decodifica la cadena JSON de posiciones
+            var positionsJSON = decodeURIComponent(urlParams.positions);
+            var positions = JSON.parse(positionsJSON);
+
+            // Muestra las posiciones en la página
+            var posicionesDiv = document.getElementById('posiciones');
+            posicionesDiv.innerHTML = '<pre>' + JSON.stringify(positions, null, 2) + '</pre>';
+        } else {
+            // Si no se encontró el parámetro "positions" en la URL
+            var posicionesDiv = document.getElementById('posiciones');
+            posicionesDiv.innerHTML = '<p>No se encontraron posiciones de marcadores.</p>';
+        }
+    </script>
+</body>
+
+</html>

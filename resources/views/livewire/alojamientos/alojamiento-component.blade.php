@@ -1,4 +1,5 @@
 <div>
+    <?php session_start(); ?>
     <div id="page-wrapper">
         <div class="containergit">
             <div class="row">
@@ -53,12 +54,24 @@
                                 @error('fotourl') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label" for="ubicaciongps">Ubicacion GPS</label>
-                                <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps" value="{{ old('ubicaciongps') }}">
+                            <div class="mb-3 d-flex">
+                                
+                                <div class="col-9">
+                                    <label class="form-label" for="ubicaciongps">Ubicacion GPS</label>
+                                    <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps" readonly="true" value="{{ $_SESSION['latitud'] }}">
+                                </div>
+                                <div class="col-3 align-bottom">
+                                    {{-- <p>Dale un vistazo <a href="../mapa/basico1.html" target="_blank">Ver Mapa</a>.</p> --}}
+                                <a class="btn btn-info" href="#" onClick="window.open('../mapa/basico1.html', 'Ubicación', 'width=400, height=400')">Capturar Coordenada</a>
+                                    {{-- <a href="ventana = window.open('../mapa/basico1.html', 'nombre', 'height=320, width=780'); ventana.focus();">Link</a> --}}
+                                </div>
+                                {{-- <button href="../mapa/basico.html"></button> --}}
                                 @error('ubicaciongps') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
+                            {{-- <div><label for="">Valor de Sesion</label><pre><?php if(isset($_SESSION['latitud'])) { echo $_SESSION['latitud']; }; ?></pre></div> --}}
+                            {{-- <button onclick="alert('<?php echo $_SESSION['latitud']; ?>')">Boton</button> --}}
+                            <input type="text" name="" id="" value="{{ $_SESSION['latitud'] }}">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                                 <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
                                 <button class="btn btn-primary" type="button" wire:click="store()" data-dismiss="modal">Guardar</button>
