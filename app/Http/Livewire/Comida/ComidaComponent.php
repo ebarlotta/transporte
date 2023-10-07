@@ -77,7 +77,10 @@ class ComidaComponent extends Component
     }
 
     public function nuevo() {
-        $this->fotourl = "";
+        $this->descripcion = '';
+        $this->precio = '';
+        $this->ubicaciongps = '';
+        $this->fotourl = '';
     }
 
     public function isModalConsultar($id) {

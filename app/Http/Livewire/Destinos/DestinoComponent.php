@@ -109,4 +109,18 @@ class DestinoComponent extends Component
 
         session()->flash('message', $this->destino_id ? 'Destino Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
     }
+
+    public function nuevo() {
+        $this->nombre = '';
+        $this->descripcion = '';
+        $this->clima = '';
+        $this->ubicaciongps = '';
+        $this->fotourl = '';
+        $this->mejorepocaparavisitar = '';
+        $this->presupuestoestimado = '';
+        $this->otrosenlaces = '';
+        $this->pais_id = '';
+
+        $this->destino_id = null;
+    }
 }

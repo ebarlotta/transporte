@@ -141,4 +141,18 @@ class PaqueteComponent extends Component
     //         $this->isModalConsultar =false;
     //     }
     // }
+
+    public function nuevo() {
+        $this->nombre = '';
+        $this->descripcion = '';
+        $this->precio = '';
+        $this->duraciontotal = '';
+        $this->presupuestoestimado = '';
+        $this->fechasdisponibles = '';
+        $this->fotourl = '';
+
+        $this->destinospaquete = null;
+
+        $this->paquete_id = null;
+    }
 }

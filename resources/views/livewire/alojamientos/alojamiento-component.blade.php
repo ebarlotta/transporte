@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="col-3 align-bottom">
                                     {{-- <p>Dale un vistazo <a href="../mapa/basico1.html" target="_blank">Ver Mapa</a>.</p> --}}
-                                <a class="btn btn-info" href="#" onClick="window.open('../mapa/basico1.html', 'Ubicación', 'width=400, height=400')">Capturar Coordenada</a>
+                                <a class="btn btn-info" href="#" onClick="window.open('../mapa/basico1.html', 'Ubicación', 'width=400, height=400')" wire:click="ActualizarCoordenadas()">Capturar Coordenada</a>
                                     {{-- <a href="ventana = window.open('../mapa/basico1.html', 'nombre', 'height=320, width=780'); ventana.focus();">Link</a> --}}
                                 </div>
                                 {{-- <button href="../mapa/basico.html"></button> --}}
@@ -71,7 +71,8 @@
 
                             {{-- <div><label for="">Valor de Sesion</label><pre><?php if(isset($_SESSION['latitud'])) { echo $_SESSION['latitud']; }; ?></pre></div> --}}
                             {{-- <button onclick="alert('<?php echo $_SESSION['latitud']; ?>')">Boton</button> --}}
-                            <input type="text" name="" id="" value="{{ $_SESSION['latitud'] }}">
+                            <input type="text" name="" id="" value="{{ $latitud }}" wire:model="longitud">
+                            <input type="text" name="" id="" value="{{ $longitud }}" wire:model="latitud">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                                 <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
                                 <button class="btn btn-primary" type="button" wire:click="store()" data-dismiss="modal">Guardar</button>

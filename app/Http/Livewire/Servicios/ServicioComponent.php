@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Servicios;
 
 use Livewire\Component;
 use App\Models\Servicio;
+use Illuminate\Support\Facades\Storage;
+
 use Livewire\WithFileUploads;
 
 class ServicioComponent extends Component
@@ -21,17 +23,26 @@ class ServicioComponent extends Component
 
     public $servicio_id;
 
+    public $ServicioAEliminar;
+
     public function store() {
         $this->validate([
             'descripcion' => 'required',
             'fotourl' => 'required',
         ]);
 
-        if($this->fotourl) {} else {$this->fotourl = $this->fotourl->store('destino/servicios'); }
+        // if($this->fotourl) {} else {$this->fotourl = $this->fotourl->store('destino/servicios'); }
+        if(Storage::exists($this->fotourl)){
+            $imagenurl = $this->fotourl;
+        }
+        else {
+            $imagenurl = $this->fotourl->store('destino/servicios');
+        }
+
         
         Servicio::updateOrCreate(['id' => $this->servicio_id], [
         'descripcion' => $this->descripcion,
-        'fotourl' => $this->fotourl,
+        'fotourl' => $imagenurl,
     ]);
         session()->flash('message', $this->servicio_id ? 'Servicio Actualizado.' : 'Servicio Creado.');
     }
@@ -44,11 +55,25 @@ class ServicioComponent extends Component
         $this->servicio_id = $id;
     }
 
-    public function delete() {
+    public function delete() {        
         $servicio = Servicio::find($this->servicio_id);
+        Storage::delete($this->fotourl);
         $servicio->destroy($this->servicio_id);
         //$this->isModalConsultar(0); // PARA HACER
 
         session()->flash('message', $this->servicio_id ? 'Servicio Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
+    }
+
+    public function isModalConsultar($id) {
+        $servicio = Servicio::find($id);
+        $this->ServicioAEliminar = $servicio->descripcion;
+        $this->servicio_id = $id;
+    }
+
+    public function nuevo() {
+        $this->descripcion = '';
+        $this->fotourl = '';
+
+        $this->servicio_id = null;
     }
 }

@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="style">Provincias</h2>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalNuevaProvincia">
+                    <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevaProvincia">
                         <i class="fa-regular fa-plus"></i> Nuevo </button>
                     {{-- <a href="#" class="btn btn-celeste"><span class="glyphicon glyphicon-plus"
                             aria-hidden="true"></span>Nuevo</a> --}}
@@ -12,6 +12,7 @@
             </div>
             <hr>
 
+            <!-- Modal Altas/Modificaciones Provincias-->
             <div wire:ignore.self class="modal fade" id="ModalNuevaProvincia" tabindex="-1"
             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -59,10 +60,7 @@
                                     <td>
                                         <div class='wrapper text-center'>
                                             <div class="btn-group" role="group">
-                                                <button wire:click="edit({{ $provincia->id }})" type="button"
-                                                    class="btn btn-warning" data-toggle="modal"
-                                                    
-                                                    data-target="#exampleModal">
+                                                <button wire:click="edit({{ $provincia->id }})" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaProvincia">
                                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                                 </button>
                                                 <button wire:click="isModalConsultar({{ $provincia->id }})"

@@ -4,7 +4,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 class="style">Lugares Para Comer</h2>
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalNuevaComida">
+                        <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevaComida">
                             <i class="fa-regular fa-plus"></i> Nuevo </button>
                     </div>
                 </div>

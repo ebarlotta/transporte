@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="style">Paquetes</h2>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalNuevoDestino">
+                    <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevoDestino">
                         <i class="fa-regular fa-plus"></i> Nuevo </button>
                     {{-- <a href="#" class="btn btn-celeste"><span class="glyphicon glyphicon-plus"
                             aria-hidden="true"></span>Nuevo</a> --}}

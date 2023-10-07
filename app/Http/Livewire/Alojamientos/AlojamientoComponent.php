@@ -18,6 +18,9 @@ class AlojamientoComponent extends Component
 
     public $AlojamientoAEliminar;
 
+    public $latitud;
+    public $longitud;
+
     use WithFileUploads;
     use WithPagination;
 
@@ -77,12 +80,23 @@ class AlojamientoComponent extends Component
 
     public function nuevo() {
         $this->fotourl = "";
+        $this->descripcion = '';
+        $this->precio = '';
+        $this->ubicaciongps = '';
+        $this->fotourl = '';
     }
 
     public function isModalConsultar($id) {
         $alojamiento = Alojamiento::find($id);
         $this->AlojamientoAEliminar = $alojamiento->descripcion;
         $this->alojamiento_id = $id;
+    }
+
+    public function ActualizarCoordenadas() {
+        // $this->latitud = $_SESSION['latitud'];
+        // $this->longitud = $_SESSION['longitud'];
+
+        dd($this->latitud . $this->longitud);
     }
 
 }

@@ -122,4 +122,18 @@ class ClienteComponent extends Component
         }
     }
 
+    public function nuevo() {
+        $this->apellido = '';
+        $this->nombre = '';
+        $this->direccion = '';
+        $this->dni = '';
+        $this->telefono = '';
+        $this->email = '';
+        $this->foto = '';
+        $this->fechanacimiento = '';
+        $this->nacionalidad_id = '';
+        $this->provincia_id = '';
+        $this->localidad_id = '';
+        $this->cliente_id =  null;
+    }
 }

@@ -40,4 +40,9 @@ class RestriccionComponent extends Component
 
         session()->flash('message', $this->restriccion_id ? 'Restriccion Eliminada.' : 'No ha seleccionado una restriccion a eliminar.');
     }
+
+    public function nuevo() {
+        $this->descripcion = '';
+        $this->restriccion_id = null;
+    }
 }

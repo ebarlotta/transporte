@@ -41,4 +41,9 @@ class ProvinciaComponent extends Component
 
         session()->flash('message', $this->provincia_id ? 'Provincia Eliminada.' : 'No ha seleccionado una provincia a eliminar.');
     }
+
+    public function nuevo() {
+        $this->nombre = '';
+        $this->provincia_id = null;
+    }
 }

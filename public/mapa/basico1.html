@@ -45,7 +45,7 @@
                 if (markers.length < 1) { // Limita la cantidad de marcadores adicionales a 5
                     addMarker(event.latLng);
                 } else {
-                    alert('Ya se han agregado 5 marcadores adicionales.');
+                    alert('Ya se ha agregado 1 marcador.');
                 }
             });
         }
@@ -92,9 +92,15 @@
 
                 // Redirige a otra página y envía los datos como parámetro en la URL
                 window.location.href = 'otra_pagina.php?positions=' + encodeURIComponent(positionsJSON);
+
+                $_SESSION['latitud'] = lat;
+                $_SESSION['longitud'] = lng;
+
+
             } else {
                 alert('Debe seleccionar un marcador en el mapa para poder enviar los datos');
             }
+            alert($_SESSION['latitud'] + "," + $_SESSION['longitud']);
         });
 
         // Llama a la función initMap cuando la página se carga

@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="style">Restricciones</h2>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalNuevaRestriccion">
+                    <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevaRestriccion">
                         <i class="fa-regular fa-plus"></i> Nuevo </button>
                 </div>
             </div>
