@@ -45,8 +45,8 @@ class AlojamientoComponent extends Component
             $imagenurl = $this->fotourl;
         }
         else {
-            $imagenurl = $this->fotourl->store('destino/alojamiento');
-            $imagenurl = 'storage/alojamiento/' . $imagenurl;
+            $imagenurl = $this->fotourl->store('destino/alojamientos');
+            $imagenurl = 'storage/alojamientos/' . $imagenurl;
         }
 
         Alojamiento::updateOrCreate(['id' => $this->alojamiento_id], [
