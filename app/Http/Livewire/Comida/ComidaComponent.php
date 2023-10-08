@@ -24,7 +24,7 @@ class ComidaComponent extends Component
 
     public function render()
     {
-        $this->comidas = Comida::paginate(2);
+        $this->comidas = Comida::paginate(4);
         $links = $this->comidas;
         $this->comidas = collect($this->comidas->items());
         // $this->comidas = Comida::all();

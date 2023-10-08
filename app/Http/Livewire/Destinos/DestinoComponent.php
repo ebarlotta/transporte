@@ -24,7 +24,7 @@ class DestinoComponent extends Component
 
     public function render()
     {
-        $this->destinos = Destino::paginate(2);
+        $this->destinos = Destino::paginate(4);
         $links = $this->destinos;
         $this->destinos = collect($this->destinos->items());
 
