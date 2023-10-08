@@ -59,9 +59,9 @@ class ServicioComponent extends Component
         $servicio = Servicio::find($this->servicio_id);
         Storage::delete($this->fotourl);
         $servicio->destroy($this->servicio_id);
-        //$this->isModalConsultar(0); // PARA HACER
 
         session()->flash('message', $this->servicio_id ? 'Servicio Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
+        $this->servicio_id = null;
     }
 
     public function isModalConsultar($id) {

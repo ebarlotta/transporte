@@ -92,7 +92,7 @@
                             @foreach ($servicios as $servicio)
                                 <tr>
                                     <td>{{ $servicio->descripcion }}</td>
-                                    <td class="col-1"><img src="{{ $servicio->fotourl }}" width="50px" height="50px"></td>
+                                    <td class="col-1"><img src="{{ 'storage/'.$servicio->fotourl }}" width="50px" height="50px"></td>
                                     <td>
                                         <div class='wrapper text-center'>
                                             <div class="btn-group" role="group">
