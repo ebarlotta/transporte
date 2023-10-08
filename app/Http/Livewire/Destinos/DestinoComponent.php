@@ -52,6 +52,7 @@ class DestinoComponent extends Component
         }
         else {
             $imagenurl = $this->fotourl->store('destino/destino');
+            $imagenurl = 'storage/destino/' . $imagenurl;
         }
 
         Destino::updateOrCreate(['id' => $this->destino_id], [

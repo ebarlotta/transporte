@@ -48,6 +48,7 @@ class PaqueteComponent extends Component
         }
         else {
             $imagenurl = $this->fotourl->store('destino/paquetes');
+            $imagenurl = 'storage/paquetes/' . $imagenurl;
         }
         
         Paquete::updateOrCreate(['id' => $this->paquete_id], [
