@@ -51,7 +51,8 @@ class ClienteComponent extends Component
             $imagenurl = $this->foto;
         }
         else {
-            $imagenurl = $this->foto->store('destino/clientes');
+            $imagenurl = $this->foto->store('public/clientes');
+            $imagenurl = 'storage/clientes/' . $imagenurl;
         }
 
         Cliente::updateOrCreate(['id' => $this->cliente_id], [
