@@ -36,7 +36,8 @@ class ServicioComponent extends Component
             $imagenurl = $this->fotourl;
         }
         else {
-            $imagenurl = $this->fotourl->store('destino/servicios');
+            $imagenurl = basename($this->fotourl->store('public/servicios'));
+            $imagenurl = 'storage/comidas/' . $imagenurl;
         }
 
         

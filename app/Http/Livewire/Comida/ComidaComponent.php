@@ -44,7 +44,9 @@ class ComidaComponent extends Component
             $imagenurl = $this->fotourl;
         }
         else {
-            $imagenurl = $this->fotourl->store('destino/comidas');
+            $imagenurl = basename($this->fotourl->store('public/comidas'));
+            $imagenurl = 'storage/comidas/' . $imagenurl;
+            // dd($imagenurl);
         }
         
         Comida::updateOrCreate(['id' => $this->comida_id], [
