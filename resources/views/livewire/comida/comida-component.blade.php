@@ -119,7 +119,7 @@
                                         </td>
                                         <td>
                                             @if($comida->fotourl <> 'Sin_imagen.jpg')
-                                                <img src="{{ $comida->fotourl}}" alt="" style="width: 100px; height:100px;">
+                                                <img src="{{ asset($comida->fotourl) }}" alt="" style="width: 100px; height:100px;">
                                             @else
                                                 <img src="/img/sin_imagen.jpg" alt="" style="width: 100px; height:100px;">
                                             @endif

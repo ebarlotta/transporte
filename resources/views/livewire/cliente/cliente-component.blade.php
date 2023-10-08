@@ -48,7 +48,13 @@
                                 <tbody>
                                     @foreach ($clientes as $cliente)
                                         <tr>
-                                            <td><img src="{{$cliente->foto}}" style="border-radius: 50%;width: 38px;height: 38px;"></td>
+                                            <td> 
+                                                @if($cliente->foto="Sin_imagen.jpg") 
+                                                    <img src="img/Sin_imagen.jpg" style="border-radius: 50%;width: 38px;height: 38px;">
+                                                @else
+                                                    <img src="{{$cliente->foto}}" style="border-radius: 50%;width: 38px;height: 38px;">
+                                                @endif
+                                            </td>
                                             <td>{{ $cliente->apellido }}, {{ $cliente->nombre }}</td>
                                             @if ($cliente->direccion)
                                                 <td>{{ $cliente->direccion }}</td>
