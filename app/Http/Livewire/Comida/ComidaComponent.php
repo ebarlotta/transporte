@@ -33,8 +33,7 @@ class ComidaComponent extends Component
         return view('livewire.comida.comida-component',['comidas' => $this->comidas, 'datos'=> $links])->extends('layouts.adminlte');;
     }
 
-    public function store() {
-        
+    public function store() {    
         $this->validate([
             'descripcion' => 'required',
             'precio' => 'required',

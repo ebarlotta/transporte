@@ -46,11 +46,15 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="foto">Foto</label>
                                 <div class="d-flex">
-                                    <input wire:model="fotourl" class="form-control" name="foto" type="file" id="foto">
-                                    @if($fotourl) <img src="{{ $fotourl }}" width="50px;">@endif
-                                </div>
+                                    <label class="form-label" for="foto">Foto</label>
+                                        <input wire:model="fotourl" class="form-control" name="fotourl" type="file" id="fotourl" accept="image/*">
+                                        <div wire:loading wire:target="fotourl">
+                                            <strong class="font-bold">Imágen cargando!!</strong>
+                                            {{-- <img src="{{ $fotourl->temporaryUrl() }}" width="50px;"> --}}
+                                        </div>
+                                        @if($fotourl) <img src="{{ asset($fotourl) }}" width="50px;">@endif
+                                    </div>
                                 @error('fotourl') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 

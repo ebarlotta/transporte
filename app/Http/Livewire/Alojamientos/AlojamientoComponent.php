@@ -11,6 +11,9 @@ use Livewire\WithPagination;
 
 class AlojamientoComponent extends Component
 {
+    use WithFileUploads;
+    use WithPagination;
+
     public $alojamientos;
     public $descripcion, $precio, $ubicaciongps, $fotourl;
 
@@ -21,12 +24,9 @@ class AlojamientoComponent extends Component
     public $latitud;
     public $longitud;
 
-    use WithFileUploads;
-    use WithPagination;
-
     public function render()
     {
-        $this->alojamientos = Alojamiento::paginate(2);
+        $this->alojamientos = Alojamiento::paginate(4);
         $links = $this->alojamientos;
         $this->alojamientos = collect($this->alojamientos->items());
         // $this->alojamientos = Alojamiento::all();
@@ -45,7 +45,7 @@ class AlojamientoComponent extends Component
             $imagenurl = $this->fotourl;
         }
         else {
-            $imagenurl = $this->fotourl->store('destino/alojamientos');
+            $imagenurl = $this->fotourl->store('public/alojamientos');
             $imagenurl = 'storage/alojamientos/' . $imagenurl;
         }
 
@@ -56,8 +56,8 @@ class AlojamientoComponent extends Component
         'fotourl' => $imagenurl,
     ]);
 
-        $this->reset();
         session()->flash('message', $this->alojamiento_id ? 'Alojamiento Actualizado.' : 'Alojamiento Creado.');
+        $this->reset();
     }
 
     public function edit($id) {
