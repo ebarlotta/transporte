@@ -12,6 +12,9 @@ use Livewire\WithPagination;
 class ComidaComponent extends Component
 {
 
+    use WithFileUploads;
+    use WithPagination;
+
     public $comidas;
     public $descripcion, $precio, $ubicaciongps, $fotourl;
 
@@ -19,16 +22,15 @@ class ComidaComponent extends Component
 
     public $ComidaAEliminar;
 
-    use WithFileUploads;
-    use WithPagination;
+    
 
     public function render()
     {
         $this->comidas = Comida::paginate(4);
         $links = $this->comidas;
         $this->comidas = collect($this->comidas->items());
-        // $this->comidas = Comida::all();
-        return view('livewire.comida.comida-component',['alojamientos' => $this->comidas, 'datos'=> $links])->extends('layouts.adminlte');;
+
+        return view('livewire.comida.comida-component',['comidas' => $this->comidas, 'datos'=> $links])->extends('layouts.adminlte');;
     }
 
     public function store() {
@@ -46,7 +48,6 @@ class ComidaComponent extends Component
         else {
             $imagenurl = basename($this->fotourl->store('public/comidas'));
             $imagenurl = 'storage/comidas/' . $imagenurl;
-            // dd($imagenurl);
         }
         
         Comida::updateOrCreate(['id' => $this->comida_id], [

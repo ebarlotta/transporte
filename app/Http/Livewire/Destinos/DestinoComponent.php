@@ -9,6 +9,7 @@ use App\Models\Nacionalidad;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
+
 class DestinoComponent extends Component
 {
     use WithFileUploads;
@@ -29,8 +30,8 @@ class DestinoComponent extends Component
         $this->destinos = collect($this->destinos->items());
 
         $this->paises = Nacionalidad::all();
-        //dd($this->paises);
         $this->destinos = Destino::all();
+
         return view('livewire.destinos.destino-component',['destinos' => $this->destinos, 'datos'=> $links])->extends('layouts.adminlte');
     }
 
@@ -51,7 +52,7 @@ class DestinoComponent extends Component
             $imagenurl = $this->fotourl;
         }
         else {
-            $imagenurl = $this->fotourl->store('public/destinos');
+            $imagenurl = basename($this->fotourl->store('public/destinos'));
             $imagenurl = 'storage/destinos/' . $imagenurl;
         }
 
@@ -66,11 +67,12 @@ class DestinoComponent extends Component
         'otrosenlaces' => $this->otrosenlaces,
         'pais_id' => $this->pais_id,
     ]);
-        $this->reset();
         session()->flash('message', $this->destino_id ? 'Destino Actualizado.' : 'Destino Creado.');
+        $this->reset();
     }
 
     public function edit($id) {
+        $this->resetValidation();
         $destino = Destino::find($id);
         $this->nombre = $destino->nombre;
         $this->descripcion = $destino->descripcion;
