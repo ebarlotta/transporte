@@ -45,12 +45,14 @@
     @livewireStyles
 
     <!-- Scripts -->
-
     <script src="js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     // <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
     <script src="js/jquery.mask.js"></script>
+
+    <!-- Mapas -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC4wBNOxS1ylbmlFwPR_ab5Z0X3R6_BYo&callback=Function.prototype"></script>
 
 </head>
 {{-- @extends(adminlte::class) --}}
@@ -69,5 +71,124 @@
 
 @livewireScripts
 </body>
+<script>
+    var map;
+    var markers = []; // Array para almacenar los marcadores adicionales
 
+    // Función para inicializar el mapa
+    function initMap() {
+        // Coordenadas para centrar el mapa (por ejemplo, Nueva York)
+        var myLatLng = {
+            lat: 40.7128,
+            lng: -74.0060
+        };
+
+        // Crea un mapa con las opciones de configuración
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 12 // Nivel de zoom
+        });
+
+        // // Crea un marcador en el mapa (no draggable)
+        // var mainMarker = new google.maps.Marker({
+        //     position: myLatLng,
+        //     map: map,
+        //     title: 'Marcador Principal',
+        //     draggable: false // El marcador no se puede arrastrar
+        // });
+
+        // Agrega un evento de clic al mapa para agregar marcadores adicionales
+        google.maps.event.addListener(map, 'click', function(event) {
+            if (markers.length < 1) { // Limita la cantidad de marcadores adicionales a 5
+                addMarker(event.latLng);
+            } else {
+                alert('Ya se ha agregado 1 marcador.');
+            }
+        });
+    }
+
+    // Función para agregar un marcador adicional
+    function addMarker(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            title: 'Marcador Adicional',
+            draggable: true // Los marcadores adicionales son arrastrables
+        });
+
+        markers.push(marker); // Agrega el marcador al array de marcadores
+
+        // Agrega un evento de clic al marcador para eliminarlo
+        google.maps.event.addListener(marker, 'click', function() {
+            removeMarker(marker);
+        });
+    }
+
+    // Función para eliminar un marcador adicional
+    function removeMarker(marker) {
+        marker.setMap(null); // Elimina el marcador del mapa
+        var index = markers.indexOf(marker);
+        if (index !== -1) {
+            markers.splice(index, 1); // Elimina el marcador del array de marcadores
+        }
+    }
+
+    // // Agrega un evento de clic al botón para enviar las posiciones
+    // document.getElementById('enviarPosiciones').addEventListener('click', function() {
+    //     // Recopila las posiciones de los marcadores y las convierte en un array de objetos LatLng
+    //     if (markers.length) {
+    //         var positions = markers.map(function(marker) {
+    //             return {
+    //                 lat: marker.getPosition().lat(),
+    //                 lng: marker.getPosition().lng()
+    //             };
+    //         });
+
+    //         // Convierte el array de posiciones en una cadena JSON
+    //         var positionsJSON = JSON.stringify(positions);
+
+    //         // Redirige a otra página y envía los datos como parámetro en la URL
+    //         ////window.location.href = 'otra_pagina.php?positions=' + encodeURIComponent(positionsJSON);
+
+    //         $_SESSION['latitud'] = lat;
+    //         $_SESSION['longitud'] = lng;
+
+
+    //     } else {
+    //         alert('Debe seleccionar un marcador en el mapa para poder enviar los datos');
+    //     }
+    //     alert($_SESSION['latitud'] + "," + $_SESSION['longitud']);
+    // });
+
+    function agregarMarcador() {
+    // Agrega un evento de clic al botón para enviar las posiciones
+        // Recopila las posiciones de los marcadores y las convierte en un array de objetos LatLng
+        if (markers.length) {
+            var positions = markers.map(function(marker) {
+                return {
+                    lat: marker.getPosition().lat(),
+                    lng: marker.getPosition().lng()
+                };
+            });
+
+            // Convierte el array de posiciones en una cadena JSON
+            var positionsJSON = JSON.stringify(positions);
+
+            // Redirige a otra página y envía los datos como parámetro en la URL
+            ////window.location.href = 'otra_pagina.php?positions=' + encodeURIComponent(positionsJSON);
+
+            $_SESSION['latitud'] = lat;
+            $_SESSION['longitud'] = lng;
+
+
+        } else {
+            alert('Debe seleccionar un marcador en el mapa para poder enviar los datos');
+        }
+        alert($_SESSION['latitud'] + "," + $_SESSION['longitud']);
+    
+    }
+    // Llama a la función initMap cuando la página se carga
+    // google.maps.event.addEventListener('load', initMap);
+    google.maps.event.addDomListener(window, 'load', initMap);
+</script>
 </html>

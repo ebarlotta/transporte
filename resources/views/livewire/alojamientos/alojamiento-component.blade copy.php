@@ -1,7 +1,5 @@
 <div>
     <?php session_start(); ?>
-
-
     <div id="page-wrapper">
         <div class="containergit">
             <div class="row">
@@ -10,34 +8,6 @@
                     <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevoAlojamiento">
                         <i class="fa-regular fa-plus"></i> Nuevo </button>
                 </div>
-                @if($mostrarMapa)
-                <div class="mb-3 mt-3">
-                    <div class="modal-content" style="width: inherit">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Capturar Coordenada</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="container">
-                            <form action="">
-                                <div class="mb-3 mt-3">
-                                    <!-- Crea un div para contener el mapa -->
-                                    <div id="map" style="width: 90%; height: 300px;" onclick="agregarMarcador();"></div>
-
-                                    <!-- Agrega un botón para enviar la posición de los marcadores -->
-                                    <button id="enviarPosiciones">Enviar Posiciones</button>
-                                </div>
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-                                    <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
-                                    <button class="btn btn-danger" type="button" wire:click="delete()" data-dismiss="modal">Eliminar</button>
-                                </div>
-                            </form>
-                        </div>
-    
-                    </div>
-                </div>
-                @endif
             </div>
             @if (session()->has('message'))
                 <div class="border-t-4  rounded-b px-4 py-3 shadow-md my-3 bg-lime-700" role="alert"
@@ -94,16 +64,13 @@
                                 
                                 <div class="col-9">
                                     <label class="form-label" for="ubicaciongps">Ubicacion GPS</label>
-                                    {{-- <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps" readonly="true" value="{{ $_SESSION['latitud'] }}"> --}}
+                                    <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps" readonly="true" value="{{ $_SESSION['latitud'] }}">
                                 </div>
                                 <div class="col-3 align-bottom">
                                     {{-- <p>Dale un vistazo <a href="../mapa/basico1.html" target="_blank">Ver Mapa</a>.</p> --}}
-                                <a class="btn btn-info" href="#"  data-toggle="modal" wire:click="ActualizarCoordenadas">Capturar Coordenada</a>
-                                {{-- <a class="btn btn-info" href="#"  data-toggle="modal" data-target="#ModalCapturarCoordenadas">Capturar Coordenada</a> --}}
-                                {{-- <a class="btn btn-info" href="#" onClick="window.open('../mapa/basico1.html', 'Ubicación', 'width=400, height=400')" wire:click="ActualizarCoordenadas()">Capturar Coordenada</a> --}}
+                                <a class="btn btn-info" href="#" onClick="window.open('../mapa/basico1.html', 'Ubicación', 'width=400, height=400')" wire:click="ActualizarCoordenadas()">Capturar Coordenada</a>
                                     {{-- <a href="ventana = window.open('../mapa/basico1.html', 'nombre', 'height=320, width=780'); ventana.focus();">Link</a> --}}
                                 </div>
-
                                 {{-- <button href="../mapa/basico.html"></button> --}}
                                 @error('ubicaciongps') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
@@ -150,37 +117,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Modal Captura Marcador del mapa -->
-            <div wire:ignore.self class="modal fade" id="ModalCapturarCoordenadas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
     
-                    <div class="modal-content" style="width: inherit">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Capturar Coordenada</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="container">
-                            <form action="">
-                                <div class="mb-3 mt-3">
-                                    <!-- Crea un div para contener el mapa -->
-                                    <div id="map" style="width: 90%; height: 300px;"></div>
-
-                                    <!-- Agrega un botón para enviar la posición de los marcadores -->
-                                    <button id="enviarPosiciones">Enviar Posiciones</button>
-                                </div>
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-                                    <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
-                                    <button class="btn btn-danger" type="button" wire:click="delete()" data-dismiss="modal">Eliminar</button>
-                                </div>
-                            </form>
-                        </div>
-    
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-lg-12">

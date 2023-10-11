@@ -4,12 +4,20 @@ namespace App\Http\Livewire\Transportes;
 
 use Livewire\Component;
 use App\Models\Transporte;
+
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithPagination;
+
 class TransporteComponent extends Component
 {
+    use WithFileUploads;
+    use WithPagination;
+
     public function render()
     {
         $this->transportes = Transporte::all();
-        return view('livewire.transportes.transporte-component')->extends('layouts.adminlte');
+        return view('livewire.transportes.transporte-component',['transportes' => $this->transportes, 'datos'=> $links])->extends('layouts.adminlte');
     }
 
     public $transportes;
@@ -36,17 +44,26 @@ class TransporteComponent extends Component
             'llegada' => 'required',
             'devolverenotrodestino' => 'required',
         ]);
+        
+        if(Storage::exists($this->fotourl)){
+            $imagenurl = $this->fotourl;
+        }
+        else {
+            $imagenurl = basename($this->fotourl->store('public/transportes'));
+            $imagenurl = 'storage/transportes/' . $imagenurl;
+        }
 
         Transporte::updateOrCreate(['id' => $this->transporte_id], [
         'descripcion' => $this->descripcion,
         'precio' => $this->precio,
         'ubicaciongps' => $this->ubicaciongps,
-        'fotourl' => $this->fotourl,
+        'fotourl' => $imagenurl,
         'salida' => $this->salida,
         'llegada' => $this->llegada,
         'devolverenotrodestino' => $this->devolverenotrodestino,
     ]);
         session()->flash('message', $this->transporte_id ? 'Transporte Actualizado.' : 'Transporte Creado.');
+        $this->reset();
     }
 
     public function edit($id) {
@@ -68,5 +85,6 @@ class TransporteComponent extends Component
         //$this->isModalConsultar(0); // PARA HACER
 
         session()->flash('message', $this->transporte_id ? 'Transporte Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
+        $this->reset();
     }
 }

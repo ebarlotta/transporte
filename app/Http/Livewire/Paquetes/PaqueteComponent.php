@@ -47,7 +47,7 @@ class PaqueteComponent extends Component
             $imagenurl = $this->fotourl;
         }
         else {
-            $imagenurl = $this->fotourl->store('destino/paquetes');
+            $imagenurl = basename($this->fotourl->store('public/paquetes'));
             $imagenurl = 'storage/paquetes/' . $imagenurl;
         }
         
@@ -61,6 +61,7 @@ class PaqueteComponent extends Component
         'fotourl' => $imagenurl,
     ]);
         session()->flash('message', $this->paquete_id ? 'Paquete Actualizado.' : 'Paquete Creado.');
+        $this->reset();
     }
 
     public function storeRelacion() {
@@ -112,6 +113,7 @@ class PaqueteComponent extends Component
         //$this->isModalConsultar(0); // PARA HACER
 
         session()->flash('message', $this->paquete_id ? 'Paquete Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
+        $this->reset();
     }
 
     public function setDestinoAEliminar($destino_id) {
@@ -133,15 +135,6 @@ class PaqueteComponent extends Component
         $this->PaqueteAEliminar = $paquete->nombre;
         $this->paquete_id = $id;
     }
-
-    // public function isModalConsultar($id) {
-    //     if($id<>0) {
-    //     $this->isModalConsultar = !$this->isModalConsultar;
-    //     $this->Consultar($id);
-    //     } else {
-    //         $this->isModalConsultar =false;
-    //     }
-    // }
 
     public function nuevo() {
         $this->nombre = '';

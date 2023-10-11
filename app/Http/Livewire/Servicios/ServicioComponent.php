@@ -6,17 +6,13 @@ use Livewire\Component;
 use App\Models\Servicio;
 use Illuminate\Support\Facades\Storage;
 
+use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 
 class ServicioComponent extends Component
 {
     use WithFileUploads;
-
-    public function render()
-    {
-        $this->servicios = Servicio::all();
-        return view('livewire.servicios.servicio-component')->extends('layouts.adminlte');
-    }
+    use WithPagination;
 
     public $servicios;
     public $descripcion, $precio, $ubicaciongps, $fotourl;
@@ -25,6 +21,11 @@ class ServicioComponent extends Component
 
     public $ServicioAEliminar;
 
+    public function render()
+        {
+            $this->servicios = Servicio::all();
+            return view('livewire.servicios.servicio-component',['servicios' => $this->servicios, 'datos'=> $links])->extends('layouts.adminlte');
+        }
     public function store() {
         $this->validate([
             'descripcion' => 'required',
@@ -46,6 +47,7 @@ class ServicioComponent extends Component
         'fotourl' => $imagenurl,
     ]);
         session()->flash('message', $this->servicio_id ? 'Servicio Actualizado.' : 'Servicio Creado.');
+        $this->reset();
     }
 
     public function edit($id) {
@@ -63,6 +65,7 @@ class ServicioComponent extends Component
 
         session()->flash('message', $this->servicio_id ? 'Servicio Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
         $this->servicio_id = null;
+        $this->reset();
     }
 
     public function isModalConsultar($id) {

@@ -22,8 +22,6 @@ class ComidaComponent extends Component
 
     public $ComidaAEliminar;
 
-    
-
     public function render()
     {
         $this->comidas = Comida::paginate(4);
@@ -76,6 +74,7 @@ class ComidaComponent extends Component
         $comida->destroy($this->comida_id);
 
         session()->flash('message', $this->comida_id ? 'Lugar Eliminado.' : 'No ha seleccionado un lugar a eliminar.');
+        $this->reset();
     }
 
     public function nuevo() {

@@ -28,15 +28,17 @@
                                 <input wire:model="descripcion" class="form-control" name="descripcion" type="text" id="descripcion">
                             </div>
                             <div class="mb-3 mt-3">
-                                <label class="form-label" for="fotourl">Foto</label>
-                                <input wire:model="fotourl" class="form-control" name="fotourl" type="file" id="fotourl">
-
-                                <div wire:loading wire:target="fotourl">
-                                    <strong class="font-bold">Imágen cargando!!</strong>
+                                <div class="d-flex">
+                                    <label class="form-label" for="foto">Foto</label>
+                                    <input wire:model="fotourl" class="form-control" name="fotourl" type="file" id="fotourl" accept="image/*">
+                                    <div wire:loading wire:target="fotourl">
+                                        <strong class="font-bold">Imágen cargando!!</strong>
+                                        {{-- <img src="{{ $fotourl->temporaryUrl() }}" width="50px;"> --}}
+                                    </div>
+                                    @if($fotourl) 
+                                        <img src="{{ asset($fotourl) }}" width="50px;">
+                                    @endif
                                 </div>
-                                @if($fotourl)
-                                    <img src="{{ $fotourl->temporaryUrl() }}" alt="" style="height: 100px; width: 100px;">
-                                @endif
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
@@ -108,6 +110,7 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {{ $datos->links() }}
                     </div>
                 </div>
             </div>

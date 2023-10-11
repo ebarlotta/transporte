@@ -24,6 +24,8 @@ class AlojamientoComponent extends Component
     public $latitud;
     public $longitud;
 
+    public $mostrarMapa=false;
+
     public function render()
     {
         $this->alojamientos = Alojamiento::paginate(4);
@@ -45,7 +47,7 @@ class AlojamientoComponent extends Component
             $imagenurl = $this->fotourl;
         }
         else {
-            $imagenurl = $this->fotourl->store('public/alojamientos');
+            $imagenurl = basename($this->fotourl->store('public/alojamientos'));
             $imagenurl = 'storage/alojamientos/' . $imagenurl;
         }
 
@@ -77,6 +79,7 @@ class AlojamientoComponent extends Component
         $alojamiento->destroy($this->alojamiento_id);
 
         session()->flash('message', $this->alojamiento_id ? 'Alojamiento Eliminado.' : 'No ha seleccionado un alojamiento a eliminar.');
+        $this->reset();
     }
 
     public function nuevo() {
@@ -96,8 +99,8 @@ class AlojamientoComponent extends Component
     public function ActualizarCoordenadas() {
         // $this->latitud = $_SESSION['latitud'];
         // $this->longitud = $_SESSION['longitud'];
-
-        dd($this->latitud . $this->longitud);
+        $this->mostrarMapa = true;
+        // dd($this->latitud . $this->longitud);
     }
 
 }
