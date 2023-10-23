@@ -7,6 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <style>
+        .miDiv {
+            /* width: 100px; */
+            background-color: lightblue;
+            transition: height 10s;
+            height: auto;
+        }
+    </style>
+
     <!-- Bootstrap -->
     <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -165,6 +174,9 @@
         // Recopila las posiciones de los marcadores y las convierte en un array de objetos LatLng
         if (markers.length) {
             var positions = markers.map(function(marker) {
+
+                document.getElementById('latitud').value = marker.getPosition().lat();
+                document.getElementById('longitud').value = marker.getPosition().lng();
                 return {
                     lat: marker.getPosition().lat(),
                     lng: marker.getPosition().lng()
@@ -177,18 +189,63 @@
             // Redirige a otra página y envía los datos como parámetro en la URL
             ////window.location.href = 'otra_pagina.php?positions=' + encodeURIComponent(positionsJSON);
 
-            $_SESSION['latitud'] = lat;
-            $_SESSION['longitud'] = lng;
+            // $_SESSION['latitud'] = lat;
+            // $_SESSION['longitud'] = lng;
 
 
         } else {
             alert('Debe seleccionar un marcador en el mapa para poder enviar los datos');
         }
-        alert($_SESSION['latitud'] + "," + $_SESSION['longitud']);
+        // alert($_SESSION['latitud'] + "," + $_SESSION['longitud']);
     
     }
     // Llama a la función initMap cuando la página se carga
     // google.maps.event.addEventListener('load', initMap);
     google.maps.event.addDomListener(window, 'load', initMap);
+
 </script>
+
+<script>
+    function expandContainer() {
+      // Cambiar la altura al 100% al hacer clic en el botón
+      const container = document.querySelector('.scrollable-container');
+      container.style.height = '100%';
+      container.style.transition = 'height 10s';
+    }
+    function contraerContainer() {
+      // Cambiar la altura al 100% al hacer clic en el botón
+      const container = document.querySelector('.scrollable-container');
+      container.style.height = '93px';
+      container.style.transition = 'height 1s';
+      console.log('volvio');
+    }
+
+    // $(document).ready(function() {
+    // var estado = false;
+
+    function abrir() {
+
+    // $('#btn-toggle').on('click', function() {
+        $('.seccionToggle').slideToggle();
+
+        if (estado == true) {
+            $(this).text("Abrir");
+            $('body').css({
+                "overflow": "auto"
+            });
+            estado = false;
+            console.log('Abrir');
+        } else {
+            $(this).text("Cerrar");
+            $('body').css({
+                "overflow": "hidden"
+            });
+            estado = true;
+            console.log('Cerrar');
+        }
+    }
+    // });
+// });
+
+  </script>
 </html>

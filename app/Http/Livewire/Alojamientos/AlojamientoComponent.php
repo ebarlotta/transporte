@@ -36,6 +36,7 @@ class AlojamientoComponent extends Component
     }
 
     public function store() {
+        $this->ubicaciongps = $this->latitud . "," . $this->longitud;
         $this->validate([
             'descripcion' => 'required',
             'precio' => 'required',
@@ -100,6 +101,7 @@ class AlojamientoComponent extends Component
         // $this->latitud = $_SESSION['latitud'];
         // $this->longitud = $_SESSION['longitud'];
         $this->mostrarMapa = true;
+        // $this->latitud = $_SESSION['latitud'];
         // dd($this->latitud . $this->longitud);
     }
 

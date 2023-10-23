@@ -4,6 +4,7 @@ use App\Http\Livewire\ClienteComponent;
 use App\Http\Livewire\Alojamientos\AlojamientoComponent;
 use App\Http\Livewire\Comida\ComidaComponent;
 use App\Http\Livewire\Destinos\DestinoComponent;
+use App\Http\Livewire\Encomienda\EncomiendaComponent;
 use App\Http\Livewire\Localidades\LocalidadComponent;
 use App\Http\Livewire\Nacionalidades\NacionalidadComponent;
 use App\Http\Livewire\Pagos\PagosComponent;
@@ -15,6 +16,9 @@ use App\Http\Livewire\Transportes\TransporteComponent;
 use App\Http\Livewire\Ventas\VentasComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\InicioComponent;
+use App\Http\Livewire\Seguimiento\SegumientoComponent;
+use App\Http\Livewire\Sucursal\SucursalComponent;
+use App\Http\Livewire\Tarifa\TarifaComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +51,10 @@ Route::get('transportes',TransporteComponent::class)->name('transportes');
 Route::get('paquetes',PaqueteComponent::class)->name('paquetes');
 Route::get('ventas',VentasComponent::class)->name('ventas');
 Route::get('pagos',PagosComponent::class)->name('pagos');
+Route::get('sucursales',SucursalComponent::class)->name('sucursales');
+Route::get('seguimiento',SegumientoComponent::class)->name('seguimiento');
+Route::get('tarifas',TarifaComponent::class)->name('tarifas');
+Route::get('encomiendas',EncomiendaComponent::class)->name('encomiendas');
 });
 
 Route::middleware([

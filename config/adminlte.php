@@ -383,7 +383,27 @@ return [
             'text' => 'Pagos',
             'url'  => 'pagos',
             'icon' => 'fas fa-fw fa-user',
-        ],   
+        ],
+        [
+            'text' => 'Sucursales',
+            'url'  => 'sucursales',
+            'icon' => 'fas fa-fw fa-user',
+        ],  
+        [
+            'text' => 'Tarifas',
+            'url'  => 'tarifas',
+            'icon' => 'fas fa-fw fa-user',
+        ], 
+        [
+            'text' => 'Encomiendas',
+            'url'  => 'encomiendas',
+            'icon' => 'fas fa-fw fa-user',
+        ], 
+        [
+            'text' => 'Seguimiento',
+            'url'  => 'seguimiento',
+            'icon' => 'fas fa-fw fa-user',
+        ], 
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',

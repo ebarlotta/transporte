@@ -1,44 +1,117 @@
 <div>
     <?php session_start(); ?>
-
+    <style>
+        .scrollable-container {
+            width: 70%; /* Ancho de la ventana */
+            height: 93px; /* Altura visible de la ventana */
+            overflow: auto; /* Agrega la barra de desplazamiento cuando sea necesario */
+            /* background-color: blue; */
+        }
+        .element {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            /* background-color: red; */
+        }   
+</style>
 
     <div id="page-wrapper">
         <div class="containergit">
-            <div class="row">
+            <div class="row bg-red-500 scrollable-container" >
                 <div class="col-lg-12">
                     <h2 class="style">Alojamientos</h2>
-                    <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevoAlojamiento">
+                    <button type="button" class="btn btn-info"  id="expandButton" onclick="expandContainer()"  >
+
+                    {{-- <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevoAlojamiento"> --}}
                         <i class="fa-regular fa-plus"></i> Nuevo </button>
                 </div>
-                @if($mostrarMapa)
-                <div class="mb-3 mt-3">
-                    <div class="modal-content" style="width: inherit">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Capturar Coordenada</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="container">
-                            <form action="">
-                                <div class="mb-3 mt-3">
-                                    <!-- Crea un div para contener el mapa -->
-                                    <div id="map" style="width: 90%; height: 300px;" onclick="agregarMarcador();"></div>
-
-                                    <!-- Agrega un botón para enviar la posición de los marcadores -->
-                                    <button id="enviarPosiciones">Enviar Posiciones</button>
-                                </div>
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-                                    <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
-                                    <button class="btn btn-danger" type="button" wire:click="delete()" data-dismiss="modal">Eliminar</button>
-                                </div>
-                            </form>
-                        </div>
-    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Alta de Alojamientos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-                @endif
+                    <div class="container">
+                        <form action="">
+                            <div class="mb-3 mt-3">
+                                <label class="form-label" for="descripcion">Descripción</label>
+                                <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea" rows="5">{{ old('descripcion') }}</textarea>
+                                @error('descripcion') <span class="text-danger">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="precio">Precio</label>
+                                <input wire:model="precio" class="form-control" name="precio" type="text" id="precio" value="{{ old('precio') }}">
+                                @error('precio') <span class="text-danger">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex">
+                                    <label class="form-label" for="foto">Foto</label>
+                                    <input wire:model="fotourl" class="form-control" name="fotourl" type="file" id="fotourl" accept="image/*">
+                                    <div wire:loading wire:target="fotourl">
+                                        <strong class="font-bold">Imágen cargando!!</strong>
+                                        {{-- <img src="{{ $fotourl->temporaryUrl() }}" width="50px;"> --}}
+                                    </div>
+                                    @if($fotourl) 
+                                        <img src="{{ asset($fotourl) }}" width="50px;">
+                                    @endif
+                                </div>
+                                @error('fotourl') <span class="text-danger">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                
+                                <div class="col-9">
+                                    <label class="form-label" for="ubicaciongps">Ubicacion GPS</label>
+                                    <!-- Crea un div para contener el mapa -->
+                                    <div id="map" style="width: 90%; height: 100px;" onclick="agregarMarcador();"></div>
+                                    
+                                    {{-- <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps" readonly="true" value="{{ $_SESSION['latitud'] }}"> --}}
+                                </div>
+                                <div class="col-3 align-bottom">
+                                    {{-- <p>Dale un vistazo <a href="../mapa/basico1.html" target="_blank">Ver Mapa</a>.</p> --}}
+                                <a class="btn btn-info" href="#"  data-toggle="modal" wire:click="ActualizarCoordenadas">Capturar Coordenada</a>
+                                </div>
+                            </div>
+                            @error('ubicaciongps') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            <input type="text" name="longitud" id="longitud" value="{{ $latitud }}" wire:model="longitud" >
+                            <input type="text" name="latitud" id="latitud" value="{{ $longitud }}" wire:model="latitud" >
+                            
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                                <button class="btn btn-warning" onclick="contraerContainer()" type="button">Cerrar</button>
+                                <button class="btn btn-primary" type="button" wire:click="store()" data-dismiss="modal">Guardar</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>                
             </div>
+
+
+            <style>
+            /* .seccionToggle {
+                display: none;
+                height: calc(100vh - 50px);
+                background: #fff;
+                color: #001F3F;
+                padding: 50px 0;
+                text-align: center;
+            } */
+            </style>
+            <a onclick="abrir()" href="#" id="btn-toggle" class="btn-toggle">Abrir</a>
+            <section class="seccionToggle" style="display: none; height: calc(100vh - 50px); background: #fff; color: #001F3F; padding: 50px 0; text-align: center;">
+                <div class="wrap">
+                    <h2>Lorem ipsum dolor sit amet.</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                    <button>Go!</button>
+                </div>
+            </section>
+    
+    
             @if (session()->has('message'))
                 <div class="border-t-4  rounded-b px-4 py-3 shadow-md my-3 bg-lime-700" role="alert"
                     style="background-color: lightgreen;">
@@ -235,6 +308,8 @@
                     </div>
                 </div>
             </div>
+
         </div>
+        
     </div>
 </div>
