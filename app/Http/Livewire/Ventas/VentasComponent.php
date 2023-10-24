@@ -12,9 +12,12 @@ use App\Models\Paquete;
 
 class VentasComponent extends Component
 {
-    public $mostrarventas=false;
+    public $mostrarlistadoventas=false;
+    public $mostrarlistadopaqueteria=false;
+
     public $listadoVentas;
     public $listadoPaquetes;
+    public $listadopaqueteria;
     public $listadoClientes;
     public $pagos;
     public $idVenta;
@@ -45,12 +48,21 @@ class VentasComponent extends Component
         return view('livewire.ventas.ventas-component')->with(['ContClientes'=>$this->ContClientes, 'ContDestinos' => $this->ContDestinos, 'ContVentas'=>$this->ContVentas])->extends('layouts.adminlte');
     }
 
-    public function MostrarListado() {
+    public function MostrarListadoPaquetes() {
+        $this->listadopaqueteria = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')->get();
+        // $this->listadoVentas = Venta::join('clientes', 'ventas.cliente_id', '=', 'clientes.id')->get();
+        //$this->listadoVentas = Venta::all();
+        // dd($this->listadoVentas);
+        $this->mostrarlistadopaqueteria=!$this->mostrarlistadopaqueteria;
+        // dd($this->listadoVentas->cliente_nombre());
+    }
+
+    public function MostrarListadoVentas() {
         $this->listadoVentas = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')->get();
         // $this->listadoVentas = Venta::join('clientes', 'ventas.cliente_id', '=', 'clientes.id')->get();
         //$this->listadoVentas = Venta::all();
         // dd($this->listadoVentas);
-        $this->mostrarventas=!$this->mostrarventas;
+        $this->mostrarlistadoventas=!$this->mostrarlistadoventas;
         // dd($this->listadoVentas->cliente_nombre());
     }
 

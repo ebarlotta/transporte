@@ -385,65 +385,33 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Sucursales',
-            'url'  => 'sucursales',
-            'icon' => 'fas fa-fw fa-user',
-        ],  
-        [
-            'text' => 'Tarifas',
-            'url'  => 'tarifas',
-            'icon' => 'fas fa-fw fa-user',
-        ], 
-        [
-            'text' => 'Encomiendas',
-            'url'  => 'encomiendas',
-            'icon' => 'fas fa-fw fa-user',
-        ], 
-        [
-            'text' => 'Seguimiento',
-            'url'  => 'seguimiento',
-            'icon' => 'fas fa-fw fa-user',
-        ], 
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
+            'text'    => 'PAQUETERÍA',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
+                    'text' => 'Sucursales',
+                    'url'  => 'sucursales',
+                    'icon' => 'fas fa-fw fa-user',
+                ],  
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
+                    'text' => 'Tarifas',
+                    'url'  => 'tarifas',
+                    'icon' => 'fas fa-fw fa-user',
+                ], 
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Encomiendas',
+                    'url'  => 'encomiendas',
+                    'icon' => 'fas fa-fw fa-user',
+                ], 
+                [
+                    'text' => 'Seguimiento',
+                    'url'  => 'seguimiento',
+                    'icon' => 'fas fa-fw fa-user',
+                ], 
+                [
+                    'text' => 'change_password',
+                    'url'  => 'admin/settings',
+                    'icon' => 'fas fa-fw fa-lock',
                 ],
             ],
         ],

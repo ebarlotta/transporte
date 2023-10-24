@@ -119,16 +119,18 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card card-resalte">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <h3 class="success">156</h3>
-                                        <span>New Clients</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="icon-user success font-large-2 float-right"></i>
+                    <div class="col-xl-12 col-md-12" wire:click="MostrarListadoPaquetes()">
+                        <div class="card card-resalte">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="success">156</h3>
+                                            <span>Paquetería</span>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="icon-user success font-large-2 float-right"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +272,7 @@
             </div>
 
             <div class="row">
-                <div class="col-xl-12 col-md-12" wire:click="MostrarListado()">
+                <div class="col-xl-12 col-md-12" wire:click="MostrarListadoVentas()">
                     <div class="card overflow-hidden">
                         <div class="card-content">
                             <div class="card-body cleartfix">
@@ -298,7 +300,7 @@
                 </div>
             </div>
 
-            @if($mostrarventas)
+            @if($mostrarlistadoventas)
             <div class="row">
                 <div class="col-xl-12 col-md-12">
                     <div class="card overflow-hidden">
@@ -339,15 +341,55 @@
             </div>
             @endif
 
+            @if($mostrarlistadopaqueteria)
+            <div class="row">
+                <div class="col-xl-12 col-md-12">
+                    <div class="card overflow-hidden">
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="media-body">
+                                        <h4>Listado de Paquetes</h4>
+                                        <table class="table table-hover text-nowrap">
+                                            <tr>
+                                                <td>Fecha</td>
+                                                <td>Cliente</td>
+                                                <td>Total</td>
+                                                <td>Opciones</td>
+                                            </tr>
+                                            @foreach ($listadopaqueteria as $venta)
+                                            <tr>
+                                                <td>{{ date('d-m-Y',strtotime($venta->fecha))}}</td>
+                                                <td>{{ $venta->apellido . ', ' . $venta->nombre }}</td>
+                                                <td>$ {{ number_format($venta->total,2)}}</td>
+                                                <td>
+                                                    <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-info" data-toggle="modal" data-target="#ModalGestionPagos">
+                                                        Gestionar Pagos
+                                                    </button>
+                                                    {{-- <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-warning" data-toggle="modal" data-target="#ModalGestionPagos">
+                                                        Imprimir chequera
+                                                    </button> --}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
 
-            <!-- Modal Gestión de pagos -->
+            <!-- Modal Gestión de Paquetería -->
             <!-- ====================== -->
             <div wire:ignore.self class="modal fade" id="ModalGestionPagos" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                     <div class="modal-content" style="width: inherit">
                         <div class="modal-header">
-                            <h5 class="modal-title">Gestión de Pagos</h5>
+                            <h5 class="modal-title">Gestión de Envío de Paquetes</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
