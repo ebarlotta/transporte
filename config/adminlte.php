@@ -319,71 +319,83 @@ return [
             'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
+
         [
-            'text' => 'Alojamientos',
-            'url'  => 'alojamientos',
-            'icon' => 'fas fa-fw fa-user',
+            'text'    => 'CONFIGURACIONES',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Localidades',
+                    'url'  => 'localidades',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Nacionalidades',
+                    'url'  => 'nacionalidades',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Provincias',
+                    'url'  => 'provincias',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+            ],
         ],
-        [
-            'text' => 'Lugares Para Comer',
-            'url'  => 'comidas',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Clientes',
-            'url'  => 'clientes',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Destinos',
-            'url'  => 'destinos',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Localidades',
-            'url'  => 'localidades',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Nacionalidades',
-            'url'  => 'nacionalidades',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Paquetes',
-            'url'  => 'paquetes',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Provincias',
-            'url'  => 'provincias',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Restricciones',
-            'url'  => 'restricciones',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Servicios',
-            'url'  => 'servicios',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Transportes',
-            'url'  => 'transportes',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+
         [
             'text' => 'Ventas',
             'url'  => 'ventas',
             'icon' => 'fas fa-fw fa-user',
-        ],    
-        [
-            'text' => 'Pagos',
-            'url'  => 'pagos',
-            'icon' => 'fas fa-fw fa-user',
         ],
+
+        [
+            'text'    => 'TURISMO',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Restricciones',
+                    'url'  => 'restricciones',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Servicios',
+                    'url'  => 'servicios',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Transportes',
+                    'url'  => 'transportes',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Paquetes',
+                    'url'  => 'paquetes',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Alojamientos',
+                    'url'  => 'alojamientos',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Lugares Para Comer',
+                    'url'  => 'comidas',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Clientes',
+                    'url'  => 'clientes',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Destinos',
+                    'url'  => 'destinos',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+
+            ],
+        ],
+
         [
             'text'    => 'PAQUETERÍA',
             'icon'    => 'fas fa-fw fa-share',
@@ -408,13 +420,16 @@ return [
                     'url'  => 'seguimiento',
                     'icon' => 'fas fa-fw fa-user',
                 ], 
-                [
-                    'text' => 'change_password',
-                    'url'  => 'admin/settings',
-                    'icon' => 'fas fa-fw fa-lock',
-                ],
+
             ],
         ],
+
+        [
+            'text' => 'change_password',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+
         ['header' => 'labels'],
         [
             'text'       => 'important',
