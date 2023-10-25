@@ -1,0 +1,1698 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.11
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 25-09-2023 a las 11:56:04
+-- Versión del servidor: 5.7.42-cll-lve
+-- Versión de PHP: 7.4.33
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `transporte1`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `actividaddestacadas`
+--
+
+CREATE TABLE `actividaddestacadas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `precio` double DEFAULT NULL,
+  `ubicaciongps` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fotourl` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Sin_imagen.jpg',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alojamientos`
+--
+
+CREATE TABLE `alojamientos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `precio` double DEFAULT NULL,
+  `ubicaciongps` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fotourl` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Sin_imagen.jpg',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `alojamientos`
+--
+
+INSERT INTO `alojamientos` (`id`, `descripcion`, `precio`, `ubicaciongps`, `fotourl`, `created_at`, `updated_at`) VALUES
+(1, 'Hotel', 10000, '111', 'destino/alojamiento/oBx62oTx2HJcm2wqqBlhLvO0gqOfyv1CSItPMDax.png', '2023-09-21 02:53:40', '2023-09-21 02:53:40'),
+(2, 'Casa', 12333, '222', 'destino/alojamiento/42I77nftEUnSMsxXHZCPbxf8T70GzDdss7BYroHV.png', '2023-09-21 03:06:22', '2023-09-21 03:06:22');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clientes`
+--
+
+CREATE TABLE `clientes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `apellido` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dni` int(11) NOT NULL,
+  `direccion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fechanacimiento` date DEFAULT NULL,
+  `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nacionalidad_id` bigint(20) UNSIGNED NOT NULL,
+  `provincia_id` bigint(20) UNSIGNED NOT NULL,
+  `localidad_id` bigint(20) UNSIGNED NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `apellido`, `nombre`, `dni`, `direccion`, `telefono`, `email`, `fechanacimiento`, `foto`, `nacionalidad_id`, `provincia_id`, `localidad_id`, `created_at`, `updated_at`) VALUES
+(1, 'ABALLAY', 'YANINA', 27726042, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(2, 'ABALLAY', 'NADIA', 38076185, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(3, 'ABDALA', 'IVANA', 37318972, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(4, 'ACCEVEDO', 'BRIZUELA', 58823227, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(5, 'ACEBEDO', 'IRMA', 18526353, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(6, 'ACOSTA', 'JESICO', 30920898, 'Pringes 520', NULL, NULL, '1967-01-16', 'Sin_imagen.jpg', 1, 11, 1, NULL, '2023-09-22 04:02:17'),
+(7, 'ACOSTA', 'KAREN ', 40420143, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(8, 'ADASME', 'CINTHIA', 30298400, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(9, 'AGÜERO', 'NADIA', 41284023, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(10, 'AGÜERO', 'MARIELA', 27088126, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(11, 'AGÜERO', 'ALEXIS', 55450714, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(12, 'AGÜERO', 'RITA', 29604044, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(13, 'AGÜERO', 'RITA', 33393946, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(14, 'AGUILAR', 'MATEO', 44431230, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(15, 'AHUMADA', 'DAIANA', 37439927, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(16, 'AHUMADA', 'NORA', 13955848, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(17, 'ALACA', 'LETICIA', 47317262, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(18, 'ALACA', 'BRIANA', 52177591, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(19, 'ALANIZ', 'ZOILA DEL CARMEN', 12408231, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(20, 'ALANIZ', 'ORLANDO ARIEL', 27786265, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(21, 'ALANIZ', 'MARIA', 23589857, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(22, 'ALDECO', 'JUDITH', 28086901, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(23, 'ALEJANDRO QUISPE', 'ZARITA', 94326716, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(24, 'ALIVA', 'MARIA', 35193933, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(25, 'ALIVA', 'MARIA', 35193833, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(26, 'ALVZRENGA', 'EDITH', 23416579, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(27, 'AMATTE', 'JOHANA', 34457619, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(28, 'AMAYA', 'ROBERTO RAFAEL', 20758234, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(29, 'ANDRADA', 'GREGORIA EMILIA', 16868810, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(30, 'ANDRADA', 'MARIA DE LOS ANGELES', 37416634, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(31, 'ANDRADA', 'CELESTE', 27524831, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(32, 'ANDRADA', 'FERNANDA', 30588968, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(33, 'ANDRADA', 'DIEGO', 29449401, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(34, 'ARAYA', 'ANCELMO', 28455009, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(35, 'ARAYA', 'SONIA', 26151927, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(36, 'ARCE', 'NANCY', 93008401, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(37, 'ARCE', 'NORMA', 20109707, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(38, 'ARCERI', 'SEBASTIAN', 41964565, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(39, 'ARGAÑARAZ', 'MATIAS', 34839585, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(40, 'ARGUELO', 'JUANA', 32590030, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(41, 'ARIAS', 'EMANUEL', 42799398, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(42, 'ARIAS', 'JESICA LORENA', 33609646, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(43, 'ARIAS', 'CAROLINA', 26771323, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(44, 'ARRIETA', 'VALERIA', 31903015, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(45, 'ARTAZA', 'JESICA', 33394893, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(46, 'ATENCIO', 'RICARDO', 30920933, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(47, 'ATENCIO', 'CARMEN', 14296224, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(48, 'AVILA', 'MARIA ALEJANDRA', 38762495, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(49, 'AVILA', 'GRACIELA VANINA', 27451261, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(50, 'AYALA', 'DIANA', 36374740, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(51, 'BALMACEDA', 'NAHUEL', 44126928, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(52, 'BALMACEDA', 'ANGELA', 43078040, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(53, 'BALMACEDA', 'DANIEL', 33058610, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(54, 'BALMACEDA', 'ELIAS', 45368608, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(55, 'BALMACEDA ', 'MAXIMILIANO', 27075363, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(56, 'BANEDA', 'EMANUEL', 45635285, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(57, 'BANEGA', 'MARIA ROSA', 17408084, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(58, 'BANEGA', 'DIEGO', 28349164, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(59, 'BARBERO', 'GONZALO', 42108799, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(60, 'BARBERO', 'LUCIANO', 39905199, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(61, 'BARRERA', 'JORGE DANIEL', 31134304, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(62, 'BARRERA', 'SOFIA', 42104372, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(63, 'BARROS', 'HECTOR ANDRES', 39906051, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(64, 'BARRRA', 'JAZMIN', 42860124, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(65, 'BASUELDO', 'FRANCO RAFAEL', 32389193, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(66, 'BAUDINO', 'AGUSTIN', 40405189, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(67, 'BAZAN', 'SEGUNDA', 11525710, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(68, 'BAZAN', 'MARINA ESTELA', 18059346, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(69, 'BAZAN', 'JORGE', 34106396, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(70, 'BAZAN', 'LUCIO WALTE', 175443098, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(71, 'BAZAN', 'TANIA NAIR', 46457594, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(72, 'BAZAN', 'ELIAS GUSTAVO', 42584741, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(73, 'BAZAN', 'ELIANA', 34780222, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(74, 'BAZAN', 'YULIANA', 33395250, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(75, 'BAZAN', 'LUCIO WALTER', 17544309, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(76, 'BAZAN CONDE', 'KAREN', 37553947, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(77, 'BEATRIZ', 'DEOLINDA', 25425669, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(78, 'BELA', 'CLAUDIO', 26591915, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(79, 'BELLO', 'MAXMILIANO', 32506732, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(80, 'BELTRAN', 'ALEX DAVID', 41284268, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(81, 'BELTRAN PIUCA', 'JUAN JESUS', 43117368, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(82, 'BENAIN', 'CAROLINE', 27291798, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(83, 'BERON', 'DANIELA', 43940814, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(84, 'BISMARK', 'JUSTINIANO', 73468614, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(85, 'BRAVO', 'ANGELA', 42845457, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(86, 'BRAVO', 'AILEN', 44199933, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(87, 'BRESSAN', 'MICAELA AYELEN', 47702394, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(88, 'BRITOS', 'GIULIANA ELIZABETH', 39497250, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(89, 'BRITOS', 'SARA', 11818480, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(90, 'BRIZUELA', 'YOHANA AYELEN', 39025870, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(91, 'BROCHERO', 'JOSE  ', 30115277, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(92, 'BROCHERO', 'JOB', 56375441, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(93, 'BROCHERO', 'RUTH', 54094561, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(94, 'BUENO', 'STEFANIA', 34780381, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(95, 'BULACIO', 'LUIS', 26795198, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(96, 'BULACIO', 'MARTINA', 47972293, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(97, 'BURGOA', 'EZEQUIEL', 42058581, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(98, 'BURGOA', 'DAVID', 18803327, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(99, 'BURGOA', 'BRIAN', 41079277, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(100, 'BURGOS', 'HAYDE DEL VALLE', 14616325, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(101, 'BUSTAMANTE', 'ROCIO', 39905239, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(102, 'BUSTOS', 'NATALIA', 28428042, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(103, 'BUSTOS', 'PEDRO', 14766976, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(104, 'CABRAL PEÑALOZA', 'MARIA BELEN', 27450084, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(105, 'CABRERA', 'FATIMA PATRICIA', 23293444, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(106, 'CABRERA', 'LAURA', 23352963, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(107, 'CABRERA', 'MARCOS ARIEL', 26336227, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(108, 'CABRERA', 'CELESTE', 35502332, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(109, 'CABRERA GONZALEZ', 'MARILIN ELIZABETH', 36854719, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(110, 'CACERES', 'SANDRA', 20253982, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(111, 'CAHIUANA', 'DELFIN', 94834115, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(112, 'CAHIUARA', 'LUIS RAUL', 41730968, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(113, 'CAIHUARA', 'BEATRIZ', 93077979, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(114, 'CALIVA', 'RITA ALICIA', 14706015, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(115, 'CALLE', 'JOHANA', 36917967, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(116, 'CALLISAYA', 'MARIA ELENA', 93675268, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(117, 'CALLISAYA', 'MAILEN', 43973087, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(118, 'CALLISAYA', 'SANDRA', 36128926, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(119, 'CALLIZAYA', 'MARIA', 93985785, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(120, 'CAMBEIRO', 'VALERIA JANINA', 34684294, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(121, 'CAMPOS', 'OLGA', 27914352, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(122, 'CAMPOS DIAZ', 'BRENDA SOLEDAD', 40482287, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(123, 'CANALES', 'PABLO DAVID', 31429789, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(124, 'CANDIDA', 'AGUIRRE', 28356863, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(125, 'CANTO', 'YONATHAN', 35049888, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(126, 'CARDOZO', 'ROCIO', 39905899, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(127, 'CARDOZO', 'ROMINA', 39005591, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(128, 'CARINPA', 'VICTOR HUGO', 23679339, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(129, 'CARMONA', 'ANA', 30769175, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(130, 'CAROLINA', 'YAZMIN', 19034537, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(131, 'CARRION', 'NADIA', 35241305, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(132, 'CARRION ', 'NELSON HERNAN', 35097493, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(133, 'CARRIZO', 'LUIS ALBERTO', 36708180, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(134, 'CARRIZO', 'SILVANA LORENA', 25225219, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(135, 'CARRIZO', 'FACUNDO', 41045338, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(136, 'CARRIZO', 'LUCAS', 31126283, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(137, 'CARRIZO', 'JOHANA', 33694869, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(138, 'CASIMIRO', 'DANIELA', 35479723, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(139, 'CASTILLO', 'GLORIA', 29727824, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(140, 'CASTRO', 'RAQUEL', 22998213, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(141, 'CASTRO', 'MARIANA', 34716524, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(142, 'CASTRO', 'ROSANA CARINA', 25252154, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(143, 'CAUCOTA', 'SILVIA', 27544294, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(144, 'CAYHUARA', 'IVANA', 18793334, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(145, 'CEBALLO', 'LUIS ', 17111114, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(146, 'CEBALLO ', 'MARGARITA', 17744427, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(147, 'CEBALLOS', 'VANESA ELIZABETH', 30821910, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(148, 'CEJAS', 'GISEL', 33754526, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(149, 'CESPEDES', 'JOSE DANIEL', 40775143, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(150, 'CESPEDES HUAYGUA', 'MARIA EUNICES', 37739848, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(151, 'CHACOMA', 'ANA LIA', 16664863, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(152, 'CHANAMPE', 'SOLANA', 12807473, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(153, 'CHAUQUE', 'MIRTA', 32452736, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(154, 'CHOQUE', 'MARIA', 31857843, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(155, 'CHOQUE', 'EFRAIN', 93985764, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(156, 'CHOQUE', 'EFRAIN', 93985715, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(157, 'CHOQUE', 'JHONI', 94950780, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(158, 'CHOQUE', 'MARIA', 32857843, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(159, 'CHOQUE', 'FATIMA', 33661312, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(160, 'CHOQUE', 'FRANCO', 33661311, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(161, 'CHUNGARA', 'MILTON', 94230247, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(162, 'CHUNGARA', 'MILTON', 45378608, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(163, 'CHUQUIMIA', 'DIONISIA', 93104378, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(164, 'CHUSGO', 'FREDDY', 9386073, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(165, 'CHUSGO', 'EMANUEL', 39299400, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(166, 'CISER', 'JORGE DANIEL', 22223416, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(167, 'CODOCEA', 'JORGE MANUEL', 14752506, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(168, 'COLINA', 'FEDERICO GABRIEL', 36438641, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(169, 'COLPARI', 'MARGARITA', 17483662, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(170, 'COLPARI', 'JIMENA CINTIA', 44329002, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(171, 'COMAN', 'NAOMI', 42845406, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(172, 'CONTRERA', 'LAZARO', 39700813, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(173, 'CONTRERA', 'ROSA', 32824979, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(174, 'CONTRERAS', 'MAGALI', 39025819, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(175, 'CORBALAN', 'AGOSTINA INES', 45110392, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(176, 'CORBALAN', 'GUILLERMO', 35174414, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(177, 'CORBALAN', 'MARIANO  ', 28431395, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(178, 'CORDERO', 'RICARDO', 14273158, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(179, 'CORDERO', 'PAULO', 39700743, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(180, 'CORDOBA', 'CARLA', 38481248, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(181, 'CORDOBA', 'LEONARDO', 13497563, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(182, 'CORDOBA', 'JORGE LUIS', 35890042, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(183, 'CORDOBA', 'LILIANA ELIZABETH', 32727381, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(184, 'CORDOBA', 'MARIA', 28087374, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(185, 'CORNEJO', 'VERONICA', 29449092, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(186, 'CORREA', 'ALBERTO', 94326728, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(187, 'CORTES', 'WILSON', 34369789, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(188, 'CORTEZ', 'VALERIA', 31712971, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(189, 'CORTEZ', 'NATALIA', 35269111, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(190, 'CORTEZ', 'FLORENCIA', 37089916, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(191, 'CORTEZ', 'DEBORA', 40820915, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(192, 'CORTEZ', 'GISELA', 37319930, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(193, 'CORZO', 'LUCIO ADAN', 40723965, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(194, 'CORZO', 'MARIA', 10152814, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(195, 'CORZO', 'CAROLINA', 39885957, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(196, 'COSTILLA', 'PAOLA', 29082113, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(197, 'CRINEJO', 'JUAN RENE', 12148906, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(198, 'CRINEJO', 'ANTONELLA', 36427313, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(199, 'CRINEJO', 'FRENCHESCO', 53668965, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(200, 'CRINEJO', 'ANGELLY', 48489238, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(201, 'CUBILLA', 'INES', 21929359, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(202, 'CUELLO', 'SILVIA', 27052098, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(203, 'D´ACOSTA', 'MARIANO CESAR', 37141538, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(204, 'DAVILA', 'MAXIMILIANO', 36438938, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(205, 'DAVILA', 'JOSE LUIS', 35503033, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(206, 'DAVILA', 'MAXIMILIANO', 36938438, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(207, 'DAVILA', 'SERGIO', 41730969, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(208, 'DAVILA', 'NESTOR', 92575877, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(209, 'DAVILA ', 'SERGIO', 41730669, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(210, 'DE FRANCHESH', 'ROXANA', 26244857, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(211, 'DE LA VEGA', 'RODRIGO', 39885988, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(212, 'DE LA VEGA', 'LAURA', 36503834, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(213, 'DESTRIBATS', 'PABLO  ', 26422738, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(214, 'DI LISA VECCHIO', 'ROCIO BELEN', 45475126, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(215, 'DI LISA VECCHIO', 'LUCA GAEL', 50163317, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(216, 'DIAZ', 'CECILIA', 27255854, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(217, 'DIAZ', 'WALTER', 37502711, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(218, 'DIAZ', 'MIGUEL RAUL', 24684115, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(219, 'DIAZ', 'LUJAN ELIZABETH', 47652510, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(220, 'DIAZ', 'BRUNO NICOLAS', 37318789, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(221, 'DIAZ', 'PIA', 53906119, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(222, 'DIAZ', 'MARIO', 11639839, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(223, 'DIAZ', 'WALTER', 28087458, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(224, 'DIAZ', 'RICARDO', 34442212, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(225, 'DIAZ', 'GABRIELA', 26054918, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(226, 'DIAZ ', 'NATALIA LUCIA', 25225826, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(227, 'DOMINGUEZ', 'LUNA', 50087583, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(228, 'ECHARRIA', 'VERONICA', 32637413, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(229, 'ESPINDOLA', 'RAUL', 27450437, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(230, 'ESPINOSA', 'DANIEL', 28619723, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(231, 'ESPINOZA', 'MARIA ELENA', 94461659, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(232, 'ESQUETI', 'HERNAN', 93885675, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(233, 'ESQUETI', 'GABRIEL', 44200352, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(234, 'ESQUETI AUCACHI', 'LUZ MABEL', 47620841, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(235, 'FAJARDO', 'MARIA ELENA', 26381932, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(236, 'FALCON', 'MATIAS GABRIEL', 33749951, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(237, 'FALCON', 'VALERIA', 30822213, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(238, 'FARIAS', 'MICAELA  ', 38019215, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(239, 'FARIAS', 'SUSANA', 33288457, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(240, 'FARIAS', 'BRIAM', 41047060, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(241, 'FERNANDEZ', 'NORMA', 94634049, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(242, 'FERNANDEZ', 'NICOLAS', 22715633, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(243, 'FERNANDEZ', 'NAHIR', 44200529, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(244, 'FERNANDEZ', 'EDWIN', 94050914, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(245, 'FERNANDEZ', 'MIRIAM', 29594126, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(246, 'FERREYRA', 'MARIA JOSE', 28619941, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(247, 'FERREYRA', 'MATIAS', 33395397, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(248, 'FERREYRA', 'MARIA JOSE', 44199745, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(249, 'FLORES', 'ROSITA', 16229307, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(250, 'FLORES', 'CYNTHIA  ', 30920839, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(251, 'FLORES ', 'EMMA', 18862103, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(252, 'FLORES MARTINEZ', 'MANUEL', 95520071, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(253, 'FUENTES', 'CRISTINA DEL VALLE', 25115833, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(254, 'FUENTES', 'MARIANELA', 34749650, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(255, 'FUENTES', 'MARIA', 23616331, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(256, 'FUENZALIDA', 'GERMAN ALEXIS', 31527506, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(257, 'FUENZALIDA', 'YAQUELINA TANIA', 33234435, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(258, 'FUENZALIDA', 'ALDO RAMON', 31907145, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(259, 'GAITAN', 'DANTE', 44411684, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(260, 'GAITAN', 'MICAELA', 38481079, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(261, 'GALLARDO', 'AGOSTINA', 38762337, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(262, 'GALLEGO', 'BRENDA', 32797524, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(263, 'GALLEGO', 'ZULMA', 95195478, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(264, 'GALLEGUILLO', 'CARLOS', 28087402, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(265, 'GARAY', 'LIZ VERONICA', 30822297, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(266, 'GARAY', 'LIZ', 30882297, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(267, 'GARAY', 'FRANCO', 35174233, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(268, 'GARAY', 'CARLOS', 29942390, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(269, 'GARCIA', 'DELINA CARMEN', 18207239, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(270, 'GARCIA', 'LUCAS', 38222939, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(271, 'GARCIA', 'OSCAR', 20301945, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(272, 'GARCIA', 'ROSARIO', 95620583, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(273, 'GARCIA', 'JONATHAN', 37655053, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(274, 'GIMENEZ', 'ROSANA', 28420896, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(275, 'GOMEZ', 'ANABELLA ALDANA', 41808910, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(276, 'GOMEZ', 'MARIA LAURA', 20543050, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(277, 'GONZALES', 'PAULA ', 13990846, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(278, 'GONZALES', 'JONATHAN', 95741184, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(279, 'GONZALEZ', 'CINTIA', 28619439, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(280, 'GONZALEZ', 'ALEXIS', 36035485, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(281, 'GONZALEZ', 'VERONICA', 33967183, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(282, 'GONZALEZ', 'GLADIS', 13398752, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(283, 'GONZALEZ', 'GERMAN', 92397713, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(284, 'GONZALEZ ', 'JOHANA', 32163824, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(285, 'GORDILLO', 'ABIGAIL', 35137867, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(286, 'GORDILLO', 'HECTOR', 28198370, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(287, 'GORDILLO', 'ISABEL', 26852433, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(288, 'GOYOCHEA', 'ANDRES', 33883858, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(289, 'GRAMAJO', 'ROLANDO', 23356845, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(290, 'GRANILLO', 'LISANDRO', 32240934, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(291, 'GRANILLO', 'LISANDRO', 32288934, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(292, 'GRECIA', 'LEIVA', 33394990, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(293, 'GUERRERO', 'ERICA', 27750671, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(294, 'GUIA DIAZ ', 'CRISTIAN DAMIAN', 29978914, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(295, 'GUIUDICE', 'ROBERTO DAVID', 32727354, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(296, 'GUTIERREZ', 'DARIO', 32401750, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(297, 'GUZMAN', 'MIRIAM', 28430164, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(298, 'HEREDIA', 'SANDRA', 22891217, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(299, 'HEREDIA', 'BRISA', 46411400, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(300, 'HERRERA', 'NOELIA', 30569735, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(301, 'HERRERA', 'LUIS LEONEL', 42799308, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(302, 'HERRERA', 'LUIS ALFREDO', 28349337, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(303, 'HERRERA', 'GABRIELA AYLEN', 44008442, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(304, 'HERRERA', 'MARIA ALEJANDRA', 35174268, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(305, 'HERRERA', 'FRANCO', 30822242, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(306, 'HERRERA', 'IVAN', 26663518, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(307, 'HERRERA', 'MILAGRO', 40775979, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(308, 'HERRERA', 'NOEMI', 22062995, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(309, 'HERRERA', 'GUADALUPE', 56055630, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(310, 'HERRERA', 'NATALIA', 30805589, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(311, 'HINOJOSA', 'JOSE MIGUEL', 93788736, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(312, 'HINOJOSA', 'SOFIA', 28231351, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(313, 'HINOJOSA', 'DANIEL ', 94142158, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(314, 'HINOJOSA', 'EMI', 43041933, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(315, 'HINOJOSA', 'LISANDRO', 94076219, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(316, 'HORMAECHE', 'ALEJANDRA', 34992020, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(317, 'HUARACHI', 'SANDRA', 22269603, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(318, 'HUAYGUA QUENTA', 'YOLA', 93792409, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(319, 'IBAÑEZ', 'YANINA VANESA', 32727287, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(320, 'IBAÑEZ', 'ANDREA', 31037917, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(321, 'IBAÑEZ', 'RODRIGO', 39299780, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(322, 'IBAÑEZ', 'JAVIER', 36036160, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(323, 'IBARRA', 'DELFINA', 92154141, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(324, 'IBARRA', 'DELFINA', 92917967, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(325, 'IDORIA', 'YESICA BEATRIZ', 37415461, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(326, 'INCA', 'MARIBEL', 94816038, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(327, 'JAFUT', 'ROSA', 25737036, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(328, 'JAIME', 'MELVA', 95663143, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(329, 'JARA', 'ETHEL', 42885182, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(330, 'JARA', 'SOL', 44091061, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(331, 'JESUS', 'GRACIELA', 13816147, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(332, 'JORDAN', 'MILENCA', 42303802, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(333, 'JUAREZ', 'LUIS ISAIAS', 42654805, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(334, 'JUSTINIANO', 'JOSE', 40965806, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(335, 'JUSTINIANO ', 'NORLAND EMANUEL', 44200799, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(336, 'LAZARTE ', 'SONIA', 28344501, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(337, 'LEAL ', 'MIRYAN RAQUEL', 24145862, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(338, 'LEAÑO', 'KARINA', 29008567, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(339, 'LEDO', 'JUAN FABIAN', 21866394, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(340, 'LEIGUE', 'CLAUDIA HURTADO', 94626696, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(341, 'LEIVA', 'MARIA TERESA', 23561933, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(342, 'LEIVA', 'BEATRIZ', 25928820, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(343, 'LEZCANO', 'NOELIA', 34914882, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(344, 'LEZCANO', 'DELIA', 40481923, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(345, 'LLANOS', 'OSCAR', 49684814, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(346, 'LLANOS', 'WILIAM', 29694015, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(347, 'LOPEZ', 'MAXILIANO', 93982619, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(348, 'LOPEZ', 'MARIA LAURA', 28619757, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(349, 'LOPEZ', 'ROSA ', 17475624, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(350, 'LOPEZ', 'GABRIEL', 27946722, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(351, 'LOYOLA', 'NORMA BEATRIZ', 17530941, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(352, 'LOZADA', 'VERONICA', 36522842, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(353, 'LUJAN', 'LUCAS', 32727147, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(354, 'LUNA', 'ARACELI', 41047200, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(355, 'LUNA', 'CRISTINA', 17544479, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(356, 'LUNA', 'MACARENA', 37558318, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(357, 'MACHACA', 'PAULINA', 94076415, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(358, 'MACHACA', 'MARIBEL', 47299060, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(359, 'MAIDANA', 'CARLOS', 33583702, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(360, 'MAIDANA', 'KAREN', 41745770, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(361, 'MALDONADO', 'CLAUDIO PATRICIO', 30089072, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(362, 'MALDONADO', 'DAYANA', 39298148, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(363, 'MALDONADO GONZALEZ', 'CINTIA', 33694859, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(364, 'MAMANI', 'NOEL', 94157998, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(365, 'MAMANI', 'BISMAR', 94140715, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(366, 'MAMANI CALIZAYA', 'LUIS LUDVID', 94904284, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(367, 'MAMANI ROMERO', 'SONIA ROSMEY', 94548271, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(368, 'MAMANI TITO', 'TERESA', 92663085, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(369, 'MAMANI ZARATE', 'HILARION', 92550750, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(370, 'MANZANELLI', 'TOMAS', 42108797, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(371, 'MANZANELLI', 'IVANA CAROLINA', 32935560, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(372, 'MARAZ', 'LAURA CINTIA', 32441452, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(373, 'MARIA', 'TERESA', 30717263, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(374, 'MARIQUE', 'LAUTARO', 47838620, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(375, 'MARQUEZ', 'SILVIA', 16285742, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(376, 'MARTINEZ', 'EMILIANO', 39297276, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(377, 'MARTINEZ', 'VANESA ELIZABETH', 32958440, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(378, 'MARTINEZ', 'FACUNDO', 36438322, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(379, 'MASTROMATEY', 'JUAN', 30569901, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(380, 'MEDINA', 'TOMASA', 94590662, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(381, 'MEDINA', 'MARIA', 4122908, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(382, 'MELIAN', 'FLORENCIA', 34457845, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(383, 'MELIAN ALICIA', 'MARIA EUGENIA', 31527534, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(384, 'MENEM', 'ARIELA', 36438672, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(385, 'MERCADO', 'MARIA DEL VALLE', 23660657, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(386, 'MERCADO', 'BRENDA', 37493769, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(387, 'MERCADO', 'BRENDA', 37493985, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(388, 'MERCADO', 'ROXANA DEL VALLE', 27946943, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(389, 'MERCADO', 'GEMMA DANIELA', 37318835, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(390, 'MERCADO', 'PAOLA', 36035440, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(391, 'MERCADO', 'AMALIA', 33749570, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(392, 'MERCADO', 'CAMILA', 41883058, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(393, 'MERCADO', 'LILIANA  ', 22437909, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(394, 'MERCADO', 'FELISA', 26336193, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(395, 'MERCADO ', 'ROMINA', 30821971, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(396, 'MICHIGA', 'MELINA', 96096195, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(397, 'MILAN', 'KARIN', 40483168, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(398, 'MILICAY', 'JORGE ALEXANDER', 35064517, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(399, 'MIRANDA', 'ROSALINDA', 92998571, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(400, 'MIRANDA', 'YANINA', 37416870, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(401, 'MODESTA', 'CHAMBI', 93028737, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(402, 'MOLINA', 'EVELIN SOLEDAD', 37627513, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(403, 'MOLINA', 'CARLOS', 23759569, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(404, 'MOLLO FLORES', 'GUMELINA', 95317686, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(405, 'MONTIVEO', 'ANDREA NICOLASA', 24579244, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(406, 'MONTOYA', 'GABRIEL EMANUEL', 36255046, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(407, 'MORA', 'SANDRA PATRICIA', 20613885, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(408, 'MORALES', 'YAMILA', 37314992, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(409, 'MORENO', 'JOSE ANTONIO', 14298735, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(410, 'MORENO CARRIZO', 'MAYRA', 37416559, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(411, 'MOSCOSO ZAMBRANA', 'JUAN CARLOS', 94206793, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(412, 'MOYANO', 'MARIA DE LOS ANGELES', 28149326, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(413, 'MOYANO', 'BRISA SOLEDAD', 45589169, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(414, 'MOYANO', 'FRANCO', 34405119, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(415, 'MOYANO', 'JOHANA', 36773342, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(416, 'MUÑOZ', 'JULIANO', 92634283, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(417, 'MUÑOZ', 'VANINA', 35241306, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(418, 'MUÑOZ', 'ADA', 29306379, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(419, 'MURIANO', 'JULIETA', 38762762, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(420, 'NACUZZI', 'ELIZABETH', 32763098, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(421, 'NARVAEZ', 'NORMA', 6529527, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(422, 'NARVAEZ', 'MICAELA', 37654925, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(423, 'NARVAEZ', 'PAOLA', 36437183, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(424, 'NAVARRO', 'AZUL ANTONELLA', 45312867, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(425, 'NEYRA', 'YOHANA DEL VALLE', 30299257, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(426, 'NEYRA ORTIZ', 'NADIA FERNANDEZ', 42654639, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(427, 'NICOLAS', 'YULIANA', 34861254, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(428, 'NIETO', 'NORMA  ', 17245566, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(429, 'NIETO', 'ANDREA', 46788750, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(430, 'NIETO', 'MARIA', 31771076, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(431, 'NIETO', 'MARIELA', 26706595, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(432, 'NORIEGA', 'MARIA', 5631695, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(433, 'NUÑEZ', 'TERESA DEL VALLE', 17891315, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(434, 'NUÑEZ', 'PAULA YAMILA', 39611704, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(435, 'NUÑEZ', 'GISELA', 36558328, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(436, 'OBREGON', 'MARISOL', 41046218, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(437, 'OCAMPO', 'VALERIA', 27450955, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(438, 'OCAMPO', 'CRISTINA', 23963353, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(439, 'OCAMPO', 'GABRIEL ', 22443416, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(440, 'OLIOVA', 'RITA', 14354063, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(441, 'OLIVA', 'DORA', 23660568, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(442, 'OLIVA', 'ALEJANDRA', 28279186, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(443, 'OLIVA', 'ALEJANDRA  ', 16179186, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(444, 'OLIVA', 'ALEJANDRA', 26279186, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(445, 'OLIVA', 'JOSE QUINTIN', 17037434, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(446, 'OLIVERA', 'NICOLAS ARTURO', 21855551, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(447, 'OLMOS', 'GISELLA', 37653858, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(448, 'OLMOS', 'CARLOS', 16193101, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(449, 'ORDOÑEZ', 'MARIA DEL CARMEN', 5115402, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(450, 'ORMEÑO', 'BRISA SABINA', 43212322, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(451, 'ORTIZ', 'ISABEL', 6219920, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(452, 'ORTIZ', 'ESTELA', 16152439, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(453, 'OSCO', 'HAYDEE', 94188132, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(454, 'OTAZUA', 'JULIETA LILIANA', 38477368, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(455, 'OVIEDO', 'ANA DEL ROSARIO', 18092704, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(456, 'OVIEDO ', 'YESICA', 32399883, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(457, 'PAEZ', 'VERONICA DE LOS ANGELES', 25507364, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(458, 'PAEZ', 'CLAUDIA FABIOLA', 17531269, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(459, 'PAEZ', 'ANAHI', 41027347, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(460, 'PAEZ', 'MARTIN', 46411398, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(461, 'PAEZ', 'EVA NOEMI', 18366584, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(462, 'PAEZ', 'ROSA', 21619326, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(463, 'PAEZ', 'HUGO', 16194419, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(464, 'PAEZ SORIA', 'EDITH ELIZABETH', 25603889, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(465, 'PAITA', 'BERTHA', 94646226, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(466, 'PALLIGAS', 'KAREN', 45193574, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(467, 'PALLIGAS', 'MONICA', 17272561, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(468, 'PASCUAL', 'RAMOS', 93019936, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(469, 'PAVON', 'CARMEN ROSA', 10932378, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(470, 'PEÑA', 'ADELIA', 14616657, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(471, 'PERALTA', 'WANDA PAMELA', 36111079, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(472, 'PERALTA', 'ELVA', 24691041, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(473, 'PEREZ', 'JORGE ISAAC', 42654879, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(474, 'PEREZ', 'MARIELA', 20613734, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(475, 'PICON', 'DAYANA', 36880357, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(476, 'PICON', 'ERIKA DEL ROSARIO', 29673203, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(477, 'PINEDA', 'ROCIO', 94738086, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(478, 'PINTO', 'NATALIA EDELIN', 39885123, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(479, 'PINTO', 'NATALIA', 38885123, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(480, 'PIUCA', 'MICHELE', 47972672, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(481, 'PIZARRO', 'YANINA YESICA', 34969872, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(482, 'PONCE', 'SUSANA', 16152267, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(483, 'PONCE', 'PABLO', 26345370, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(484, 'PORRAS', 'SUSANA', 37416473, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(485, 'PUICA ALEJANDRO', 'MICHELLE ALEJANDRA', 47972372, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(486, 'PUICA PACHECO', 'SONIA', 94261796, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(487, 'PUICA QUISPE', 'WILLANS RONALD', 46723472, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(488, 'PUICA SILVAY', 'ESTELA', 93115216, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL);
+INSERT INTO `clientes` (`id`, `apellido`, `nombre`, `dni`, `direccion`, `telefono`, `email`, `fechanacimiento`, `foto`, `nacionalidad_id`, `provincia_id`, `localidad_id`, `created_at`, `updated_at`) VALUES
+(489, 'QUINTANA', 'MICAELA ANABEL', 39886435, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(490, 'QUINTERO', 'MERCEDES', 25595364, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(491, 'QUINTERO', 'PEDRO', 30299188, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(492, 'QUINTERO', 'SIGRID', 31745396, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(493, 'QUINTERO', 'MERCEDES', 25595354, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(494, 'QUINTERO', 'ROSANA', 24579403, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(495, 'QUINTERO', 'NOELIA', 29073598, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(496, 'QUINTEROS', 'FEDERICO', 32393448, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(497, 'QUINTETO', 'RAUL', 33166097, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(498, 'QUIROGA', 'SILVIA YOLANDA', 18400210, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(499, 'QUIROGA', 'FACUNDO ', 38755289, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(500, 'QUIROGA', 'JOSE DAVID', 40690428, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(501, 'QUISPE', 'WILMA', 94809290, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(502, 'QUISPE', 'SERGIO', 29336501, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(503, 'QUISPE', 'CRISTIAN', 33690266, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(504, 'QUISPE CAHIARA', 'SANDRA', 95032266, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(505, 'RAMIREZ', 'EZPERANZA', 93910274, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(506, 'RAMIREZ', 'YESICA', 37346793, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(507, 'RAMIREZ', 'TANIA', 34061915, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(508, 'RAMOS', 'MIGUEL  ', 94818754, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(509, 'RAMOS', 'HILDA', 24423383, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(510, 'RAMOS ', 'VILMA', 95066223, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(511, 'RASGIDO', 'CYNTIA', 30119375, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(512, 'REARTE', 'LEONOR', 45896129, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(513, 'REINOSO', 'MARIELA', 24215181, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(514, 'REYES', 'YESICA  ', 26893079, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(515, 'REYES', 'MARIO GENARO', 11496729, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(516, 'REYES', 'MARIA FLORENCIA', 43635574, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(517, 'REYES', 'MARTIN', 39887091, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(518, 'REYNOSO', 'SUSANA', 17927562, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(519, 'RIIOS', 'NOELIA BIVIANA', 31336360, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(520, 'RIVERO', 'MARIO', 31242705, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(521, 'ROBLES', 'CLAUDIA VERONICA', 29288337, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(522, 'RODRIGUEZ', 'ANABELA', 95024000, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(523, 'RODRIGUEZ', 'LEONARDO', 34633583, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(524, 'RODRIGUEZ', 'NORMA YANET', 34992100, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(525, 'RODRIGUEZ', 'CRISTIAN JAVIER', 31712933, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(526, 'RODRIGUEZ', 'SANDRA', 18575609, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(527, 'RODRIGUEZ', 'YANINA', 38222329, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(528, 'RODRIGUEZ', 'VANESA', 28459102, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(529, 'RODRIGUEZ', 'PATRICIA', 36522601, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(530, 'RODRUIGUEZ', 'MARIA ALEJANDRA', 30415660, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(531, 'ROJAS', 'GERALDI JUSTIANO', 92844659, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(532, 'ROLDAN', 'PATRICIA', 26089554, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(533, 'ROMERO', 'LORENA SOLEDAD', 26336489, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(534, 'ROMERO', 'LUCIANA BELEN', 36436215, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(535, 'ROMERO', 'LUCIANA BELEN', 36426215, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(536, 'ROMERO', 'MARIA ', 33967293, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(537, 'ROMERO', 'BRISA AYELEN', 41808515, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(538, 'ROMERO', 'SILVIA ', 21088111, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(539, 'ROMERO', 'FERNANDO', 20253030, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(540, 'ROMERO', 'RAFAEL', 32727347, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(541, 'ROMERO', 'GLADIS', 14378536, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(542, 'ROMERO', 'FLAVIA', 36437082, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(543, 'ROMERO', 'JACQUELINE', 41116524, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(544, 'ROMERO', 'CELESTE', 27451220, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(545, 'RONCORONI', 'FABRICIO', 21564908, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(546, 'RONCORONI', 'FABRICIO', 21564948, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(547, 'ROSARIO', 'ANDRADA', 11859770, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(548, 'RUIZ', 'OLIVER', 44330677, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(549, 'RUIZ', 'VICTOR HUGO', 25183536, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(550, 'RUSO', 'SARA', 14292626, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(551, 'RUSO', 'GABRIELA', 43075242, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(552, 'SAAVEDRA', 'RAMON', 37655116, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(553, 'SALGUERO', 'MIRIAN', 95370628, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(554, 'SANCHES', 'ROMINA', 32349128, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(555, 'SANCHES', 'JORGE', 13918099, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(556, 'SANCHEZ', 'MARCELO', 30569784, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(557, 'SANCHEZ', 'ROMINA', 39885926, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(558, 'SANCHEZ', 'CECILIA', 33715008, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(559, 'SANCHEZ', 'VERONICA', 35502315, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(560, 'SANCHEZ', 'KATHERINA', 44008359, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(561, 'SANCHEZ', 'ESTRELLA', 37493861, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(562, 'SANTILLAN', 'RICARDO', 37758780, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(563, 'SARMIENTO', 'NESTOR ARIEL', 30299127, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(564, 'SIMONS', 'ROSA', 92987932, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(565, 'SOLIS', 'ALBERTO', 12580399, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(566, 'SOLOHAGA', 'ARIANA AYLEN', 42799185, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(567, 'SORIA', 'ARTURO', 22593352, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(568, 'SORIANO', 'EMANUEL', 38762730, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(569, 'SORIANO', 'MALENA', 57232881, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(570, 'SORIENTE', 'MARIA CECILIA', 21959784, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(571, 'SOSA', 'FRANCO', 42787365, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(572, 'SOSA', 'JOSE', 95038665, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(573, 'SOSA', 'LIZ', 26279170, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(574, 'SOTO', 'SONIA', 94326841, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(575, 'SOTO', 'MAURA', 94261855, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(576, 'SOTOMAYOR', 'JUANA HAYDEE DEL ROSARIO', 16567177, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(577, 'STAGLIANO', 'YAGO', 45699709, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(578, 'STAGLIANO', 'ABRIL', 43189518, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(579, 'SUAREZ', 'MARIBEL ANTONIA', 36438877, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(580, 'SUAREZ', 'INES', 22291399, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(581, 'SUAREZ', 'ABIGAIL', 39299797, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(582, 'TACHACO', 'GABRIELA', 43212446, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(583, 'TAPIA', 'RUBEN DARIO', 24557287, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(584, 'TEJERINA', 'NATALI', 29293064, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(585, 'TEJERINA', 'LIDIA', 16840432, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(586, 'TEJERINA', 'NATALIA', 29293054, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(587, 'TERAN', 'NADIA ANAHI', 40820726, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(588, 'TERAN', 'MELANI SOFIA', 43612371, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(589, 'TLISKI', 'JAZMIN', 43075162, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(590, 'TOLEDO', 'ADRIANA', 18431980, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(591, 'TOLEDO', 'DILAN', 46723546, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(592, 'TOLEDO', 'SOFIA', 28444371, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(593, 'TOLEDO', 'ROSALINDA', 22714762, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(594, 'TOLOZA', 'JULIO', 18741072, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(595, 'TOMAS ALMENA', 'VERONICA', 28087623, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(596, 'TORANZO', 'BEATRIZ', 26279062, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(597, 'TORRES', 'JAVIER', 35027819, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(598, 'TORRES', 'BLANCA', 13823411, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(599, 'TORRES', 'ROSA SILVINA', 27632895, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(600, 'TORRES', 'CRISTIAN', 26945887, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(601, 'TORRES', 'ALBERTO', 17724505, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(602, 'TORRES', 'SILVANA', 25225565, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(603, 'TORRES', 'VALERIA', 27450910, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(604, 'TORRES', 'JORGE  ', 26729537, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(605, 'TRONCOSO', 'CANDELA', 44200512, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(606, 'TULIAN', 'SOLEDAD', 36487552, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(607, 'VALERIANO', 'OSCAR', 24541175, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(608, 'VARELA', 'BRENDA', 46929968, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(609, 'VARELA', 'ROBERTO', 13798397, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(610, 'VARGAS', 'MARIA MANUELA', 13341573, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(611, 'VARGAS', 'DANIEL GUSTAVO', 31046617, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(612, 'VARGAS', 'YAMILA', 39060537, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(613, 'VARGAS', 'INES ', 12692803, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(614, 'VARGAS LANZONE', 'GUILLERMO ESEQUIEL', 44665759, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(615, 'VECCHIO', 'NATALIA SOLEDAD', 33497144, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(616, 'VEGA', 'ZULMA', 21410076, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(617, 'VEGA', 'VIVIANA ELIZABETH', 30569719, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(618, 'VEGA', 'IVANA', 25786987, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(619, 'VEGA', 'MATILDE', 45469186, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(620, 'VEGA', 'LILIANA JOHANA', 30415717, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(621, 'VEGA', 'ANA', 25237262, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(622, 'VEGA', 'ALBERTA', 25890722, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(623, 'VELAZQUEZ', 'CLAUDIA', 29659696, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(624, 'VELAZQUEZ', 'CLAUDIA', 2965996, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(625, 'VELIZ', 'MYRIAM NOEMI', 20422274, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(626, 'VENTURA ALFARO', 'MARY BRIGIDA', 94552683, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(627, 'VERA', 'VALERIA RUTH', 31902319, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(628, 'VERA', 'IVANA', 38221850, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(629, 'VERA', 'JOSE LUIS', 27052502, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(630, 'VERA LORENA', 'GISELE', 33694741, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(631, 'VERGARA', 'MONICA', 21356206, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(632, 'VERGARA', 'JESICA', 32903743, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(633, 'VERGARA', 'WALTER DAMIAN', 38761773, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(634, 'VERGARA', 'LUCIA', 24524938, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(635, 'VICENTE', 'DESIDERIA', 92592406, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(636, 'VICTORIO', 'ADRIANA MABEL', 18585077, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(637, 'VIDAL', 'GABRIELA', 23016036, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(638, 'VIDAL', 'VIVANA', 11098300, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(639, 'VILDOZO', 'ALDANA', 37762311, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(640, 'VILLA', 'VICTOR', 18796466, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(641, 'VILLACORTA', 'GISELLA', 37321517, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(642, 'VILLAFAÑE', 'MARIA NICOLASA', 20253331, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(643, 'VILLAFAÑE', 'JULIO', 18432768, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(644, 'VILLAFAÑE', 'MARIELA', 23448145, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(645, 'VILLAGRA', 'MALENA JACQUELINE', 40203885, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(646, 'VILLAROEL', 'SOLEDAD', 29237461, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(647, 'VILLARREAL', 'LUCAS ', 31219774, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(648, 'VILLARRUEL', 'MIA', 54092569, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(649, 'VILLATARCO', 'CELESTE MAILEN', 42857654, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(650, 'VILLEGAS', 'VALERIA', 31712943, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(651, 'VILLEGAS', 'BRENDA', 37415715, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(652, 'VIQUE', 'WILFREDO', 41046624, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(653, 'VIQUE', 'SANDRA', 41046625, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(654, 'WILFREDO PUICA', 'PACHECO', 94326804, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(655, 'ZALAZAR', 'JOHANA', 30089234, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(656, 'ZALAZAR', 'MARTHA', 10448509, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(657, 'ZALAZAR', 'SARA', 1044859, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(658, 'ZALAZAR', 'MABEL', 13694090, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(659, 'ZALDIVAR', 'OSCAR', 95575335, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(660, 'ZARATE', 'ANCELMA', 18613834, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(661, 'ZARATE', 'MIRTHA', 19044563, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(662, 'ZARATE', 'JULIA ', 34129873, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL),
+(663, 'ZAVALA', 'YESICA', 28619879, NULL, NULL, NULL, NULL, 'Sin_imagen.jpg', 1, 11, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `comentario` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comidas`
+--
+
+CREATE TABLE `comidas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `precio` double DEFAULT NULL,
+  `ubicaciongps` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fotourl` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Sin_imagen.jpg',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuotas`
+--
+
+CREATE TABLE `cuotas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `usuario_paquetes_id` bigint(20) UNSIGNED NOT NULL,
+  `monto` double NOT NULL,
+  `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `destinos`
+--
+
+CREATE TABLE `destinos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `clima` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mejorepocaparavisitar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ubicaciongps` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `presupuestoestimado` double NOT NULL,
+  `otrosenlaces` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pais_id` bigint(20) UNSIGNED NOT NULL,
+  `fotourl` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Sin_imagen.jpg',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `destinosable`
+--
+
+CREATE TABLE `destinosable` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `destinosable_id` bigint(20) UNSIGNED NOT NULL,
+  `destinosable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `destino_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `destino_paquetes`
+--
+
+CREATE TABLE `destino_paquetes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `destino_id` bigint(20) UNSIGNED NOT NULL,
+  `paquete_id` bigint(20) UNSIGNED NOT NULL,
+  `fechainicio` date NOT NULL,
+  `fechafinal` date NOT NULL,
+  `lugarsalida` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `localidads`
+--
+
+CREATE TABLE `localidads` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `localidads`
+--
+
+INSERT INTO `localidads` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(1, 'La Rioja - Capital', '2023-09-21 22:30:39', '2023-09-21 22:30:39');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(3, '2014_10_12_200000_add_two_factor_columns_to_users_table', 1),
+(4, '2019_08_19_000000_create_failed_jobs_table', 1),
+(5, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(6, '2023_07_10_130911_create_sessions_table', 1),
+(7, '2023_07_10_135539_create_nacionalidads_table', 1),
+(8, '2023_07_10_135548_create_provincias_table', 1),
+(9, '2023_07_10_135555_create_localidads_table', 1),
+(10, '2023_07_10_135853_create_clientes_table', 1),
+(11, '2023_07_16_123748_create_servicios_table', 1),
+(12, '2023_07_16_123841_create_restriccions_table', 1),
+(13, '2023_07_16_123851_create_alojamientos_table', 1),
+(14, '2023_07_16_123905_create_comidas_table', 1),
+(15, '2023_07_16_123916_create_comentarios_table', 1),
+(16, '2023_07_16_123922_create_transportes_table', 1),
+(17, '2023_07_16_123953_create_actividaddestacadas_table', 1),
+(18, '2023_07_16_124018_create_destinos_table', 1),
+(19, '2023_07_16_124025_create_paquetes_table', 1),
+(20, '2023_07_16_124113_create_destino_paquetes_table', 1),
+(21, '2023_07_16_124158_create_paquete_restriccions_table', 1),
+(22, '2023_07_16_124646_create_serviciosable_table', 1),
+(23, '2023_07_16_124818_create_destinosable_table', 1),
+(24, '2023_08_26_122007_create_usuario_paquetes_table', 1),
+(25, '2023_08_26_122517_create_cuotas_table', 1),
+(26, '2023_09_02_221756_create_ventas_table', 1),
+(27, '2023_09_02_221809_create_pagos_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `nacionalidads`
+--
+
+CREATE TABLE `nacionalidads` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `codigopais` int(11) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `nacionalidads`
+--
+
+INSERT INTO `nacionalidads` (`id`, `codigopais`, `nombre`, `created_at`, `updated_at`) VALUES
+(1, 54, 'Argentina *', NULL, '2023-09-09 02:21:12'),
+(2, 591, 'Bolivia', NULL, NULL),
+(3, 56, 'Chile', NULL, NULL),
+(4, 598, 'Uruguay', NULL, NULL),
+(5, 595, 'Paraguay', NULL, NULL),
+(6, 55, 'Brasil', NULL, NULL),
+(7, 57, 'Colombia', NULL, NULL),
+(8, 52, 'México', NULL, NULL),
+(9, 34, 'España', NULL, NULL),
+(10, 39, 'Italia', NULL, NULL),
+(11, 49, 'Alemania', NULL, NULL),
+(12, 33, 'Francia', NULL, NULL),
+(13, 7, 'Rusia', NULL, NULL),
+(14, 1, 'Estados Unidos', NULL, NULL),
+(15, 44, 'Reino Unido', NULL, NULL),
+(16, 380, 'Ucrania', NULL, NULL),
+(17, 41, 'Suiza', NULL, NULL),
+(18, 43, 'Austria', NULL, NULL),
+(19, 86, 'China', NULL, NULL),
+(20, 32, 'Bélgica', NULL, NULL),
+(21, 31, 'Países Bajos', NULL, NULL),
+(22, 46, 'Suecia', NULL, NULL),
+(23, 30, 'Grecia', NULL, NULL),
+(24, 91, 'India', NULL, NULL),
+(27, 45, 'Dinamarca', NULL, NULL),
+(28, 48, 'Polonia', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagos`
+--
+
+CREATE TABLE `pagos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `venta_id` bigint(20) UNSIGNED NOT NULL,
+  `montopagado` double NOT NULL,
+  `fechavencimiento` date NOT NULL,
+  `fechapago` date DEFAULT NULL,
+  `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `pagos`
+--
+
+INSERT INTO `pagos` (`id`, `descripcion`, `venta_id`, `montopagado`, `fechavencimiento`, `fechapago`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'Cuota 1 - $8500.00', 1, 8500, '2023-09-21', '2023-09-21', 'Pagada', '2023-09-22 06:19:42', '2023-09-22 06:20:04'),
+(2, 'Cuota 2 - $8500.00', 1, 8500, '2023-10-21', '2023-09-22', 'Pagada', '2023-09-22 06:19:42', '2023-09-22 23:45:02'),
+(3, 'Cuota 3 - $8500.00', 1, 0, '2023-11-20', NULL, 'Impaga', '2023-09-22 06:19:42', '2023-09-22 06:19:42'),
+(4, 'Cuota 4 - $8500.00', 1, 0, '2023-12-20', NULL, 'Impaga', '2023-09-22 06:19:42', '2023-09-22 06:19:42'),
+(5, 'Cuota 5 - $8500.00', 1, 0, '2024-01-19', NULL, 'Impaga', '2023-09-22 06:19:42', '2023-09-22 06:19:42'),
+(6, 'Cuota 6 - $8500.00', 1, 0, '2024-02-18', NULL, 'Impaga', '2023-09-22 06:19:42', '2023-09-22 06:19:42'),
+(7, 'Cuota 7 - $8500.00', 1, 0, '2024-03-19', NULL, 'Impaga', '2023-09-22 06:19:42', '2023-09-22 06:19:42'),
+(8, 'Cuota 8 - $8500.00', 1, 0, '2024-04-18', NULL, 'Impaga', '2023-09-22 06:19:42', '2023-09-22 06:19:42'),
+(9, 'Cuota 9 - $8500.00', 1, 0, '2024-05-18', NULL, 'Impaga', '2023-09-22 06:19:42', '2023-09-22 06:19:42'),
+(10, 'Cuota 10 - $8500.00', 1, 0, '2024-06-17', NULL, 'Impaga', '2023-09-22 06:19:42', '2023-09-22 06:19:42');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `paquetes`
+--
+
+CREATE TABLE `paquetes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `duraciontotal` double DEFAULT NULL,
+  `presupuestoestimado` double DEFAULT NULL,
+  `fechasdisponibles` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fotourl` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Sin_imagen.jpg',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `paquetes`
+--
+
+INSERT INTO `paquetes` (`id`, `nombre`, `descripcion`, `duraciontotal`, `presupuestoestimado`, `fechasdisponibles`, `fotourl`, `created_at`, `updated_at`) VALUES
+(1, 'Talampaya', 'Talampaya', 5, 85000, '12-05/23', 'destino/alojamiento/42I77nftEUnSMsxXHZCPbxf8T70GzDdss7BYroHV.png', '2023-09-22 06:18:45', '2023-09-22 06:18:45'),
+(2, 'Otro', 'Otro', 11, 2333, '3333', 'destino/paquetes/QWbiDlVkmAYhEpvD7YnGWH0xmEzkT9choPdAs8u5.png', '2023-09-22 09:32:24', '2023-09-22 09:32:24');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `paquete_restriccions`
+--
+
+CREATE TABLE `paquete_restriccions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `paquete_id` bigint(20) UNSIGNED NOT NULL,
+  `restriccion_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `provincias`
+--
+
+CREATE TABLE `provincias` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `provincias`
+--
+
+INSERT INTO `provincias` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(1, 'Buenos Aires', NULL, NULL),
+(2, 'Catamarca', NULL, NULL),
+(3, 'Chaco', NULL, NULL),
+(4, 'Chubut', NULL, NULL),
+(5, 'Córdoba', NULL, NULL),
+(6, 'Corrientes', NULL, NULL),
+(7, 'Entre Ríos', NULL, NULL),
+(8, 'Formosa', NULL, NULL),
+(9, 'Jujuy', NULL, NULL),
+(10, 'La Pampa', NULL, NULL),
+(11, 'La Rioja', NULL, NULL),
+(12, 'Mendoza', NULL, NULL),
+(13, 'Misiones', NULL, NULL),
+(14, 'Neuquén', NULL, NULL),
+(15, 'Río Negro', NULL, NULL),
+(16, 'Salta', NULL, NULL),
+(17, 'San Juan', NULL, NULL),
+(18, 'San Luis', NULL, NULL),
+(19, 'Santa Cruz', NULL, NULL),
+(20, 'Santa Fe', NULL, NULL),
+(21, 'Santiago del Estero', NULL, NULL),
+(22, 'Tierra del Fuego', NULL, NULL),
+(23, 'Tucumán', NULL, NULL),
+(24, 'borrador', '2023-08-11 00:27:33', '2023-08-11 00:27:33');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `restriccions`
+--
+
+CREATE TABLE `restriccions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicios`
+--
+
+CREATE TABLE `servicios` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fotourl` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Sin_imagen.jpg',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `serviciosable`
+--
+
+CREATE TABLE `serviciosable` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `serviciosable_id` bigint(20) UNSIGNED NOT NULL,
+  `serviciosable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `servicio_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('9XzTPyp3b9eIS1uoEeZOzDzuwCXsuZOtsTppAJw5', NULL, '190.112.105.164', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQmVIclRoQ29MdUVsRmVZeGpCY0NrdFN1MU1jTzJ2NmVnZjBIcnpKOCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHBzOi8vdHJhbnNwb3J0ZS5zb2Z0eHBsdXMuY29tL3ZlbnRhcyI7fX0=', 1695666886),
+('LZRVHd7ExZ8GhEAPdgKITwxGSlsarMmanfu5wZqr', NULL, '165.232.153.236', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUzJqbmhMd3RybUtxRW9KaHE0dUpIMGZuaXR2enpkMFFzcGdmS1A5NyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly90cmFuc3BvcnRlLnNvZnR4cGx1cy5jb20iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1695619144),
+('ngUMJ6ujIK6pIuaqMPEbNZEdCTG8YidLPnUqogss', NULL, '165.232.153.236', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTjNBN05sVDY4OXVXM0xKek5uMFVOZXF3b3VHTTFrQWZBUDdaV0pIMCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHBzOi8vdHJhbnNwb3J0ZS5zb2Z0eHBsdXMuY29tIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1695619145),
+('QMnZdTv9ChmLYOvNhTZxuSfjKizhNJtxUmTA4q6E', NULL, '190.112.105.164', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZTczUThCaG5rVUU5UEF3bklvZzZ4TzNWMnhpR2pqQ0swYVc4OVV4ViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHBzOi8vdHJhbnNwb3J0ZS5zb2Z0eHBsdXMuY29tL3ZlbnRhcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1695644643),
+('S2mnF1qiFjuwstDLoxcAtdz8eeJPkzvvngwvFeLR', NULL, '167.248.133.33', 'Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ1VQWW5uYWFvTWtMSXptSmhUS05PUWt5NWd3bEowYVRQanI4VnFkMyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHBzOi8vdHJhbnNwb3J0ZS5zb2Z0eHBsdXMuY29tIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1695615731),
+('sil9k49zrFkuQiYTLVwtDNdD30lBwM4qmkKRAXZw', NULL, '167.248.133.51', 'Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibXlLUzhXZXc5dmxxUjhFaUR5QjE4QlR0eE9BRzJNbnhJanNWeUtmYyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly90cmFuc3BvcnRlLnNvZnR4cGx1cy5jb20iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1695620375);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `transportes`
+--
+
+CREATE TABLE `transportes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `precio` double DEFAULT NULL,
+  `ubicaciongps` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fotourl` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Sin_imagen.jpg',
+  `salida` date DEFAULT NULL,
+  `llegada` date DEFAULT NULL,
+  `devolverenotrodestino` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
+  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
+  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_paquetes`
+--
+
+CREATE TABLE `usuario_paquetes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `paquete_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `cliente_id` bigint(20) UNSIGNED NOT NULL,
+  `total` double NOT NULL,
+  `fecha` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`id`, `cliente_id`, `total`, `fecha`, `created_at`, `updated_at`) VALUES
+(1, 1, 85000, '2023-09-21', '2023-09-22 06:19:42', '2023-09-22 06:19:42');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `actividaddestacadas`
+--
+ALTER TABLE `actividaddestacadas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `alojamientos`
+--
+ALTER TABLE `alojamientos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `clientes_nacionalidad_id_foreign` (`nacionalidad_id`),
+  ADD KEY `clientes_provincia_id_foreign` (`provincia_id`),
+  ADD KEY `clientes_localidad_id_foreign` (`localidad_id`);
+
+--
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comentarios_user_id_foreign` (`user_id`);
+
+--
+-- Indices de la tabla `comidas`
+--
+ALTER TABLE `comidas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `cuotas`
+--
+ALTER TABLE `cuotas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cuotas_usuario_paquetes_id_foreign` (`usuario_paquetes_id`);
+
+--
+-- Indices de la tabla `destinos`
+--
+ALTER TABLE `destinos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `destinos_pais_id_foreign` (`pais_id`);
+
+--
+-- Indices de la tabla `destinosable`
+--
+ALTER TABLE `destinosable`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `destinosable_destino_id_foreign` (`destino_id`);
+
+--
+-- Indices de la tabla `destino_paquetes`
+--
+ALTER TABLE `destino_paquetes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `destino_paquetes_destino_id_foreign` (`destino_id`),
+  ADD KEY `destino_paquetes_paquete_id_foreign` (`paquete_id`);
+
+--
+-- Indices de la tabla `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indices de la tabla `localidads`
+--
+ALTER TABLE `localidads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `nacionalidads`
+--
+ALTER TABLE `nacionalidads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pagos_venta_id_foreign` (`venta_id`);
+
+--
+-- Indices de la tabla `paquetes`
+--
+ALTER TABLE `paquetes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `paquete_restriccions`
+--
+ALTER TABLE `paquete_restriccions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `paquete_restriccions_paquete_id_foreign` (`paquete_id`),
+  ADD KEY `paquete_restriccions_restriccion_id_foreign` (`restriccion_id`);
+
+--
+-- Indices de la tabla `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indices de la tabla `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indices de la tabla `provincias`
+--
+ALTER TABLE `provincias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `restriccions`
+--
+ALTER TABLE `restriccions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `serviciosable`
+--
+ALTER TABLE `serviciosable`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `serviciosable_servicio_id_foreign` (`servicio_id`);
+
+--
+-- Indices de la tabla `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indices de la tabla `transportes`
+--
+ALTER TABLE `transportes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indices de la tabla `usuario_paquetes`
+--
+ALTER TABLE `usuario_paquetes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_paquetes_user_id_foreign` (`user_id`),
+  ADD KEY `usuario_paquetes_paquete_id_foreign` (`paquete_id`);
+
+--
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ventas_cliente_id_foreign` (`cliente_id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `actividaddestacadas`
+--
+ALTER TABLE `actividaddestacadas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `alojamientos`
+--
+ALTER TABLE `alojamientos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=664;
+
+--
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `comidas`
+--
+ALTER TABLE `comidas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `cuotas`
+--
+ALTER TABLE `cuotas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `destinos`
+--
+ALTER TABLE `destinos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `destinosable`
+--
+ALTER TABLE `destinosable`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `destino_paquetes`
+--
+ALTER TABLE `destino_paquetes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `localidads`
+--
+ALTER TABLE `localidads`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `nacionalidads`
+--
+ALTER TABLE `nacionalidads`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `paquetes`
+--
+ALTER TABLE `paquetes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `paquete_restriccions`
+--
+ALTER TABLE `paquete_restriccions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `provincias`
+--
+ALTER TABLE `provincias`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT de la tabla `restriccions`
+--
+ALTER TABLE `restriccions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `serviciosable`
+--
+ALTER TABLE `serviciosable`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `transportes`
+--
+ALTER TABLE `transportes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario_paquetes`
+--
+ALTER TABLE `usuario_paquetes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD CONSTRAINT `clientes_localidad_id_foreign` FOREIGN KEY (`localidad_id`) REFERENCES `localidads` (`id`),
+  ADD CONSTRAINT `clientes_nacionalidad_id_foreign` FOREIGN KEY (`nacionalidad_id`) REFERENCES `nacionalidads` (`id`),
+  ADD CONSTRAINT `clientes_provincia_id_foreign` FOREIGN KEY (`provincia_id`) REFERENCES `provincias` (`id`);
+
+--
+-- Filtros para la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `comentarios_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `cuotas`
+--
+ALTER TABLE `cuotas`
+  ADD CONSTRAINT `cuotas_usuario_paquetes_id_foreign` FOREIGN KEY (`usuario_paquetes_id`) REFERENCES `usuario_paquetes` (`id`);
+
+--
+-- Filtros para la tabla `destinos`
+--
+ALTER TABLE `destinos`
+  ADD CONSTRAINT `destinos_pais_id_foreign` FOREIGN KEY (`pais_id`) REFERENCES `nacionalidads` (`id`);
+
+--
+-- Filtros para la tabla `destinosable`
+--
+ALTER TABLE `destinosable`
+  ADD CONSTRAINT `destinosable_destino_id_foreign` FOREIGN KEY (`destino_id`) REFERENCES `destinos` (`id`);
+
+--
+-- Filtros para la tabla `destino_paquetes`
+--
+ALTER TABLE `destino_paquetes`
+  ADD CONSTRAINT `destino_paquetes_destino_id_foreign` FOREIGN KEY (`destino_id`) REFERENCES `destinos` (`id`),
+  ADD CONSTRAINT `destino_paquetes_paquete_id_foreign` FOREIGN KEY (`paquete_id`) REFERENCES `paquetes` (`id`);
+
+--
+-- Filtros para la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD CONSTRAINT `pagos_venta_id_foreign` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`);
+
+--
+-- Filtros para la tabla `paquete_restriccions`
+--
+ALTER TABLE `paquete_restriccions`
+  ADD CONSTRAINT `paquete_restriccions_paquete_id_foreign` FOREIGN KEY (`paquete_id`) REFERENCES `paquetes` (`id`),
+  ADD CONSTRAINT `paquete_restriccions_restriccion_id_foreign` FOREIGN KEY (`restriccion_id`) REFERENCES `restriccions` (`id`);
+
+--
+-- Filtros para la tabla `serviciosable`
+--
+ALTER TABLE `serviciosable`
+  ADD CONSTRAINT `serviciosable_servicio_id_foreign` FOREIGN KEY (`servicio_id`) REFERENCES `servicios` (`id`);
+
+--
+-- Filtros para la tabla `usuario_paquetes`
+--
+ALTER TABLE `usuario_paquetes`
+  ADD CONSTRAINT `usuario_paquetes_paquete_id_foreign` FOREIGN KEY (`paquete_id`) REFERENCES `paquetes` (`id`),
+  ADD CONSTRAINT `usuario_paquetes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `ventas_cliente_id_foreign` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

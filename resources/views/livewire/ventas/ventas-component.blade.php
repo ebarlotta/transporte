@@ -36,7 +36,7 @@
                                         {{-- @if($ContDestinos) --}}
                                         <h3>{{ $ContDestinos }}</h3>
                                         {{-- @endif --}}
-                                        <span>Destinos</span>
+                                        <span>Destinos *</span>
                                     </div>
                                 </div>
                             </div>
@@ -409,7 +409,7 @@
                                     @if($pago->estado=="Pagada")
                                         <tr style="background-color: lightgreen;">
                                     @else
-                                        @if($pago->fechavencimiento>now()) 
+                                        @if($pago->fechavencimiento>now())
                                             <tr style="background-color: beige;">
                                         @else
                                             <tr style="background-color: pink;">
@@ -520,7 +520,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <!-- listado de paquetes -->
                             <div class="col-xl-4 col-md-4 m-4">
