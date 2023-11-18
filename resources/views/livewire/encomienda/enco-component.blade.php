@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>423</h3>
-                                        <span>Comprobantes</span>
+                                        <span>Comprobantes *</span>
                                     </div>
                                 </div>
                             </div>
