@@ -288,10 +288,12 @@
                                 <div class="card-body cleartfix">
                                     <div class="media align-items-stretch">
                                         <div class="media-body">
-                                            <h4>Gestión de Sucursales</h4>
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalAltaModificacionSucursales">
-                                                <i class="fa-regular fa-plus"></i> Nuevo 
-                                            </button>
+                                            <div class="d-flex flex justify-content-between">
+                                                <h4>Gestión de Sucursales</h4>
+                                                <button type="button" class="btn btn-info" data-toggle="modal" wire:click="CargaDatosAlModal(0,'sucursal')" data-target="#ModalAltaModificacionSucursales">
+                                                    <i class="fa-regular fa-plus"></i> Nuevo 
+                                                </button>
+                                            </div>
                                             <table class="table table-hover text-nowrap">
                                                 <tr>
                                                     <td>Nombre</td>
@@ -341,7 +343,12 @@
                                 <div class="card-body cleartfix">
                                     <div class="media align-items-stretch">
                                         <div class="media-body">
-                                            <h4>Gestión de Tarifas</h4>
+                                            <div class="d-flex flex justify-content-between">
+                                                <h4>Gestión de Tarifas</h4>
+                                                <button type="button" class="btn btn-info" data-toggle="modal" wire:click="CargaDatosAlModal(0,'tarifa')" data-target="#ModalAltaModificacionTarifas">
+                                                    <i class="fa-regular fa-plus"></i> Nuevo 
+                                                </button>
+                                            </div>
                                             <table class="table table-hover text-nowrap">
                                                 <tr>
                                                     <td>descripcionpaquete</td>
@@ -393,7 +400,12 @@
                                 <div class="card-body cleartfix">
                                     <div class="media align-items-stretch">
                                         <div class="media-body">
-                                            <h4>Gestión de Seguimientos</h4>
+                                            <div class="d-flex flex justify-content-between">
+                                                <h4>Gestión de Seguimientos</h4>
+                                                <button type="button" class="btn btn-info" data-toggle="modal" wire:click="CargaDatosAlModal(0,'seguimiento')" data-target="#ModalAltaModificacionSeguimientos">
+                                                    <i class="fa-regular fa-plus"></i> Nuevo 
+                                                </button>
+                                            </div>
                                             <table class="table table-hover text-nowrap">
                                                 <tr>
                                                     <td>encomienda_id</td>
@@ -439,7 +451,12 @@
                                 <div class="card-body cleartfix">
                                     <div class="media align-items-stretch">
                                         <div class="media-body">
-                                            <h4>Gestión de Encomiendas</h4>
+                                            <div class="d-flex flex justify-content-between">
+                                                <h4>Gestión de Encomiendas</h4>
+                                                <button type="button" class="btn btn-info" data-toggle="modal" wire:click="CargaDatosAlModal(0,'encomienda')" data-target="#ModalAltaModificacionEncomiendas">
+                                                    <i class="fa-regular fa-plus"></i> Nuevo 
+                                                </button>
+                                            </div>
                                             <table class="table table-hover text-nowrap">
                                                 <tr>
                                                     <td>direccionremitente</td>
@@ -521,7 +538,7 @@
                             <input type="text" class="form-control" wire:model="usuario_id" disabled>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-info" wire:click="store('seguiminto')">
+                            <button type="button" class="btn btn-info" wire:click="store('seguimiento')">
                                 <i class="fa-solid fa-pen-to-square"></i>Guardar
                             </button>
                             <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
@@ -778,7 +795,7 @@
                             <input type="text" class="form-control" wire:model="activo">
                         </div>
                         <div>
-                            <button type="button" class="btn btn-info" wire:click="store()">
+                            <button type="button" class="btn btn-info" wire:click="store('sucursales')">
                                 <i class="fa-solid fa-pen-to-square"></i>Guardar
                             </button>
                             <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
@@ -805,7 +822,7 @@
                             Está seguro de que quiere eliminar la sucursal <b>{{ $nombresucursal }}</b>?
                         </div>
                         <div>
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" wire:click="destroy({{$sucursal_id}},'sucursales')">
                                 <i class="fa-solid fa-pen-to-square"></i>Eliminar
                             </button>
                             <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">

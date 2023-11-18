@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Seguimiento extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'encomienda_id',
+        'descripcionseguimiento',
+        'fecha',
+        'usuario_id',
+    ];
 }
