@@ -289,6 +289,9 @@
                                     <div class="media align-items-stretch">
                                         <div class="media-body">
                                             <h4>Gestión de Sucursales</h4>
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalAltaModificacionSucursales">
+                                                <i class="fa-regular fa-plus"></i> Nuevo 
+                                            </button>
                                             <table class="table table-hover text-nowrap">
                                                 <tr>
                                                     <td>Nombre</td>
@@ -309,10 +312,10 @@
                                                     <td>{{ $sucursal->observaciones }}</td>
                                                     <td>
                                                         <div class="btn-group" role="group">
-                                                            <button wire:click="edit(1)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaLocalidad">
+                                                            <button type="button" class="btn btn-warning" wire:click="CargaDatosAlModal({{$sucursal->id}},'sucursal')" data-toggle="modal" data-target="#ModalAltaModificacionSucursales">
                                                             <i class="fa-solid fa-pen-to-square"></i> Editar
                                                             </button>
-                                                            <button wire:click="BuscarDatosLocalidad(1)" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarLocalidad">
+                                                            <button wire:click="BuscarDatos({{$sucursal->id}},'sucursal')" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarSucursales">
                                                             <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                             </button>
                                                         </div>
@@ -352,19 +355,19 @@
                                                 </tr>
                                                 @foreach ($tarifas as $tarifa)
                                                 <tr> 	 	 	 	 	
-                                                    <td>{{ $sucursal->descripcionpaquete }}</td>
-                                                    <td>{{ $sucursal->largo }}</td>
-                                                    <td>{{ $sucursal->ancho }}</td>
-                                                    <td>{{ $sucursal->alto }}</td>
-                                                    <td>{{ $sucursal->peso }}</td>
-                                                    <td>{{ $sucursal->monto }}</td>
-                                                    <td>{{ $sucursal->activo }}</td>
+                                                    <td>{{ $tarifa->descripcionpaquete }}</td>
+                                                    <td>{{ $tarifa->largo }}</td>
+                                                    <td>{{ $tarifa->ancho }}</td>
+                                                    <td>{{ $tarifa->alto }}</td>
+                                                    <td>{{ $tarifa->peso }}</td>
+                                                    <td>{{ $tarifa->monto }}</td>
+                                                    <td>{{ $tarifa->activo }}</td>
                                                     <td>
                                                         <div class="btn-group" role="group">
-                                                            <button wire:click="edit(1)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaLocalidad">
+                                                            <button type="button" class="btn btn-warning" wire:click="CargaDatosAlModal({{$tarifa->id}},'tarifa')" data-toggle="modal" data-target="#ModalAltaModificacionTarifas">
                                                             <i class="fa-solid fa-pen-to-square"></i> Editar
                                                             </button>
-                                                            <button wire:click="BuscarDatosLocalidad(1)" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarLocalidad">
+                                                            <button wire:click="BuscarDatos({{$tarifa->id}},'tarifa')" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarTarifas">
                                                             <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                             </button>
                                                         </div>
@@ -396,19 +399,21 @@
                                                     <td>encomienda_id</td>
                                                     <td>Descripcion</td>
                                                     <td>Fecha</td>
+                                                    <td>Usuario</td>
                                                     <td>Opciones</td>
                                                 </tr>
                                                 @foreach ($seguimientos as $seguimiento)
                                                 <tr> 	 	 	 	 	
                                                     <td>{{ $seguimiento->encomienda_id }}</td>
                                                     <td>{{ $seguimiento->descripcionseguimiento }}</td>
-                                                    <td>{{ $seguimiento->fecha }}</td>
+                                                    <td>{{ substr($seguimiento->fecha,8,2)."-".substr($seguimiento->fecha,5,2)."-".substr($seguimiento->fecha,0,4) }}</td>
+                                                    <td>{{ $seguimiento->usuario_id }}</td>
                                                     <td>
                                                         <div class="btn-group" role="group">
-                                                            <button wire:click="edit(1)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaLocalidad">
+                                                            <button type="button" wire:click="CargaDatosAlModal({{$seguimiento->id}},'seguimiento')" class="btn btn-warning" data-toggle="modal" data-target="#ModalAltaModificacionSeguimientos">
                                                             <i class="fa-solid fa-pen-to-square"></i> Editar
                                                             </button>
-                                                            <button wire:click="BuscarDatosLocalidad(1)" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarLocalidad">
+                                                            <button wire:click="BuscarDatos({{$seguimiento->id}},'seguimiento')" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarSeguimientos">
                                                             <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                             </button>
                                                         </div>
@@ -467,10 +472,10 @@
                                                     <td>{{ $encomienda->observaciones }}</td>
                                                     <td>
                                                         <div class="btn-group" role="group">
-                                                            <button wire:click="edit(1)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaLocalidad">
+                                                            <button  type="button" class="btn btn-warning" wire:click="CargaDatosAlModal({{$encomienda->id}},'encomienda')" data-toggle="modal" data-target="#ModalAltaModificacionEncomiendas">
                                                             <i class="fa-solid fa-pen-to-square"></i> Editar
                                                             </button>
-                                                            <button wire:click="BuscarDatosLocalidad(1)" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarLocalidad">
+                                                            <button wire:click="BuscarDatos({{$encomienda->id}},'encomienda')" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarEncomiendas">
                                                             <i class="fa-regular fa-circle-xmark"></i> Eliminar
                                                             </button>
                                                         </div>
@@ -487,7 +492,329 @@
                 </div>
             @endif
 
+            <!-- Modal Alta/Modificación Seguimientos -->
+            <!-- ================================== -->
+            <div wire:ignore.self class="modal fade" id="ModalAltaModificacionSeguimientos" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Alta/Modificación Seguimientos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+                            <label for="">seguimiento_encomienda_id</label>
+                            <input type="text" class="form-control" wire:model="seguimiento_encomienda_id">
+                        </div>
+                        <div>
+                            <label for="">descripcionseguimiento</label>
+                            <input type="text" class="form-control" wire:model="descripcionseguimiento">
+                        </div>
+                        <div>
+                            <label for="">fecha</label>
+                            <input type="date" class="form-control" wire:model="fecha">
+                        </div>
+                        <div>
+                            <label for="">usuario_id</label>
+                            <input type="text" class="form-control" wire:model="usuario_id" disabled>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-info" wire:click="store('seguiminto')">
+                                <i class="fa-solid fa-pen-to-square"></i>Guardar
+                            </button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-pen-to-square"></i>Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Modal Eliminar Seguimientos -->
+            <!-- ====================== -->
+            <div wire:ignore.self class="modal fade" id="ModalEliminarSeguimientos" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar Seguimientos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+                            Está seguro de que quiere eliminar el seguimiento cuyo número de encomienda es: <b>{{ $encomienda_id }}</b>?
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger">
+                                <i class="fa-solid fa-pen-to-square"></i>Eliminar
+                            </button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-pen-to-square"></i>Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Alta/Modificación Encomiendas -->
+            <!-- ================================== -->
+            <div wire:ignore.self class="modal fade" id="ModalAltaModificacionEncomiendas" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Alta/Modificación Encomiendas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+                            <label for="">direccionremitente</label>
+                            <input type="text" class="form-control" wire:model="direccionremitente">
+                        </div>
+                        <div>
+                            <label for="">sucursalorigen</label>
+                            <input type="text" class="form-control" wire:model="sucursalorigen">
+                        </div>
+                        <div>
+                            <label for="">clienteorigen_id</label>
+                            <input type="text" class="form-control" wire:model="clienteorigen_id">
+                        </div>
+                        <div>
+                            <label for="">telefonoremitente</label>
+                            <input type="text" class="form-control" wire:model="telefonoremitente">
+                        </div>
+                        <div>
+                            <label for="">emailremitente</label>
+                            <input type="text" class="form-control" wire:model="emailremitente">
+                        </div>
+                        <div>
+                            <label for="">clientedestino_id</label>
+                            <input type="text" class="form-control" wire:model="clientedestino_id">
+                        </div>
+                        <div>
+                            <label for="">direcciondestinatario</label>
+                            <input type="text" class="form-control" wire:model="direcciondestinatario">
+                        </div>
+                        <div>
+                            <label for="">sucursaldestino</label>
+                            <input type="text" class="form-control" wire:model="sucursaldestino">
+                        </div>
+                        <div>
+                            <label for="">valordeclarado</label>
+                            <input type="text" class="form-control" wire:model="valordeclarado">
+                        </div>
+                        <div>
+                            <label for="">cantidadbultos</label>
+                            <input type="text" class="form-control" wire:model="cantidadbultos">
+                        </div>
+                        <div>
+                            <label for="">tarifa_id</label>
+                            <input type="text" class="form-control" wire:model="encomienda_tarifa_id">
+                        </div>
+                        <div>
+                            <label for="">observaciones</label>
+                            <input type="text" class="form-control" wire:model="encomienda_observaciones">
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-info" wire:click="store('encomienda')">
+                                <i class="fa-solid fa-pen-to-square"></i>Guardar
+                            </button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-pen-to-square"></i>Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Eliminar Encomiendas -->
+            <!-- ====================== -->
+            <div wire:ignore.self class="modal fade" id="ModalEliminarEncomiendas" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar Encomiendas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+                            Está seguro de que quiere eliminar la encomienda con sucursal de destino <b>{{ $sucursaldestino }}</b> y dirección de destinatario <b>{{  $direcciondestinatario }}</b>?
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger">
+                                <i class="fa-solid fa-pen-to-square"></i>Eliminar
+                            </button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-pen-to-square"></i>Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Alta/Modificación Tarifas -->
+            <!-- ================================== -->
+            <div wire:ignore.self class="modal fade" id="ModalAltaModificacionTarifas" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Alta/Modificación Tarifas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+                            <label for="">descripcionpaquete</label>
+                            <input type="text" class="form-control" wire:model="descripcionpaquete">
+                        </div>
+                        <div>
+                            <label for="">largo</label>
+                            <input type="text" class="form-control" wire:model="largo">
+                        </div>
+                        <div>
+                            <label for="">ancho</label>
+                            <input type="text" class="form-control" wire:model="ancho">
+                        </div>
+                        <div>
+                            <label for="">alto</label>
+                            <input type="text" class="form-control" wire:model="alto">
+                        </div>
+                        <div>
+                            <label for="">peso</label>
+                            <input type="text" class="form-control" wire:model="peso">
+                        </div>
+                        <div>
+                            <label for="">monto</label>
+                            <input type="text" class="form-control" wire:model="monto">
+                        </div>
+                        <div>
+                            <label for="">Activa</label>
+                            <input type="text" class="form-control" wire:model="tarifa_activo">
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-info" wire:click="store('tarifa')">
+                                <i class="fa-solid fa-pen-to-square"></i>Guardar
+                            </button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-pen-to-square"></i>Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Eliminar Tarifas -->
+            <!-- ====================== -->
+            <div wire:ignore.self class="modal fade" id="ModalEliminarTarifas" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar Tarifas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+                            Está seguro de que quiere eliminar la tarifa <b>{{ $descripcionpaquete }}</b>?
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger">
+                                <i class="fa-solid fa-pen-to-square"></i>Eliminar
+                            </button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-pen-to-square"></i>Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Alta/Modificación Sucursales -->
+            <!-- ================================== -->
+            <div wire:ignore.self class="modal fade" id="ModalAltaModificacionSucursales" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Alta/Modificación Sucursales</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+                            <label for="">Nombre</label>
+                            <input type="text" class="form-control" wire:model="nombresucursal">
+                        </div>
+                        <div>
+                            <label for="">Dirección</label>
+                            <input type="text" class="form-control" wire:model="direccionsucursal">
+                        </div>
+                        <div>
+                            <label for="">Teléfono</label>
+                            <input type="text" class="form-control" wire:model="telefonosucursal">
+                        </div>
+                        <div>
+                            <label for="">Código Postal</label>
+                            <input type="text" class="form-control" wire:model="CP">
+                        </div>
+                        <div>
+                            <label for="">Responsable</label>
+                            <input type="text" class="form-control" wire:model="responsablesucursal">
+                        </div>
+                        <div>
+                            <label for="">Observaciones</label>
+                            <input type="text" class="form-control" wire:model="observaciones">
+                        </div>
+                        <div>
+                            <label for="">Activa</label>
+                            <input type="text" class="form-control" wire:model="activo">
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-info" wire:click="store()">
+                                <i class="fa-solid fa-pen-to-square"></i>Guardar
+                            </button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-pen-to-square"></i>Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Eliminar Sucursales -->
+            <!-- ================================== -->
+            <div wire:ignore.self class="modal fade" id="ModalEliminarSucursales" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content" style="width: inherit">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Eliminar Sucursales</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div>
+                            Está seguro de que quiere eliminar la sucursal <b>{{ $nombresucursal }}</b>?
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger">
+                                <i class="fa-solid fa-pen-to-square"></i>Eliminar
+                            </button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-pen-to-square"></i>Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </section>
 
