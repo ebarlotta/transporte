@@ -1,5 +1,3 @@
-<!-- Probando la vista de paqueteria  -->
-
 <div>
     <link rel="stylesheet" type="text/css" href="{{asset('css/ventas/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/ventas/bootstrap-extended.min.css')}}">
@@ -16,11 +14,8 @@
         z-index: 9;
     }
     </style>
-    <button wire:click="MostrarSucursales()">Apretar</button>
-    @if($mostrar_sucursales) 
-        Esto se habilita
-    @endif
-    {{-- <div class="grey-bg container-fluid">
+
+    <div class="grey-bg container-fluid">
         <section id="minimal-statistics">
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
@@ -195,7 +190,7 @@
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <h3 class="primary">278</h3>
-                                        <span>Libre 1</span>
+                                        <span>Gestión Sucursales</span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="icon-book-open primary font-large-2 float-right"></i>
@@ -209,14 +204,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-sm-6 col-12">
+                <div class="col-xl-3 col-sm-6 col-12" wire:click="MostrarSeguimientos()">
                     <div class="card card-resalte">
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <h3 class="warning">156</h3>
-                                        <span>Libre 2</span>
+                                        <span>Gestión de Seguimientos</span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="icon-bubbles warning font-large-2 float-right"></i>
@@ -231,14 +226,14 @@
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-sm-6 col-12">
+                <div class="col-xl-3 col-sm-6 col-12" wire:click="MostrarEncomiendas()">
                     <div class="card card-resalte">
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <h3 class="success">64.89 %</h3>
-                                        <span>Libre 3</span>
+                                        <span>Gestión de Encomiendas</span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="icon-cup success font-large-2 float-right"></i>
@@ -252,14 +247,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-sm-6 col-12">
+                <div class="col-xl-3 col-sm-6 col-12" wire:click="MostrarTarifas()">
                     <div class="card-resalte">
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
                                         <h3 class="danger">423</h3>
-                                        <span>Libre 4</span>
+                                        <span>Gestión de Tarifas</span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="icon-direction danger font-large-2 float-right"></i>
@@ -279,50 +274,21 @@
         <section id="stats-subtitle">
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
-                    <h4 class="text-uppercase">Estadísticas Generales</h4>
-                    <p>Estadistis sobre Ventas &amp; Sub Title.</p>
+                    <h4 class="text-uppercase">Statistics With Subtitle</h4>
+                    <p>Statistics on minimal cards with Title &amp; Sub Title.</p>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xl-12 col-md-12" wire:click="MostrarSucursales()">
-                    <div class="card overflow-hidden">
-                        <div class="card-content">
-                            <div class="card-body cleartfix">
-                                <div class="media align-items-stretch">
-                                    <div class="align-self-center">
-                                        <i class="icon-pencil primary font-large-2 mr-2"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Total Ventas</h4>
-                                        Aca van los datos
-                                        <span>Monthly blog posts</span>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <button type="button" class="btn btn-info mr-4" data-toggle="modal" wire:click="ConstructorVenta()" data-target="#ModalGestionVentas">
-                                        Gestionar Ventas
-                                        </button>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <h1>18,000</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {{-- Card ocultable --}}
             @if($mostrar_sucursales)
-            Esta es la informacion
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-xl-12 col-md-12">
                         <div class="card overflow-hidden">
                             <div class="card-content">
                                 <div class="card-body cleartfix">
                                     <div class="media align-items-stretch">
                                         <div class="media-body">
-                                            <h4>Listado de Sucursales</h4>
+                                            <h4>Gestión de Sucursales</h4>
                                             <table class="table table-hover text-nowrap">
                                                 <tr>
                                                     <td>Nombre</td>
@@ -342,9 +308,14 @@
                                                     <td>{{ $sucursal->responsablesucursal }}</td>
                                                     <td>{{ $sucursal->observaciones }}</td>
                                                     <td>
-                                                        <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-info" data-toggle="modal" data-target="#ModalGestionPagos">
-                                                            Gestionar Pagos
-                                                        </button>
+                                                        <div class="btn-group" role="group">
+                                                            <button wire:click="edit(1)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaLocalidad">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Editar
+                                                            </button>
+                                                            <button wire:click="BuscarDatosLocalidad(1)" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarLocalidad">
+                                                            <i class="fa-regular fa-circle-xmark"></i> Eliminar
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -355,11 +326,171 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
+            @endif
+
+            {{-- Card ocultable --}}
+            @if($mostrar_tarifas)
+                <div class="row">
+                    <div class="col-xl-12 col-md-12">
+                        <div class="card overflow-hidden">
+                            <div class="card-content">
+                                <div class="card-body cleartfix">
+                                    <div class="media align-items-stretch">
+                                        <div class="media-body">
+                                            <h4>Gestión de Tarifas</h4>
+                                            <table class="table table-hover text-nowrap">
+                                                <tr>
+                                                    <td>descripcionpaquete</td>
+                                                    <td>largo</td>
+                                                    <td>ancho</td>
+                                                    <td>alto</td>
+                                                    <td>peso</td>
+                                                    <td>monto</td>
+                                                    <td>activo</td>
+                                                    <td>Opciones</td>
+                                                </tr>
+                                                @foreach ($tarifas as $tarifa)
+                                                <tr> 	 	 	 	 	
+                                                    <td>{{ $sucursal->descripcionpaquete }}</td>
+                                                    <td>{{ $sucursal->largo }}</td>
+                                                    <td>{{ $sucursal->ancho }}</td>
+                                                    <td>{{ $sucursal->alto }}</td>
+                                                    <td>{{ $sucursal->peso }}</td>
+                                                    <td>{{ $sucursal->monto }}</td>
+                                                    <td>{{ $sucursal->activo }}</td>
+                                                    <td>
+                                                        <div class="btn-group" role="group">
+                                                            <button wire:click="edit(1)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaLocalidad">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Editar
+                                                            </button>
+                                                            <button wire:click="BuscarDatosLocalidad(1)" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarLocalidad">
+                                                            <i class="fa-regular fa-circle-xmark"></i> Eliminar
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            {{-- Card ocultable --}}
+            @if($mostrar_seguimiento)
+                <div class="row">
+                    <div class="col-xl-12 col-md-12">
+                        <div class="card overflow-hidden">
+                            <div class="card-content">
+                                <div class="card-body cleartfix">
+                                    <div class="media align-items-stretch">
+                                        <div class="media-body">
+                                            <h4>Gestión de Seguimientos</h4>
+                                            <table class="table table-hover text-nowrap">
+                                                <tr>
+                                                    <td>encomienda_id</td>
+                                                    <td>Descripcion</td>
+                                                    <td>Fecha</td>
+                                                    <td>Opciones</td>
+                                                </tr>
+                                                @foreach ($seguimientos as $seguimiento)
+                                                <tr> 	 	 	 	 	
+                                                    <td>{{ $seguimiento->encomienda_id }}</td>
+                                                    <td>{{ $seguimiento->descripcionseguimiento }}</td>
+                                                    <td>{{ $seguimiento->fecha }}</td>
+                                                    <td>
+                                                        <div class="btn-group" role="group">
+                                                            <button wire:click="edit(1)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaLocalidad">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Editar
+                                                            </button>
+                                                            <button wire:click="BuscarDatosLocalidad(1)" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarLocalidad">
+                                                            <i class="fa-regular fa-circle-xmark"></i> Eliminar
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            {{-- Card ocultable --}}
+            @if($mostrar_encomiendas)
+                <div class="row">
+                    <div class="col-xl-12 col-md-12">
+                        <div class="card overflow-hidden">
+                            <div class="card-content">
+                                <div class="card-body cleartfix">
+                                    <div class="media align-items-stretch">
+                                        <div class="media-body">
+                                            <h4>Gestión de Encomiendas</h4>
+                                            <table class="table table-hover text-nowrap">
+                                                <tr>
+                                                    <td>direccionremitente</td>
+                                                    <td>sucursalorigen</td>
+                                                    <td>clienteorigen_id</td>
+                                                    <td>telefonoremitente</td>
+                                                    <td>emailremitente</td>
+                                                    <td>clientedestino_id</td>
+                                                    <td>direcciondestinatario</td>
+                                                    <td>sucursaldestino</td>
+                                                    <td>valordeclarado</td>
+                                                    <td>cantidadbultos</td>
+                                                    <td>tarifa_id</td>
+                                                    <td>observaciones</td>
+                                                    <td>Opciones</td>
+                                                </tr>
+                                                @foreach ($encomiendas as $encomienda)
+                                                <tr> 	 	 	 	 	
+                                                    <td>{{ $encomienda->direccionremitente }}</td>
+                                                    <td>{{ $encomienda->sucursalorigen }}</td>
+                                                    <td>{{ $encomienda->clienteorigen_id }}</td>
+                                                    <td>{{ $encomienda->telefonoremitente }}</td>
+                                                    <td>{{ $encomienda->emailremitente }}</td>
+                                                    <td>{{ $encomienda->clientedestino_id }}</td>
+                                                    <td>{{ $encomienda->direcciondestinatario }}</td>
+                                                    <td>{{ $encomienda->sucursaldestino }}</td>
+                                                    <td>{{ $encomienda->valordeclarado }}</td>
+                                                    <td>{{ $encomienda->cantidadbultos }}</td>
+                                                    <td>{{ $encomienda->tarifa_id }}</td>
+                                                    <td>{{ $encomienda->observaciones }}</td>
+                                                    <td>
+                                                        <div class="btn-group" role="group">
+                                                            <button wire:click="edit(1)" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalNuevaLocalidad">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Editar
+                                                            </button>
+                                                            <button wire:click="BuscarDatosLocalidad(1)" class="btn btn-danger" data-toggle="modal" data-target="#ModalEliminarLocalidad">
+                                                            <i class="fa-regular fa-circle-xmark"></i> Eliminar
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endif
 
 
 
         </section>
-    </div> --}}
+
+    </div>
+
 </div>

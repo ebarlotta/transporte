@@ -18,6 +18,7 @@ use App\Http\Livewire\InicioComponent;
 use App\Http\Livewire\Seguimiento\SegumientoComponent;
 use App\Http\Livewire\Sucursal\SucursalComponent;
 use App\Http\Livewire\Tarifa\TarifaComponent;
+use App\Http\Livewire\Paqueteria\PaqueteriaComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,10 @@ Route::get('ventas',VentasComponent::class)->name('ventas');
 Route::get('sucursales',SucursalComponent::class)->name('sucursales');
 Route::get('seguimiento',SegumientoComponent::class)->name('seguimiento');
 Route::get('tarifas',TarifaComponent::class)->name('tarifas');
+// Route::get('menu-paqueteria',EncomiendaComponent::class)->name('menu-paqueteria');
 Route::get('encomiendas',EncomiendaComponent::class)->name('encomiendas');
+Route::get('paqueteria',PaqueteriaComponent::class)->name('paqueteria');
+
 });
 
 Route::middleware([

@@ -395,34 +395,40 @@ return [
 
             ],
         ],
-
         [
-            'text'    => 'PAQUETERÍA',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Sucursales',
-                    'url'  => 'sucursales',
-                    'icon' => 'fas fa-fw fa-user',
-                ],  
-                [
-                    'text' => 'Tarifas',
-                    'url'  => 'tarifas',
-                    'icon' => 'fas fa-fw fa-user',
-                ], 
-                [
-                    'text' => 'Encomiendas',
-                    'url'  => 'encomiendas',
-                    'icon' => 'fas fa-fw fa-user',
-                ], 
-                [
-                    'text' => 'Seguimiento',
-                    'url'  => 'seguimiento',
-                    'icon' => 'fas fa-fw fa-user',
-                ], 
+            'text' => 'Paquetería',
+            // 'url'  => 'menu-paqueteria',
+            'url'  => 'paqueteria',
+            'icon' => 'fas fa-fw fa-user',
+        ], 
+        // [
+        //     'text'    => 'PAQUETERÍA',
+        //     'url'  => 'destinos',
+        //     'icon'    => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Sucursales',
+        //             'url'  => 'sucursales',
+        //             'icon' => 'fas fa-fw fa-user',
+        //         ],  
+        //         [
+        //             'text' => 'Tarifas',
+        //             'url'  => 'tarifas',
+        //             'icon' => 'fas fa-fw fa-user',
+        //         ], 
+        //         [
+        //             'text' => 'Encomiendas',
+        //             'url'  => 'encomiendas',
+        //             'icon' => 'fas fa-fw fa-user',
+        //         ], 
+        //         [
+        //             'text' => 'Seguimiento',
+        //             'url'  => 'seguimiento',
+        //             'icon' => 'fas fa-fw fa-user',
+        //         ], 
 
-            ],
-        ],
+        //     ],
+        // ],
 
         [
             'text' => 'change_password',

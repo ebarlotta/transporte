@@ -97,7 +97,7 @@
                 display: none;
                 height: calc(100vh - 50px);
                 background: #fff;
-                color: #001F3F;
+                color: #001F3F; 
                 padding: 50px 0;
                 text-align: center;
             } */
