@@ -457,9 +457,9 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <p class="my-3 mx-auto">
+                        <p class="my-3 ml-3 mx-auto">
                             Ingrese el monto a abonar por la cuota seleccionada:
-                            <input type="text" wire:model="Parcial" style="text-align: right;">
+                            <input type="text" class="form-control" wire:model="Parcial" style="text-align: right;">
                         </p>
                         <button type="button" class="btn btn-info m-2" wire:click="RegistrarPagoParcial()" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="ModalVentasExitosa" data-target="ModalGestionVentas" >Registrar Pago</button>
                         <br>
@@ -524,7 +524,7 @@
                         <div class="row">
                             <!-- listado de paquetes -->
                             <div class="col-xl-4 col-md-4 m-4">
-                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2" type="text" value="" placeholder="Buscar Paquete" wire:model="FiltroCliente">
+                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2" type="text" value="" placeholder="Buscar Paquete" wire:model="FiltroPaquete" wire:keyup="FiltrarPaquete">
                                 @if($ocultarPaquetes)
                                 @else
                                 @if($listadoPaquetes)
@@ -553,37 +553,34 @@
                             </div>
                             <!-- listado de clientes -->
                             <div class="col-xl-4 col-md-4 m-4">
-                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2" type="text" value="" placeholder="Buscar Cliente">
+                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2" type="text" value="" placeholder="Buscar Cliente" wire:model="FiltroCliente" wire:keyup="FiltrarCliente">
                                 @if($ocultarClientes)
                                 @else
-                                @if($comprarPaquete)
-                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200" type="text" value="" placeholder="Buscar Persona">
-
-                                    @foreach($listadoClientes as $cliente)
-                                    <div class="col-xl-12 col-md-12 m-4">
-                                        <h6  wire:click="SeleccionoCliente({{$cliente->id}})" class="card-resalte">{{ $cliente->apellido }}, {{ $cliente->nombre }}</h6>
-                                                {{-- <div class="card overflow-hidden card-resalte" wire:click="SeleccionoCliente({{$cliente->id}})">
-                                                    <div class="card-content rounded" style="background-color: #a6c49a;">
-                                                        <div class="card-body cleartfix">
-                                                            <div class="media align-items-stretch">
-                                                                <div class="media-body">
-                                                                    <h6>{{ $cliente->apellido }}, {{ $cliente->nombre }}</h6>
-                                                                    <span>{{ $paquete->descripcion}}</span>
-                                                                </div>
-                                                                <div class="align-self-center">
-                                                                    <img class="m-2" src="{{ asset('fotourl')}}" alt="" style="width: 50px; height:50px ;">
+                                    @if($comprarPaquete)
+                                        {{-- <input class="form-control mx-3 btn col-11 align-self-center bg-red-200" type="text" value="" placeholder="Buscar Persona"> --}}
+                                        @foreach($listadoClientes as $cliente)
+                                            <div class="col-xl-12 col-md-12 m-4">
+                                                <h6  wire:click="SeleccionoCliente({{$cliente->id}})" class="card-resalte">{{ $cliente->apellido }}, {{ $cliente->nombre }} - {{ $cliente->dni }}</h6>
+                                                        {{-- <div class="card overflow-hidden card-resalte" wire:click="SeleccionoCliente({{$cliente->id}})">
+                                                            <div class="card-content rounded" style="background-color: #a6c49a;">
+                                                                <div class="card-body cleartfix">
+                                                                    <div class="media align-items-stretch">
+                                                                        <div class="media-body">
+                                                                            <h6>{{ $cliente->apellido }}, {{ $cliente->nombre }}</h6>
+                                                                            <span>{{ $paquete->descripcion}}</span>
+                                                                        </div>
+                                                                        <div class="align-self-center">
+                                                                            <img class="m-2" src="{{ asset('fotourl')}}" alt="" style="width: 50px; height:50px ;">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
-
-
-                                    </div>
-                                    @endforeach
-                                @else
-                                    Seleccione un paquete
-                                @endif
+                                                        </div> --}}
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        Seleccione un paquete
+                                    @endif
                                 @endif
                             </div>
                             <div class="col-xl-12 col-md-12 m-4">
@@ -652,7 +649,7 @@
                         <p class="my-3 mx-auto">
                             Gracias por adquirir el paquete!!!
                         </p>
-                        <button type="button" class="btn btn-info m-2" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="ModalVentasExitosa" data-target="ModalGestionVentas" >Cerrar</button>
+                        <button type="button" class="btn btn-info m-2" wire:click="LimpiarVariables()" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="ModalVentasExitosa" data-target="ModalGestionVentas" >Cerrar</button>
                         <br>
                     </div>
                 </div>

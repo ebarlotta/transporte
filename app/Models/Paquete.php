@@ -16,5 +16,6 @@ class Paquete extends Model
         'presupuestoestimado',
         'fechasdisponibles',
         'fotourl',
+        'transporte_id',
     ];
 }

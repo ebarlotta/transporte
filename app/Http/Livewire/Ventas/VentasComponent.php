@@ -8,7 +8,7 @@ use App\Models\Venta;
 use Livewire\Component;
 use App\Models\Pago;
 use App\Models\Paquete;
-
+use App\Models\Transporte;
 
 class VentasComponent extends Component
 {
@@ -36,7 +36,7 @@ class VentasComponent extends Component
     public $ContDestinos=0;
     public $ContVentas=0;
 
-    public $FiltroCliente;
+    public $FiltroCliente, $FiltroPaquete;
 
     public function render()
     {
@@ -48,6 +48,39 @@ class VentasComponent extends Component
         return view('livewire.ventas.ventas-component')->with(['ContClientes'=>$this->ContClientes, 'ContDestinos' => $this->ContDestinos, 'ContVentas'=>$this->ContVentas])->extends('layouts.adminlte');
     }
 
+    public function FiltrarPaquete() {
+        if(strlen($this->FiltroPaquete)>0) {
+            $this->listadoPaquetes = Paquete::where('nombre', 'like', '%'.$this->FiltroPaquete .'%')->get();
+        // dd($this->listadoPaquetes); 
+        }
+        else {
+            $this->listadoPaquetes = Paquete::all();
+        }
+    }
+
+    public function FiltrarCliente() {
+        if(strlen($this->FiltroCliente)>0) {
+            $this->listadoClientes = Cliente::where('apellido', 'like', '%'.$this->FiltroCliente .'%')
+            ->orwhere('nombre', 'like', '%'.$this->FiltroCliente .'%')
+            ->orwhere('dni', 'like', '%'.$this->FiltroCliente .'%')
+            ->get();
+        //dd($this->listadoClientes); 
+        }
+        else {
+            $this->listadoClientes = Cliente::all();
+        }
+    }
+
+    public function LimpiarVariables() {
+        // $this->comprarPaquete=null;
+        $this->FiltroPaquete='';//Borra el paquete seleccionado
+        $this->FiltrarPaquete();  //Recupera el listado completo de paquetes
+        $this->listadoClientes=''; //Borra el cliente seleccionado
+        $this->FiltrarCliente(); //Recupera el listado completo de clientes
+        // $this->comprarCliente=null;
+        // $this->precioPaqueteSeleccionado=null;
+        return redirect('ventas');
+    }
     public function MostrarListadoPaquetes() {
         $this->listadopaqueteria = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')->get();
         // $this->listadoVentas = Venta::join('clientes', 'ventas.cliente_id', '=', 'clientes.id')->get();

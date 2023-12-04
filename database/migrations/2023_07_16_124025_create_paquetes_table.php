@@ -19,8 +19,10 @@ return new class extends Migration
             $table->double('presupuestoestimado')->nullable();
             $table->string('fechasdisponibles')->nullable();
             $table->string('fotourl')->default('Sin_imagen.jpg');
+            $table->unsignedBigInteger('transporte_id')->nullable();
             $table->timestamps();
 
+            $table->foreign('transporte_id')->references('id')->on('transportes');
         });
     }
 

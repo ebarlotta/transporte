@@ -39,11 +39,23 @@
                                 <input wire:model="duraciontotal" class="form-control" name="duraciontotal" type="text" id="duraciontotal">
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-3 col-5">
                                 <label class="form-label" for="presupuestoestimado">Presupuesto estimado</label>
                                 <input wire:model="presupuestoestimado" class="form-control" name="presupuestoestimado" type="text" id="presupuestoestimado">
                             </div>
-
+                            <div class="mb-3 col-6">
+                                <label class="form-label" for="Transportes">Transportes</label>
+                                
+                                <select name="" id="" wire:model="transporte_id">
+                                    <option value="">-</option>
+                                    @foreach ($transportes as $transporte)
+                                        <option value="{{ $transporte->id }}">{{ $transporte->descripcion }}</option>
+                                        {{-- <td>{{ date("d/m/Y", strtotime($transporte->salida)); }}</td>
+                                        <td>{{ date("d/m/Y", strtotime($transporte->llegada)); }}</td> --}}
+                                    @endforeach
+                                </select>                               
+                                {{-- <input wire:model="presupuestoestimado" class="form-control" name="presupuestoestimado" type="text" id="presupuestoestimado"> --}}
+                            </div>
                             <div class="mb-3">
                                 <label class="form-label" for="otrosenlaces">Fechas Disponibles</label>
                                 <input wire:model="fechasdisponibles" class="form-control" name="fechasdisponibles" type="text" id="fechasdisponibles">
@@ -51,14 +63,25 @@
 
                             <div class="mb-3">
                                 <div class="d-flex">
-                                    <label class="form-label" for="foto">Foto</label>
-                                    <input wire:model="fotourl" class="form-control" name="fotourl" type="file" id="fotourl" accept="image/*">
-                                    <div wire:loading wire:target="fotourl">
-                                        <strong class="font-bold">Imágen cargando!!</strong>
-                                        {{-- <img src="{{ $fotourl->temporaryUrl() }}" width="50px;"> --}}
-                                    </div>
-                                    @if($fotourl) 
-                                        <img src="{{ asset($fotourl) }}" width="50px;">
+                                    <label class="form-label mr-3" for="foto">Foto</label>
+                                    @if(is_null($fotourl))
+                                        <input wire:model="fotourl" class="form-control mr-3" name="fotourl" type="file" id="fotourl" accept="image/*">
+                                        <div wire:loading wire:target="fotourl">
+                                            <strong class="font-bold">Imágen cargando!!</strong>
+                                            {{-- <img src="{{ $fotourl->temporaryUrl() }}" width="50px;"> --}}
+                                        </div>
+                                    @else
+                                        @if($fotourl=="Sin_imagen.jpg")
+                                            <img src="img/Sin_imagen.jpg" class="mr-3" width="70px;">
+                                            <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal"         data-target="#ModalNuevaTransporte">
+                                                <i class="fa-regular fa-plus"></i> Cambiar Foto 
+                                            </button>
+                                        @else
+                                            <img src="{{ asset($fotourl) }}" class="mr-3" width="70px;">
+                                            <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevaTransporte">
+                                                <i class="fa-regular fa-plus"></i> Cambiar Foto 
+                                            </button>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -200,10 +223,12 @@
                                             <span>{{ $paquete->duraciontotal }}</span>
                                         </div>
                                         <div class="align-self-center">
-                                            @if("Sin_imagen.jpg"==$paquete->fotourl) 
-                                                <img src="img/sin_imagen.jpg" alt="" style="width: 100px; height:100px;">
-                                            @else 
-                                                <img src="{{ asset($paquete->fotourl) }}" alt="" style="width: 100px; height:100px;">
+                                            @if(!is_null($paquete->fotourl))
+                                                @if($paquete->fotourl=='Sin_imagen.jpg') 
+                                                    <img src="img/Sin_imagen.jpg" alt="" width="50px;">
+                                                @else 
+                                                    <img src="{{ $paquete->fotourl }}" alt="" width="50px;">
+                                                @endif
                                             @endif
                                         </div>
                                         <div class="align-self-center">
@@ -257,7 +282,7 @@
                                     <td>{{ $paquete->fechasdisponibles }}</td>
                                     <td>
                                         @if("Sin_imagen.jpg"==$paquete->fotourl) 
-                                            <img src="img/sin_imagen.jpg" alt="" style="width: 100px; height:100px;">
+                                            <img src="img/Sin_imagen.jpg" alt="" style="width: 100px; height:100px;">
                                         @else 
                                             <img src="{{ asset($paquete->fotourl) }}" alt="" style="width: 100px; height:100px;">
                                         @endif

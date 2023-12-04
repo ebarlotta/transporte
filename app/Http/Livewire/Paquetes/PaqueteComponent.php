@@ -6,7 +6,7 @@ use App\Models\Destino;
 use App\Models\DestinoPaquete;
 use Livewire\Component;
 use App\Models\Paquete;
-
+use App\Models\Transporte;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
@@ -15,8 +15,9 @@ class PaqueteComponent extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $paquetes;
+    public $paquetes, $transportes;
     public $nombre, $descripcion, $precio, $duraciontotal, $presupuestoestimado, $fechasdisponibles, $fotourl;
+    public $transporte, $transporte_id;
 
     public $destinospaquete, $destinosp, $destinosposibles, $destinoaeliminar;
 
@@ -29,6 +30,7 @@ class PaqueteComponent extends Component
         $this->paquetes = Paquete::paginate(10);
         $links = $this->paquetes;
         $this->paquetes = collect($this->paquetes->items());
+        $this->transportes = Transporte::all();
         // $this->paquetes = Paquete::all();
         return view('livewire.paquetes.paquete-component',['paquetes' => $this->paquetes, 'datos'=> $links])->extends('layouts.adminlte');
     }
@@ -43,13 +45,13 @@ class PaqueteComponent extends Component
             'fotourl' => 'required',
         ]);
 
-        if(Storage::exists($this->fotourl)){
-            $imagenurl = $this->fotourl;
-        }
-        else {
-            $imagenurl = basename($this->fotourl->store('public/paquetes'));
-            $imagenurl = 'storage/paquetes/' . $imagenurl;
-        }
+        // if(Storage::exists($this->fotourl)){
+        //     $imagenurl = $this->fotourl;
+        // }
+        // else {
+        //     $imagenurl = basename($this->fotourl->store('public/paquetes'));
+        //     $imagenurl = 'storage/paquetes/' . $imagenurl;
+        // }
         
         Paquete::updateOrCreate(['id' => $this->paquete_id], [
         'nombre' => $this->nombre,
@@ -58,7 +60,8 @@ class PaqueteComponent extends Component
         'duraciontotal' => $this->duraciontotal,
         'presupuestoestimado' => $this->presupuestoestimado,
         'fechasdisponibles' => $this->fechasdisponibles,
-        'fotourl' => $imagenurl,
+        'transporte_id' => $this->transporte_id,
+        // 'fotourl' => $imagenurl,
     ]);
         session()->flash('message', $this->paquete_id ? 'Paquete Actualizado.' : 'Paquete Creado.');
         $this->reset();
@@ -90,6 +93,7 @@ class PaqueteComponent extends Component
         $this->duraciontotal = $paquete->duraciontotal;
         $this->presupuestoestimado = $paquete->presupuestoestimado;
         $this->fechasdisponibles = $paquete->fechasdisponibles;
+        $this->transporte_id = $paquete->transporte_id;
         $this->fotourl = $paquete->fotourl;
 
         $this->paquete_id = $id;
@@ -143,7 +147,8 @@ class PaqueteComponent extends Component
         $this->duraciontotal = '';
         $this->presupuestoestimado = '';
         $this->fechasdisponibles = '';
-        $this->fotourl = '';
+        $this->transporte_id = '';
+        $this->fotourl = 'img/Sin_imagen.jpg';
 
         $this->destinospaquete = null;
 

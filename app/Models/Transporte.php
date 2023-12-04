@@ -17,6 +17,7 @@ class Transporte extends Model
         'salida',
         'llegada',
         'devolverenotrodestino',
+        'propio',
     ];
 
     public function servicios() {

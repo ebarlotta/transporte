@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('salida')->nullable();
             $table->date('llegada')->nullable();
             $table->boolean('devolverenotrodestino')->default(false);
+            $table->boolean('propio')->default(false);
 
             $table->timestamps();
         });

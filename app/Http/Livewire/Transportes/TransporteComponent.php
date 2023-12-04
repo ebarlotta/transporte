@@ -16,12 +16,16 @@ class TransporteComponent extends Component
 
     public function render()
     {
-        $this->transportes = Transporte::all();
+        $this->transportes = Transporte::paginate(10);
+        $links = $this->transportes;
+        $this->transportes = collect($this->transportes->items());
+
+        // $this->transportes = Transporte::all();
         return view('livewire.transportes.transporte-component',['transportes' => $this->transportes, 'datos'=> $links])->extends('layouts.adminlte');
     }
 
     public $transportes;
-    public $descripcion, $precio, $ubicaciongps, $fotourl, $salida, $llegada, $devolverenotrodestino;
+    public $descripcion, $precio, $ubicaciongps, $fotourl, $salida, $llegada, $devolverenotrodestino,$propio;
 
     public $transporte_id;
 
@@ -29,10 +33,11 @@ class TransporteComponent extends Component
         $this->descripcion = '';
         $this->precio = 0;
         $this->ubicaciongps = '';
-        $this->fotourl = null;
+        $this->fotourl = 'img/Sin_imagen.jpg';
         $this->salida = null;
         $this->llegada = null;
         $this->devolverenotrodestino = true;
+        $this->propio = true;
     }
     public function store() {
         $this->validate([
@@ -44,23 +49,38 @@ class TransporteComponent extends Component
             'llegada' => 'required',
             'devolverenotrodestino' => 'required',
         ]);
-        
-        if(Storage::exists($this->fotourl)){
-            $imagenurl = $this->fotourl;
-        }
-        else {
-            $imagenurl = basename($this->fotourl->store('public/transportes'));
-            $imagenurl = 'storage/transportes/' . $imagenurl;
-        }
+
+//dd($this->fotourl);
+        // if($this->fotourl) {
+        //     // Storage::delete('public/transportes/' . $this->fotourl);
+        //     $imagenurl = basename($this->fotourl->store('public/transportes'));
+        //     $imagenurl = 'storage/transportes/' . $imagenurl;
+        //     //$imagenurl = $this->fotourl;
+        // } else {
+        //     $imagenurl = 'storage/transportes/Sin_imagen.jpg';
+        // }
+
+        //$a = substr(Storage::url($this->fotourl),17); //   ::exists($this->fotourl);
+        //dd($a);
+        //if (Storage::exists($a)) {
+        // dd(Storage::exists('transportes/' . $this->fotourl));
+        // if(Storage::exists($this->fotourl)){
+        //    $imagenurl = $this->fotourl;
+        //}
+        //else {
+        //    $imagenurl = basename($this->fotourl->store('public/transportes'));
+        //    $imagenurl = 'storage/transportes/' . $imagenurl;
+        //}
 
         Transporte::updateOrCreate(['id' => $this->transporte_id], [
         'descripcion' => $this->descripcion,
         'precio' => $this->precio,
         'ubicaciongps' => $this->ubicaciongps,
-        'fotourl' => $imagenurl,
+        //'fotourl' => $imagenurl,
         'salida' => $this->salida,
         'llegada' => $this->llegada,
         'devolverenotrodestino' => $this->devolverenotrodestino,
+        'propio' => $this->propio,
     ]);
         session()->flash('message', $this->transporte_id ? 'Transporte Actualizado.' : 'Transporte Creado.');
         $this->reset();
@@ -75,6 +95,7 @@ class TransporteComponent extends Component
         $this->salida = $transporte->salida;
         $this->llegada = $transporte->llegada;
         $this->devolverenotrodestino = $transporte->devolverenotrodestino;
+        $this->propio = $transporte->propio;
 
         $this->transporte_id = $id;
     }
