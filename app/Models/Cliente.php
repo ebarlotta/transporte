@@ -17,6 +17,7 @@ class Cliente extends Model
         'dni',
         'telefono',
         'fechanacimiento',
+        'sexo',
         'foto',
         'nacionalidad_id',
         'provinicia_id',
@@ -34,4 +35,5 @@ class Cliente extends Model
     public function localidad() {
         return $this->hasOne('App\Models\Localidad', 'id','localidad_id');
     }
+
 }

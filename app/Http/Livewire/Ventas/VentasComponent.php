@@ -238,19 +238,20 @@ $operacion='AFEPS-40595';
         );
         //recorremos los registros y con ellos llenamos nuestro arreglo arrayDetall
         // apellido	nombre	tipo_documento	descripcion_documento	numero_documento	sexo	menor	nacionalidad	tripulante	ocupa_butaca
-
+        
         foreach ($items as $item){
             $arrayDetalle[] = array('apellido' => $item->apellido,
                             'nombre'  => "$item->nombre",
-                            'tipo_documento'  => $item->dni,
-                            'descripcion_documento'  => $item->dni,
+                            'tipo_documento'  => 'DNI',
+                            'descripcion_documento'  => null,
                             'numero_documento'  => $item->dni,
-                            'sexo'  => $item->dni,
-                            'menor'  => $item->dni,
-                            'nacionalidad'  => $item->dni,
-                            'tripulante'  => $item->dni,
-                            'ocupa_butaca'  => $item->dni
+                            'sexo'  => $item->sexo,
+                            'menor'  => $this->menor($item->fechanacimiento),
+                            'nacionalidad'  => 'AR',
+                            'tripulante'  => 0,
+                            'ocupa_butaca'  => 1
                             );
+                            // dd($item->nacionalidad());
         }
 
         //construyamos un arreglo para la información de las columnas
@@ -276,4 +277,11 @@ $operacion='AFEPS-40595';
         return response()->stream($callback, 200, $headers);                      
     }
 
+    public function menor($fechanacimiento) {    
+        if((date("Y")-date("Y", strtotime($fechanacimiento))) < 18 ){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
 }
