@@ -96,7 +96,9 @@ class VentasComponent extends Component
     }
 
     public function MostrarListadoVentas() {
-        $this->listadoVentas = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')->get();
+        $this->listadoVentas = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')
+        ->join('paquetes', 'paquetes.id', '=', 'ventas.paquete_id')->get();
+        
         // $this->listadoVentas = Venta::join('clientes', 'ventas.cliente_id', '=', 'clientes.id')->get();
         //$this->listadoVentas = Venta::all();
         // dd($this->listadoVentas);
@@ -182,6 +184,7 @@ class VentasComponent extends Component
         $venta->fecha = date("Y-m-d");
         $venta->total = $this->precioPaqueteSeleccionado; //$this->CantidadCuotas;
         $venta->cliente_id=$this->comprarCliente;
+        $venta->paquete_id = $this->comprarPaquete;
         //dd($venta);
         $venta->save();    
         $date=$this->FechaVencimiento;

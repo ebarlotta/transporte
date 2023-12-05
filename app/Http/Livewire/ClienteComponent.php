@@ -38,6 +38,8 @@ class ClienteComponent extends Component
     }
 
     public function store() {
+
+        dd($this->provincia_id);
         $this->validate([
             'apellido' => 'required',
             'nombre' => 'required',
@@ -47,13 +49,13 @@ class ClienteComponent extends Component
             'localidad_id' =>  'required|integer',
         ]);
         
-        if(Storage::exists($this->foto)){
-            $imagenurl = $this->foto;
-        }
-        else {
-            $imagenurl = $this->foto->store('public/clientes');
-            $imagenurl = 'storage/clientes/' . $imagenurl;
-        }
+        // if(Storage::exists($this->foto)){
+        //     $imagenurl = $this->foto;
+        // }
+        // else {
+        //     $imagenurl = $this->foto->store('public/clientes');
+        //     $imagenurl = 'storage/clientes/' . $imagenurl;
+        // }
 
         Cliente::updateOrCreate(['id' => $this->cliente_id], [
         'apellido' => $this->apellido,
@@ -66,7 +68,7 @@ class ClienteComponent extends Component
         'nacionalidad_id' => $this->nacionalidad_id,
         'provincia_id' => $this->provincia_id,
         'localidad_id' => $this->localidad_id,
-        'foto' => $imagenurl,
+        // 'foto' => $imagenurl,
     ]);
         session()->flash('message', $this->cliente_id ? 'Cliente Actualizado.' : 'Cliente Creado.');
         //$this->isModalCreateChange();

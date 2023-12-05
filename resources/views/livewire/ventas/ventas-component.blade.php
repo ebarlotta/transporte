@@ -317,11 +317,11 @@
                                                 <img class="p-2" src="img/csv.png" alt="" width="45px">
                                             </a>
                                         </div>
-
                                         <table class="table table-hover text-nowrap">
                                             <tr>
                                                 <td>Fecha</td>
                                                 <td>Cliente</td>
+                                                <td>Paquete</td>
                                                 <td>Total</td>
                                                 <td>Opciones</td>
                                             </tr>
@@ -329,8 +329,10 @@
                                             <tr>
                                                 <td>{{ date('d-m-Y',strtotime($venta->fecha))}}</td>
                                                 <td>{{ $venta->apellido . ', ' . $venta->nombre }}</td>
+                                                <td>{{ $venta->nombre }}</td>
                                                 <td>$ {{ number_format($venta->total,2)}}</td>
                                                 <td>
+                                                    {{$venta->paquete}}
                                                     <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-info" data-toggle="modal" data-target="#ModalGestionPagos">
                                                         Gestionar Pagos
                                                     </button>
