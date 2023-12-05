@@ -10,7 +10,7 @@ class Paquete extends Model
     use HasFactory;
 
     protected $fillable=[
-        'nombre',
+        'nombrepaquete',
         'descripcion',
         'duraciontotal',
         'presupuestoestimado',

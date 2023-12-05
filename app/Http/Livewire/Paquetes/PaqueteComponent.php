@@ -16,7 +16,7 @@ class PaqueteComponent extends Component
     use WithPagination;
 
     public $paquetes, $transportes;
-    public $nombre, $descripcion, $precio, $duraciontotal, $presupuestoestimado, $fechasdisponibles, $fotourl;
+    public $nombrepaquete, $descripcion, $precio, $duraciontotal, $presupuestoestimado, $fechasdisponibles, $fotourl;
     public $transporte, $transporte_id;
 
     public $destinospaquete, $destinosp, $destinosposibles, $destinoaeliminar;
@@ -37,7 +37,7 @@ class PaqueteComponent extends Component
 
     public function store() {
         $this->validate([
-            'nombre' => 'required',
+            'nombrepaquete' => 'required',
             'descripcion' => 'required',
             'duraciontotal' => 'required',
             'presupuestoestimado' => 'required',
@@ -54,7 +54,7 @@ class PaqueteComponent extends Component
         // }
         
         Paquete::updateOrCreate(['id' => $this->paquete_id], [
-        'nombre' => $this->nombre,
+        'nombrepaquete' => $this->nombrepaquete,
         'descripcion' => $this->descripcion,
         'precio' => $this->precio,
         'duraciontotal' => $this->duraciontotal,
@@ -87,7 +87,7 @@ class PaqueteComponent extends Component
         ->get();
         //dd($this->destinospaquete);
         
-        $this->nombre = $paquete->nombre;
+        $this->nombrepaquete = $paquete->nombrepaquete;
         $this->descripcion = $paquete->descripcion;
         $this->precio = $paquete->precio;
         $this->duraciontotal = $paquete->duraciontotal;
@@ -131,17 +131,17 @@ class PaqueteComponent extends Component
     public function Consultar($id) {
         $paquete = Paquete::find($id);
         dd($paquete);
-        $this->nombre = $paquete->nombre;
+        $this->nombrepaquete = $paquete->nombrepaquete;
         $this->paquete_id = $id;
     }
     public function isModalConsultar($id) {
         $paquete = Paquete::find($id);
-        $this->PaqueteAEliminar = $paquete->nombre;
+        $this->PaqueteAEliminar = $paquete->nombrepaquete;
         $this->paquete_id = $id;
     }
 
     public function nuevo() {
-        $this->nombre = '';
+        $this->nombrepaquete = '';
         $this->descripcion = '';
         $this->precio = '';
         $this->duraciontotal = '';

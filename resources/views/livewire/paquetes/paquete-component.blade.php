@@ -35,8 +35,8 @@
                         <form action="">
                             <div class="mb-3 mt-3">
                                 <label class="form-label" for="nombre">Nombre</label>
-                                <input wire:model="nombre" class="form-control" name="nombre" type="text" id="nombre">
-                                @error('nombre') <span class="text-danger">{{ $message }}</span>@enderror
+                                <input wire:model="nombrepaquete" class="form-control" name="nombrepaquete" type="text" id="nombrepaquete">
+                                @error('nombrepaquete') <span class="text-danger">{{ $message }}</span>@enderror
 
                             </div>
 
@@ -117,7 +117,7 @@
                                                         <span wire:click="setDestinoAEliminar({{ $destino->id }})" data-toggle="modal" data-target="#ModalEliminarRelacion" class="px-1" style="margin-left: 23px; background-color: #e98989; border-radius: 7px; text-decoration: none;">&times;</span>
                                                     </div>
                                                 </div>
-                                                {{ $destino->nombre}}
+                                                {{ $destino->nombrepaquete}}
                                             </div>
                                         @endforeach
                                     @else
@@ -292,7 +292,7 @@
                             </thead>
                             @foreach ($paquetes as $paquete)
                                 <tr>
-                                    <td>{{ $paquete->nombre }}</td>
+                                    <td>{{ $paquete->nombrepaquete }}</td>
                                     <td>{{ $paquete->descripcion }}</td>
                                     <td>{{ $paquete->duraciontotal }}</td>
                                     <td>{{ $paquete->presupuestoestimado }}</td>

@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>423</h3>
-                                        <span>Total Visits</span>
+                                        <span>Total Visitas</span>
                                     </div>
                                 </div>
                             </div>
@@ -245,8 +245,8 @@
                             <div class="card-body">
                                 <div class="media d-flex">
                                     <div class="media-body text-left">
-                                        <h3 class="danger">423</h3>
-                                        <span>Total Visits</span>
+                                        <h3 class="danger">15</h3>
+                                        <span>Generación de DUT</span>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="icon-direction danger font-large-2 float-right"></i>
@@ -329,7 +329,7 @@
                                             <tr>
                                                 <td>{{ date('d-m-Y',strtotime($venta->fecha))}}</td>
                                                 <td>{{ $venta->apellido . ', ' . $venta->nombre }}</td>
-                                                <td>{{ $venta->nombre }}</td>
+                                                <td>{{ $venta->nombrepaquete }}</td>
                                                 <td>$ {{ number_format($venta->total,2)}}</td>
                                                 <td>
                                                     {{$venta->paquete}}
