@@ -308,7 +308,16 @@
                             <div class="card-body cleartfix">
                                 <div class="media align-items-stretch">
                                     <div class="media-body">
-                                        <h4>Listado de Paquetes Vendidos</h4>
+                                        <div style="display: block ruby">
+                                            <h4>Listado de Paquetes Vendidos</h4>
+                                            <a href="{{ URL::to('/pdf/deuda') }}" target="_blank">
+                                                <img class="p-2" src="img/pdf.png" alt="" width="50px">
+                                            </a>
+                                            <a href="{{ URL::to('/pdf/csv') }}" target="_blank">
+                                                <img class="p-2" src="img/csv.png" alt="" width="45px">
+                                            </a>
+                                        </div>
+
                                         <table class="table table-hover text-nowrap">
                                             <tr>
                                                 <td>Fecha</td>

@@ -57,6 +57,9 @@ Route::get('tarifas',TarifaComponent::class)->name('tarifas');
 Route::get('encomiendas',EncomiendaComponent::class)->name('encomiendas');
 Route::get('paqueteria',PaqueteriaComponent::class)->name('paqueteria');
 
+Route::get('pdf/deuda', [VentasComponent::class, 'GenerarListadoVentasPDF']);
+Route::get('pdf/csv', [VentasComponent::class, 'GenerarCSV']);
+
 });
 
 Route::middleware([

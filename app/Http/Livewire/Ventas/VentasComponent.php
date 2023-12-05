@@ -9,6 +9,11 @@ use Livewire\Component;
 use App\Models\Pago;
 use App\Models\Paquete;
 use App\Models\Transporte;
+// use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+// use Barryvdh\DomPDF\PDF;
+// use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+
 
 class VentasComponent extends Component
 {
@@ -197,4 +202,78 @@ class VentasComponent extends Component
     public function LeerParcial($dato) {
         $this->Parcial = $dato;
     }
+    public function GenerarListadoVentasPDF() {
+        // $pdf = app('dompdf.wrapper');
+        // $pdf = FacadePdf::make('dompdf.wrapper');
+
+        // $pdf->loadHTML('<h1>Styde.net</h1>');
+        // $data = [
+            // 'titulo' => 'Styde.net'
+        // ];
+$registros=10;
+$saldo =1000;
+$operacion='AFEPS-40595';
+        $pdf = PDF::loadView('livewire.ventas.pdf_view',compact('registros','saldo','operacion'));
+
+        return $pdf->stream('archivo.pdf');
+    }
+
+    public function GenerarCSV() {
+
+        //Nombre del archivo que generaremos
+        $fileName = 'InvTransactionsInterface.csv';
+        //Arreglo que contendrá las filas de datos
+        $arrayDetalle = Array();
+
+        //Estos son los datos que recibimos del modelo que queremos leer, aquí ustedes cámbienlo por el modelo que necesiten
+        $items=Cliente::all();
+
+        //El encabezado que le dice al explorador el tipo de archivo que estamos generando
+        $headers = array(
+                    "Content-type"        => "text/csv",
+                    "Content-Disposition" => "attachment; filename=$fileName",
+                    "Pragma"              => "no-cache",
+                    "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                    "Expires"             => "0"
+        );
+        //recorremos los registros y con ellos llenamos nuestro arreglo arrayDetall
+        // apellido	nombre	tipo_documento	descripcion_documento	numero_documento	sexo	menor	nacionalidad	tripulante	ocupa_butaca
+
+        foreach ($items as $item){
+            $arrayDetalle[] = array('apellido' => $item->apellido,
+                            'nombre'  => "$item->nombre",
+                            'tipo_documento'  => $item->dni,
+                            'descripcion_documento'  => $item->dni,
+                            'numero_documento'  => $item->dni,
+                            'sexo'  => $item->dni,
+                            'menor'  => $item->dni,
+                            'nacionalidad'  => $item->dni,
+                            'tripulante'  => $item->dni,
+                            'ocupa_butaca'  => $item->dni
+                            );
+        }
+
+        //construyamos un arreglo para la información de las columnas
+        $columns = array('apellido',
+                        'nombre',
+                        'tipo_documento',
+                        'descripcion_documento',
+                        'numero_documento',
+                        'sexo',
+                        'menor',
+                        'nacionalidad',
+                        'tripulante',
+                        'ocupa_butaca');
+        $callback = function() use($arrayDetalle, $columns) {
+            $file = fopen('php://output', 'w');
+            //si no quieren que el csv muestre el titulo de columnas omitan la siguiente línea.
+            fputcsv($file, $columns);
+                    foreach ($arrayDetalle as $item) {
+                        fputcsv($file, $item);
+                    }
+                    fclose($file);
+                };
+        return response()->stream($callback, 200, $headers);                      
+    }
+
 }

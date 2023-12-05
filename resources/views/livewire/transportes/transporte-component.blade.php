@@ -16,6 +16,15 @@
             <div class="modal-dialog modal-lg" role="document">
 
                 <div class="modal-content" style="width: inherit">
+                    @if (session()->has('message'))
+                        <div class="border-t-4  rounded-b px-4 py-3 shadow-md my-3 bg-lime-700" role="alert" style="background-color: lightgreen;">
+                            <div class="flex">
+                                <div>
+                                    <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Alta de Transportes</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -28,18 +37,19 @@
                             <div class="mb-3 mt-3">
                                 <label class="form-label" for="descripcion">Descripción</label>
                                 <input wire:model="descripcion" class="form-control" name="descripcion" type="text" id="descripcion">
+                                @error('descripcion') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="precio">Precio</label>
-                                <input wire:model="precio" class="form-control"
-                                    name="precio" type="text" id="precio">
+                                <input wire:model="precio" class="form-control" name="precio" type="text" id="precio">
+                                @error('precio') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="ubicaciongps">Ubicacion GPS</label>
-                                <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps"
-                                    type="text" id="ubicaciongps">
+                                <input wire:model="ubicaciongps" class="form-control" name="ubicaciongps" type="text" id="ubicaciongps" value="10,20">
+                                @error('ubicaciongps') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="mb-3 mt-3">
@@ -65,31 +75,35 @@
                                         @endif
                                     @endif
                                 </div>
+                                @error('fotourl') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="mb-3 mt-3">
                                 <label class="form-label" for="salida">Salida</label>
                                 <input wire:model="salida" class="form-control" name="salida" type="date" id="salida">
+                                @error('salida') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="mb-3 mt-3">
                                 <label class="form-label" for="llegada">Llegada</label>
                                 <input wire:model="llegada" class="form-control" name="llegada" type="date" id="llegada">
+                                @error('llegada') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="mb-3 mt-3">
                                 <label class="form-label" for="devolverenotrodestino">Devolver en otro destino</label>
                                 <input wire:model="devolverenotrodestino" class="" name="devolverenotrodestino" type="checkbox" id="devolverenotrodestino">
+                                @error('devolverenotrodestino') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="mb-3 mt-3">
                                 <label class="form-label" for="propio">El vehículo es propio?</label>
                                 <input wire:model="propio" class="" name="propio" type="checkbox" id="propio">
+                                @error('propio') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                                 <button class="btn btn-warning" data-dismiss="modal" type="button">Cerrar</button>
-                                <button class="btn btn-primary" type="button" wire:click="store()" data-dismiss="modal">Guardar</button>
+                                <button class="btn btn-primary" type="button" wire:click="store()">Guardar</button>
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>

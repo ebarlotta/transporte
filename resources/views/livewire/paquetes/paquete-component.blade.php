@@ -22,73 +22,90 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    @if (session()->has('message'))
+                        <div class="border-t-4  rounded-b px-4 py-3 shadow-md my-3 bg-lime-700" role="alert" style="background-color: lightgreen;">
+                            <div class="flex">
+                                <div>
+                                    <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="container">
                         <form action="">
                             <div class="mb-3 mt-3">
                                 <label class="form-label" for="nombre">Nombre</label>
                                 <input wire:model="nombre" class="form-control" name="nombre" type="text" id="nombre">
+                                @error('nombre') <span class="text-danger">{{ $message }}</span>@enderror
+
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="descripcion">Descripción</label>
                                 <textarea wire:model="descripcion" class="form-control" placeholder="Descripción" aria-label="With textarea" rows="5"></textarea>
+                                @error('descripcion') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
+                            <div class="flex d-flex">
+                                <div class="mb-3 col-4">
+                                    <label class="form-label" for="clima">Duracion Total</label>
+                                    <input wire:model="duraciontotal" class="form-control" name="duraciontotal" type="text" id="duraciontotal">
+                                    @error('Duraciontotal') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>                                
+                                <div class="mb-3 col-4">
+                                    <label class="form-label" for="presupuestoestimado">Presupuesto estimado</label>
+                                    <input wire:model="presupuestoestimado" class="form-control" name="presupuestoestimado" type="text" id="presupuestoestimado">
+                                    @error('presupuestoestimado') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label class="form-label" for="Transportes">Transportes</label>
+                                    <select class="form-control" name="" id="" wire:model="transporte_id">
+                                        <option value="">-</option>
+                                        @foreach ($transportes as $transporte)
+                                            <option value="{{ $transporte->id }}">{{ $transporte->descripcion }}</option>
+                                            {{-- <td>{{ date("d/m/Y", strtotime($transporte->salida)); }}</td>
+                                            <td>{{ date("d/m/Y", strtotime($transporte->llegada)); }}</td> --}}
+                                        @endforeach
+                                    </select>       
+                                    @error('transporte_id') <span class="text-danger">{{ $message }}</span>@enderror                        
+                                </div>
+                            </div>
+                            <div class="flex d-flex">
+                                <div class="mb-3 col-4">
+                                    <label class="form-label" for="otrosenlaces">Fechas Disponibles</label>
+                                    <input wire:model="fechasdisponibles" class="form-control" name="fechasdisponibles" type="text" id="fechasdisponibles">
+                                    @error('fechasdisponibles') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
 
-                            <div class="mb-3">
-                                <label class="form-label" for="clima">Duracion Total</label>
-                                <input wire:model="duraciontotal" class="form-control" name="duraciontotal" type="text" id="duraciontotal">
-                            </div>
-
-                            <div class="mb-3 col-5">
-                                <label class="form-label" for="presupuestoestimado">Presupuesto estimado</label>
-                                <input wire:model="presupuestoestimado" class="form-control" name="presupuestoestimado" type="text" id="presupuestoestimado">
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label class="form-label" for="Transportes">Transportes</label>
-                                
-                                <select name="" id="" wire:model="transporte_id">
-                                    <option value="">-</option>
-                                    @foreach ($transportes as $transporte)
-                                        <option value="{{ $transporte->id }}">{{ $transporte->descripcion }}</option>
-                                        {{-- <td>{{ date("d/m/Y", strtotime($transporte->salida)); }}</td>
-                                        <td>{{ date("d/m/Y", strtotime($transporte->llegada)); }}</td> --}}
-                                    @endforeach
-                                </select>                               
-                                {{-- <input wire:model="presupuestoestimado" class="form-control" name="presupuestoestimado" type="text" id="presupuestoestimado"> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="otrosenlaces">Fechas Disponibles</label>
-                                <input wire:model="fechasdisponibles" class="form-control" name="fechasdisponibles" type="text" id="fechasdisponibles">
-                            </div>
-
-                            <div class="mb-3">
-                                <div class="d-flex">
-                                    <label class="form-label mr-3" for="foto">Foto</label>
-                                    @if(is_null($fotourl))
-                                        <input wire:model="fotourl" class="form-control mr-3" name="fotourl" type="file" id="fotourl" accept="image/*">
-                                        <div wire:loading wire:target="fotourl">
-                                            <strong class="font-bold">Imágen cargando!!</strong>
-                                            {{-- <img src="{{ $fotourl->temporaryUrl() }}" width="50px;"> --}}
-                                        </div>
-                                    @else
-                                        @if($fotourl=="Sin_imagen.jpg")
-                                            <img src="img/Sin_imagen.jpg" class="mr-3" width="70px;">
-                                            <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal"         data-target="#ModalNuevaTransporte">
-                                                <i class="fa-regular fa-plus"></i> Cambiar Foto 
-                                            </button>
+                                <div class="mb-3 col-8">
+                                    <div class="d-flex">
+                                        <label class="form-label mr-3" for="foto">Foto</label>
+                                        @if(is_null($fotourl))
+                                            <input wire:model="fotourl" class="form-control mr-3" name="fotourl" type="file" id="fotourl" accept="image/*">
+                                            <div wire:loading wire:target="fotourl">
+                                                <strong class="font-bold">Imágen cargando!!</strong>
+                                                {{-- <img src="{{ $fotourl->temporaryUrl() }}" width="50px;"> --}}
+                                            </div>
                                         @else
-                                            <img src="{{ asset($fotourl) }}" class="mr-3" width="70px;">
-                                            <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevaTransporte">
-                                                <i class="fa-regular fa-plus"></i> Cambiar Foto 
-                                            </button>
+                                            @if($fotourl=="Sin_imagen.jpg")
+                                                <img src="img/Sin_imagen.jpg" class="mr-3" width="70px;">
+                                                <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal"         data-target="#ModalNuevaTransporte">
+                                                    <i class="fa-regular fa-plus"></i> Cambiar Foto 
+                                                </button>
+                                            @else
+                                                <img src="{{ asset($fotourl) }}" class="mr-3" width="70px;">
+                                                <button type="button" class="btn btn-info" wire:click="nuevo()" data-toggle="modal" data-target="#ModalNuevaTransporte">
+                                                    <i class="fa-regular fa-plus"></i> Cambiar Foto 
+                                                </button>
+                                            @endif
                                         @endif
-                                    @endif
+                                    </div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div>
-                                    <label class="form-label">Destinos Relacionados</label>
-                                    <button class="btn btn-info" data-dismiss="modal" type="button" wire:click="ConstructorDestinos()" data-toggle="modal" data-target="#ModalNueaRelacion"><i class="fa-regular fa-plus"></i>Agregar Destino</button>
+                                    <label class="form-label col-12">Destinos Relacionados</label>
+                                    <button class="btn btn-info form-control col-3" data-dismiss="modal" type="button" wire:click="ConstructorDestinos()" data-toggle="modal" data-target="#ModalNueaRelacion"><i class="fa-regular fa-plus"></i>Agregar Destino</button>
+                                    @error('descripcion') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="d-flex flex-wrap align-self-center">
                                     @if(($destinospaquete))
