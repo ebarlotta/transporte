@@ -35,6 +35,21 @@ class PaqueteComponent extends Component
         return view('livewire.paquetes.paquete-component',['paquetes' => $this->paquetes, 'datos'=> $links])->extends('layouts.adminlte');
     }
 
+    public function ModificarFoto() {
+        $this->validate([
+            'fotourl' => 'required',
+        ]);
+        $imagenurl = basename($this->fotourl->store('public/paquetes'));
+        $imagenurl = 'storage/paquetes/' . $imagenurl;
+
+        Paquete::updateOrCreate(['id' => $this->paquete_id], [
+            'fotourl' => $imagenurl,
+        ]);
+        $a = Paquete::find($this->paquete_id)->get();
+        // dd($a[0]->fotourl);
+        $this->fotourl = $a[0]->fotourl;
+    }
+
     public function store() {
         $this->validate([
             'nombrepaquete' => 'required',
@@ -85,7 +100,6 @@ class PaqueteComponent extends Component
         $this->destinospaquete = DestinoPaquete::where('paquete_id','=',$this->paquete_id)
         ->join('destinos','destino_paquetes.destino_id','=','destinos.id')
         ->get();
-        //dd($this->destinospaquete);
         
         $this->nombrepaquete = $paquete->nombrepaquete;
         $this->descripcion = $paquete->descripcion;
@@ -95,6 +109,7 @@ class PaqueteComponent extends Component
         $this->fechasdisponibles = $paquete->fechasdisponibles;
         $this->transporte_id = $paquete->transporte_id;
         $this->fotourl = $paquete->fotourl;
+        // dd($this->fotourl);
 
         $this->paquete_id = $id;
 

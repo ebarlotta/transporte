@@ -174,8 +174,8 @@ class VentasComponent extends Component
 
     public function SeleccionoCliente($id) {
         $this->comprarCliente=$id;
-        $this->ocultarPaquetes=!$this->ocultarPaquetes;
-        $this->ocultarClientes=!$this->ocultarClientes;
+        // $this->ocultarPaquetes=!$this->ocultarPaquetes;
+        // $this->ocultarClientes=!$this->ocultarClientes;
         $this->ocultarVenta=!$this->ocultarVenta;
     }
 

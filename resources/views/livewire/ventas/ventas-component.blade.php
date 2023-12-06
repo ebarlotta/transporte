@@ -532,14 +532,15 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" style="justify-content: center">
                             <!-- listado de paquetes -->
-                            <div class="col-xl-4 col-md-4 m-4">
-                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2" type="text" value="" placeholder="Buscar Paquete" wire:model="FiltroPaquete" wire:keyup="FiltrarPaquete">
+                            <div class="col-xl-5 col-md-4 m-4" style="overflow-x: scroll; height;height: 300px;background-color: antiquewhite; box-shadow: 5px 5px 15px gray;">
+                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2 mt-2" type="text" value="" placeholder="Buscar Paquete" wire:model="FiltroPaquete" wire:keyup="FiltrarPaquete" style="background-color: whitesmoke; box-shadow: 5px 5px 15px gray;">
                                 @if($ocultarPaquetes)
                                 @else
                                 @if($listadoPaquetes)
-                                    @foreach ($listadoPaquetes as $paquete)
+                                    <div style="overflow-x: scroll; height: 240px;">
+                                        @foreach ($listadoPaquetes as $paquete)
                                         <div class="card overflow-hidden card-resalte" wire:click="SeleccionoPaquete({{$paquete->id}})">
                                             <div class="card-content rounded" style="background-color: #cda3a3;">
                                                 <div class="card-body cleartfix">
@@ -558,18 +559,20 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
                                 @endif
                                 @endif
                             </div>
                             <!-- listado de clientes -->
-                            <div class="col-xl-4 col-md-4 m-4">
-                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2" type="text" value="" placeholder="Buscar Cliente" wire:model="FiltroCliente" wire:keyup="FiltrarCliente">
+                            <div class="col-xl-5 col-md-4 m-4" style="height: 300px;background-color: antiquewhite; box-shadow: 5px 5px 15px gray;">
+                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2 mt-2" type="text" value="" placeholder="Buscar Cliente" wire:model="FiltroCliente" wire:keyup="FiltrarCliente" style="background-color: whitesmoke; box-shadow: 5px 5px 15px gray;">
                                 @if($ocultarClientes)
                                 @else
                                     @if($comprarPaquete)
                                         {{-- <input class="form-control mx-3 btn col-11 align-self-center bg-red-200" type="text" value="" placeholder="Buscar Persona"> --}}
-                                        @foreach($listadoClientes as $cliente)
+                                        <div style="overflow-x: scroll; height: 240px;">
+                                            @foreach($listadoClientes as $cliente)
                                             <div class="col-xl-12 col-md-12 m-4">
                                                 <h6  wire:click="SeleccionoCliente({{$cliente->id}})" class="card-resalte">{{ $cliente->apellido }}, {{ $cliente->nombre }} - {{ $cliente->dni }}</h6>
                                                         {{-- <div class="card overflow-hidden card-resalte" wire:click="SeleccionoCliente({{$cliente->id}})">
@@ -588,13 +591,14 @@
                                                             </div>
                                                         </div> --}}
                                             </div>
-                                        @endforeach
+                                            @endforeach
+                                        </div>
                                     @else
                                         Seleccione un paquete
                                     @endif
                                 @endif
                             </div>
-                            <div class="col-xl-12 col-md-12 m-4">
+                            <div class="col-xl-11 col-md-11 m-4">
                                 @if($comprarPaquete>0 && $comprarCliente>0 and $precioPaqueteSeleccionado>0)
                                     Monto del Paquete: $ <input class="btn" type="text" value="203" wire:model="precioPaqueteSeleccionado">
                                     @if(!$ocultarVenta)
@@ -609,7 +613,7 @@
                                                 <input class="form-control" type="date" name="FechaVencimiento" id="FechaVencimiento" wire:model="FechaVencimiento">
                                             </td>
                                             <td>
-                                                <select  class="form-control" name="CantidadCuotas" id="CantidadCuotas" wire:model="CantidadCuotas">
+                                                <select  class="form-control ml-2 mr-2" name="CantidadCuotas" id="CantidadCuotas" wire:model="CantidadCuotas">
                                                     <option value="1" selected>1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -625,8 +629,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-info" wire:click="RealizarVenta()" data-toggle="modal" data-target="#ModalVentasExitosa">
-                                                    Realizar Venta </button>
+                                                <button type="button" class="btn btn-info mx-2" wire:click="RealizarVenta()" data-toggle="modal" data-target="#ModalVentasExitosa">Realizar Venta </button>
                                             </td>
                                         </tr>
                                     </table>

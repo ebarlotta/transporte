@@ -49,7 +49,7 @@
                                     @foreach ($clientes as $cliente)
                                         <tr>
                                             <td> 
-                                                @if($cliente->foto="Sin_imagen.jpg") 
+                                                @if($cliente->foto=="Sin_imagen.jpg") 
                                                     <img src="img/Sin_imagen.jpg" style="border-radius: 50%;width: 38px;height: 38px;">
                                                 @else
                                                     <img src="{{$cliente->foto}}" style="border-radius: 50%;width: 38px;height: 38px;">
@@ -171,7 +171,7 @@
                                         <div class="col-5 m-2">
                                             <div class="d-flex">
                                                 <label class="block text-gray-700 text-sm font-bold mb-2">Foto</label>
-                                                <input type="file" style="width: inherit;" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese foto" wire:model="foto">
+                                                <input type="file" style="width: inherit;" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese foto" accept="image/*" wire:model="foto">
                                                 <img src="{{ $foto }}" width="50px;" style="border-radius: 50%;width: 38px;height: 38px;">
                                             </div>
                                         </div>
@@ -232,7 +232,7 @@
             </div>
 
 
-            {{-- M odal Estado de cuenta PRUEBA --}}
+            {{-- Modal Estado de cuenta PRUEBA --}}
             {{-- ====================== --}}
 
             <head>
