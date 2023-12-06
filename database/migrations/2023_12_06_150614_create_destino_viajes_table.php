@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('destino_paquetes', function (Blueprint $table) {
+        Schema::create('destino_viajes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('destino_id');
-            $table->unsignedBigInteger('paquete_id');
+            $table->unsignedBigInteger('viaje_id');
             $table->date('fechainicio');
             $table->date('fechafinal');
             $table->unsignedBigInteger('lugarsalida');  // destino_id desde donde se parte
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('destino_id')->references('id')->on('destinos');
-            $table->foreign('paquete_id')->references('id')->on('paquetes');
+            $table->foreign('viaje_id')->references('id')->on('viajes');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('destino_paquetes');
+        Schema::dropIfExists('destino_viajes');
     }
 };

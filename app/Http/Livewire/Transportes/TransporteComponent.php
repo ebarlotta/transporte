@@ -27,7 +27,7 @@ class TransporteComponent extends Component
     public $transportes;
     public $descripcion, $precio, $ubicaciongps, $fotourl, $salida, $llegada, $devolverenotrodestino,$propio;
 
-    public $transporte_id;
+    public $transporte_id=1;
 
     public function nuevo() {
         $this->descripcion = '';

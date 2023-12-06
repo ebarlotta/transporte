@@ -9,11 +9,12 @@ use Livewire\Component;
 use App\Models\Pago;
 use App\Models\Paquete;
 use App\Models\Transporte;
+use App\Models\Viaje;
 // use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 // use Barryvdh\DomPDF\PDF;
 // use Barryvdh\DomPDF\Facade as PDF;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
-
+use Livewire\Request;
 
 class VentasComponent extends Component
 {
@@ -24,12 +25,16 @@ class VentasComponent extends Component
     public $listadoPaquetes;
     public $listadopaqueteria;
     public $listadoClientes;
+    public $listadoViajes;
+    public $listadoViajesVendidos;
+    public $listadoPaquetesVendidos;
     public $pagos;
     public $idVenta;
-    public $comprarPaquete, $comprarCliente, $precioPaqueteSeleccionado;
+    public $comprarPaquete, $comprarCliente, $comprarViaje, $precioPaqueteSeleccionado, $precioViajeSeleccionado;
 
     public $ocultarPaquetes=false;
     public $ocultarClientes=false;
+    public $ocultarViajes=false;
     public $ocultarVenta=true;
 
     public $FechaVencimiento, $PrecioDelPaquete;
@@ -41,7 +46,11 @@ class VentasComponent extends Component
     public $ContDestinos=0;
     public $ContVentas=0;
 
-    public $FiltroCliente, $FiltroPaquete;
+    public $FiltroCliente, $FiltroPaquete, $FiltroViaje;
+
+    public $PaqueteViaje; 
+    public $MostrarDatosDeViaje=false;
+    public $MostrarDatosDePaquete=false;
 
     public function render()
     {
@@ -53,6 +62,15 @@ class VentasComponent extends Component
         return view('livewire.ventas.ventas-component')->with(['ContClientes'=>$this->ContClientes, 'ContDestinos' => $this->ContDestinos, 'ContVentas'=>$this->ContVentas])->extends('layouts.adminlte');
     }
 
+    public function SeleccionaVenta($producto) {
+        switch ($producto) {
+            case 'Paquete': $this->MostrarDatosDePaquete=true; $this->ocultarPaquetes=true; $this->MostrarDatosDeViaje=false; $this->ocultarViajes=true; break;
+            case 'Viaje': $this->MostrarDatosDePaquete=false; $this->ocultarPaquetes=false;$this->MostrarDatosDeViaje=true; $this->ocultarPaquetes=true;
+            
+            break;
+        }
+    }
+
     public function FiltrarPaquete() {
         if(strlen($this->FiltroPaquete)>0) {
             $this->listadoPaquetes = Paquete::where('nombre', 'like', '%'.$this->FiltroPaquete .'%')->get();
@@ -60,6 +78,15 @@ class VentasComponent extends Component
         }
         else {
             $this->listadoPaquetes = Paquete::all();
+        }
+    }
+
+    public function FiltrarViaje() {
+        if(strlen($this->FiltroViaje)>0) {
+            $this->listadoViajes = Viaje::where('nombreviaje', 'like', '%'.$this->FiltroViaje .'%')->get();
+        }
+        else {
+            $this->listadoViajes = Viaje::all();
         }
     }
 
@@ -88,38 +115,27 @@ class VentasComponent extends Component
     }
     public function MostrarListadoPaquetes() {
         $this->listadopaqueteria = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')->get();
-        // $this->listadoVentas = Venta::join('clientes', 'ventas.cliente_id', '=', 'clientes.id')->get();
-        //$this->listadoVentas = Venta::all();
-        // dd($this->listadoVentas);
         $this->mostrarlistadopaqueteria=!$this->mostrarlistadopaqueteria;
-        // dd($this->listadoVentas->cliente_nombre());
     }
 
     public function MostrarListadoVentas() {
-        $this->listadoVentas = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')
+        $this->listadoPaquetesVendidos = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')
         ->join('paquetes', 'paquetes.id', '=', 'ventas.paquete_id')->get();
-        
-        // $this->listadoVentas = Venta::join('clientes', 'ventas.cliente_id', '=', 'clientes.id')->get();
-        //$this->listadoVentas = Venta::all();
-        // dd($this->listadoVentas);
+        $this->listadoViajesVendidos = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')
+        ->join('viajes', 'viajes.id', '=', 'ventas.viaje_id')->get();
         $this->mostrarlistadoventas=!$this->mostrarlistadoventas;
-        // dd($this->listadoVentas->cliente_nombre());
     }
 
     public function CargarIdVenta($idVenta) {
         $this->idVenta = $idVenta;
         $this->pagos = Pago::where('venta_id','=',$idVenta)->orderby('fechavencimiento')->get();
-        //dd($this->pagos);
     }
 
     public function RegistrarPago($id) {
-        //dd($id);
         $pago = Pago::find($id);
         $pago->fechapago = date("Y-m-d");
         $pieces = explode("-", $pago->descripcion); //extrae el monto de la cuota que se encuentra en la descripción
-        //dd(floatval(substr(trim($pieces[1]),1)));
         $pago->montopagado=substr(trim($pieces[1]),1);
-        //dd($pago->montopagado);
         $pago->estado="Pagada";
         $pago->save();
         $this->CargarIdVenta($this->idVenta);
@@ -128,6 +144,7 @@ class VentasComponent extends Component
     public function CapturarIdPago($id) {
         $this->idcuotadepagoparcial = $id;
     }
+
     public function RegistrarPagoParcial() {
         //dd($id);
                 
@@ -161,6 +178,7 @@ class VentasComponent extends Component
 
     public function ConstructorVenta() {
         $this->listadoPaquetes=Paquete::all();
+        $this->listadoViajes=Viaje::all();
         $this->listadoClientes=Cliente::all();
         $this->FechaVencimiento = date('Y-m-d'); 
     }
@@ -170,6 +188,12 @@ class VentasComponent extends Component
         $paquete =  Paquete::where('id','=',$id)->get('presupuestoestimado');
         //dd($paquete[0]['presupuestoestimado']);
         $this->precioPaqueteSeleccionado = $paquete[0]['presupuestoestimado'];
+    }
+
+    public function SeleccionoViaje($id) {
+        $this->comprarViaje=$id;
+        $viaje =  Viaje::where('id','=',$id)->get('presupuestoestimado');
+        $this->precioViajeSeleccionado = $viaje[0]['presupuestoestimado'];
     }
 
     public function SeleccionoCliente($id) {
@@ -182,15 +206,18 @@ class VentasComponent extends Component
     public function RealizarVenta() {
         $venta = new Venta;
         $venta->fecha = date("Y-m-d");
-        $venta->total = $this->precioPaqueteSeleccionado; //$this->CantidadCuotas;
+        if($this->precioPaqueteSeleccionado) $venta->total = $this->precioPaqueteSeleccionado; 
+        if($this->precioViajeSeleccionado) $venta->total = $this->precioViajeSeleccionado;
         $venta->cliente_id=$this->comprarCliente;
         $venta->paquete_id = $this->comprarPaquete;
+        $venta->viaje_id = $this->comprarViaje;
         //dd($venta);
         $venta->save();    
         $date=$this->FechaVencimiento;
         for($cont=1; $cont<=$this->CantidadCuotas;$cont++) {
             $pago = new Pago;
-            $pago->descripcion = "Cuota ".  $cont . " - $" . number_format($this->precioPaqueteSeleccionado/$this->CantidadCuotas,2, '.', '');
+            if($this->precioPaqueteSeleccionado) $pago->descripcion = "Cuota ".  $cont . " - $" . number_format($this->precioPaqueteSeleccionado/$this->CantidadCuotas,2, '.', '');
+            if($this->precioViajeSeleccionado)   $pago->descripcion = "Cuota ".  $cont . " - $" . number_format($this->precioViajeSeleccionado/$this->CantidadCuotas,2, '.', '');
             $pago->venta_id=$venta->id;
             $pago->montopagado=0;
             $pago->fechavencimiento=$date;
@@ -221,16 +248,23 @@ $operacion='AFEPS-40595';
         return $pdf->stream('archivo.pdf');
     }
 
-    public function GenerarCSV() {
+    public function GenerarCSV($codigoviaje) {
 
         //Nombre del archivo que generaremos
-        $fileName = 'InvTransactionsInterface.csv';
+        $fileName = 'DUT_900107_Pasajeros_fecha_'.$codigoviaje.'.csv';
         //Arreglo que contendrá las filas de datos
         $arrayDetalle = Array();
 
         //Estos son los datos que recibimos del modelo que queremos leer, aquí ustedes cámbienlo por el modelo que necesiten
-        $items=Cliente::all();
+        $items=Venta::where('ventas.viaje_id','=',$codigoviaje)
+        ->join('clientes','ventas.cliente_id','=','clientes.id')
+        ->get();
 
+        // dd($items);
+        // $items=Cliente::all();
+        // $this->destinospaquete = DestinoPaquete::where('paquete_id','=',$this->paquete_id)
+        // ->join('destinos','destino_paquetes.destino_id','=','destinos.id')
+        // ->get();
         //El encabezado que le dice al explorador el tipo de archivo que estamos generando
         $headers = array(
                     "Content-type"        => "text/csv",

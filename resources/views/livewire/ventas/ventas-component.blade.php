@@ -313,9 +313,6 @@
                                             <a href="{{ URL::to('/pdf/deuda') }}" target="_blank">
                                                 <img class="p-2" src="img/pdf.png" alt="" width="50px">
                                             </a>
-                                            <a href="{{ URL::to('/pdf/csv') }}" target="_blank">
-                                                <img class="p-2" src="img/csv.png" alt="" width="45px">
-                                            </a>
                                         </div>
                                         <table class="table table-hover text-nowrap">
                                             <tr>
@@ -325,7 +322,50 @@
                                                 <td>Total</td>
                                                 <td>Opciones</td>
                                             </tr>
-                                            @foreach ($listadoVentas as $venta)
+                                            @foreach ($listadoPaquetesVendidos as $venta)
+                                            <tr>
+                                                <td>{{ date('d-m-Y',strtotime($venta->fecha))}}</td>
+                                                <td>{{ $venta->apellido . ', ' . $venta->nombre }}</td>
+                                                <td>{{ $venta->nombrepaquete }}</td>
+                                                <td>$ {{ number_format($venta->total,2)}}</td>
+                                                <td>
+                                                    {{$venta->paquete}}
+                                                    <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-info" data-toggle="modal" data-target="#ModalGestionPagos">
+                                                        Gestionar Pagos
+                                                    </button>
+                                                    {{-- <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-warning" data-toggle="modal" data-target="#ModalGestionPagos">
+                                                        Imprimir chequera
+                                                    </button> --}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body cleartfix">
+                                <div class="media align-items-stretch">
+                                    <div class="media-body">
+                                        <div style="display: block ruby">
+                                            <h4>Listado de Viajes Vendidos</h4>
+                                            <a href="{{ URL::to('/pdf/deuda') }}" target="_blank">
+                                                <img class="p-2" src="img/pdf.png" alt="" width="50px">
+                                            </a>
+                                            <a href="{{ URL::to('/pdf/csv') }}" target="_blank">
+                                                <img class="p-2" src="img/csv.png" alt="" width="45px">
+                                            </a>
+                                        </div>
+                                        <table class="table table-hover text-nowrap">
+                                            <tr>
+                                                <td>Fecha</td>
+                                                <td>Cliente</td>
+                                                <td>Viaje</td>
+                                                <td>Total</td>
+                                                <td>Opciones</td>
+                                            </tr>
+                                            @foreach ($listadoViajesVendidos as $venta)
                                             <tr>
                                                 <td>{{ date('d-m-Y',strtotime($venta->fecha))}}</td>
                                                 <td>{{ $venta->apellido . ', ' . $venta->nombre }}</td>
@@ -493,7 +533,7 @@
 
                         <div class="row">
                             <!-- card de paquetes turisticos -->
-                            <div class="col-xl-5 col-md-5 m-4">
+                            <div class="col-xl-5 col-md-5 m-4" wire:click="SeleccionaVenta('Paquete')">
                                 <div class="card overflow-hidden card-resalte">
                                     <div class="card-content">
                                         <div class="card-body cleartfix">
@@ -512,7 +552,7 @@
                                 </div>
                             </div>
                             <!-- card de viajes aereos -->
-                            <div class="col-xl-5 col-md-5 m-4">
+                            <div class="col-xl-5 col-md-5 m-4" wire:click="SeleccionaVenta('Viaje')">
                                 <div class="card overflow-hidden card-resalte">
                                     <div class="card-content">
                                         <div class="card-body cleartfix">
@@ -521,7 +561,7 @@
                                                     <i class="icon-pencil primary font-large-2 mr-2"></i>
                                                 </div>
                                                 <div class="media-body">
-                                                    <h4>Viajes Aéreos</h4>
+                                                    <h4>Viajes</h4>
                                                     Aca van los datos
                                                     <span>Monthly blog posts</span>
                                                 </div>
@@ -532,16 +572,131 @@
                             </div>
                         </div>
 
-                        <div class="row" style="justify-content: center">
-                            <!-- listado de paquetes -->
+                        @if($MostrarDatosDePaquete)
+                            <!-- GESTIÓN DE PAQUETES TURÍSTICOS -->
+                            <div class="row" style="justify-content: center">
+                                <!-- listado de paquetes -->
+                                <div class="col-xl-5 col-md-4 m-4" style="overflow-x: scroll; height;height: 300px;background-color: antiquewhite; box-shadow: 5px 5px 15px gray;">
+                                    <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2 mt-2" type="text" value="" placeholder="Buscar Paquete" wire:model="FiltroPaquete" wire:keyup="FiltrarPaquete" style="background-color: whitesmoke; box-shadow: 5px 5px 15px gray;">
+                                    @if($ocultarPaquetes)
+                                    @else
+                                    @if($listadoPaquetes)
+                                        <div style="overflow-x: scroll; height: 240px;">
+                                            @foreach ($listadoPaquetes as $paquete)
+                                            <div class="card overflow-hidden card-resalte" wire:click="SeleccionoPaquete({{$paquete->id}})">
+                                                <div class="card-content rounded" style="background-color: #cda3a3;">
+                                                    <div class="card-body cleartfix">
+                                                        <div class="media align-items-stretch">
+                                                            <div class="align-self-center">
+                                                                <i class="icon-pencil primary font-large-2 mr-2"></i>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h6>{{ $paquete->nombre }}</h6>
+                                                                <span>{{ $paquete->descripcion}}</span>
+                                                            </div>
+                                                            <div class="align-self-center">
+                                                                <img class="m-2" src="{{ asset($paquete->fotourl)}}" alt="" style="width: 50px; height:50px ;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    @endif
+                                </div>
+                                <!-- listado de clientes -->
+                                <div class="col-xl-5 col-md-4 m-4" style="height: 300px;background-color: antiquewhite; box-shadow: 5px 5px 15px gray;">
+                                    <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2 mt-2" type="text" value="" placeholder="Buscar Cliente" wire:model="FiltroCliente" wire:keyup="FiltrarCliente" style="background-color: whitesmoke; box-shadow: 5px 5px 15px gray;">
+                                    @if($ocultarClientes)
+                                    @else
+                                        @if($comprarPaquete)
+                                            {{-- <input class="form-control mx-3 btn col-11 align-self-center bg-red-200" type="text" value="" placeholder="Buscar Persona"> --}}
+                                            <div style="overflow-x: scroll; height: 240px;">
+                                                @foreach($listadoClientes as $cliente)
+                                                <div class="col-xl-12 col-md-12 m-4">
+                                                    <h6  wire:click="SeleccionoCliente({{$cliente->id}})" class="card-resalte">{{ $cliente->apellido }}, {{ $cliente->nombre }} - {{ $cliente->dni }}</h6>
+                                                            {{-- <div class="card overflow-hidden card-resalte" wire:click="SeleccionoCliente({{$cliente->id}})">
+                                                                <div class="card-content rounded" style="background-color: #a6c49a;">
+                                                                    <div class="card-body cleartfix">
+                                                                        <div class="media align-items-stretch">
+                                                                            <div class="media-body">
+                                                                                <h6>{{ $cliente->apellido }}, {{ $cliente->nombre }}</h6>
+                                                                                <span>{{ $paquete->descripcion}}</span>
+                                                                            </div>
+                                                                            <div class="align-self-center">
+                                                                                <img class="m-2" src="{{ asset('fotourl')}}" alt="" style="width: 50px; height:50px ;">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div> --}}
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            Seleccione un paquete
+                                        @endif
+                                    @endif
+                                </div>
+                                <div class="col-xl-11 col-md-11 m-4">
+                                    @if($comprarPaquete>0 && $comprarCliente>0 and $precioPaqueteSeleccionado>0)
+                                        Monto del Paquete: $ <input class="btn" type="text" value="203" wire:model="precioPaqueteSeleccionado">
+                                        @if(!$ocultarVenta)
+                                        <table>
+                                            <tr>
+                                                <td>Fecha Vencimiento</td>
+                                                <td>Cantidad Cuotas</td>
+                                                <td>Acción</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-control" type="date" name="FechaVencimiento" id="FechaVencimiento" wire:model="FechaVencimiento">
+                                                </td>
+                                                <td>
+                                                    <select  class="form-control ml-2 mr-2" name="CantidadCuotas" id="CantidadCuotas" wire:model="CantidadCuotas">
+                                                        <option value="1" selected>1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info mx-2" wire:click="RealizarVenta()" data-toggle="modal" data-target="#ModalVentasExitosa">Realizar Venta </button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        Monto de la cuota <input class="btn" type="text" value="{{ $precioPaqueteSeleccionado/$CantidadCuotas }}" disabled>
+                                        @endif
+
+                                    @else
+                                        Debe seleccionar un paquete y una persona
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($MostrarDatosDeViaje)
+                            <!-- GESTIÓN DE VIAJES -->
+                            <div class="row" style="justify-content: center">
+                            <!-- listado de VIAJES -->
                             <div class="col-xl-5 col-md-4 m-4" style="overflow-x: scroll; height;height: 300px;background-color: antiquewhite; box-shadow: 5px 5px 15px gray;">
-                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2 mt-2" type="text" value="" placeholder="Buscar Paquete" wire:model="FiltroPaquete" wire:keyup="FiltrarPaquete" style="background-color: whitesmoke; box-shadow: 5px 5px 15px gray;">
-                                @if($ocultarPaquetes)
+                                <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2 mt-2" type="text" value="" placeholder="Buscar Viaje" wire:model="FiltroViaje" wire:keyup="FiltrarViaje" style="background-color: whitesmoke; box-shadow: 5px 5px 15px gray;">
+                                @if($ocultarViajes)
                                 @else
-                                @if($listadoPaquetes)
+                                @if($listadoViajes)
                                     <div style="overflow-x: scroll; height: 240px;">
-                                        @foreach ($listadoPaquetes as $paquete)
-                                        <div class="card overflow-hidden card-resalte" wire:click="SeleccionoPaquete({{$paquete->id}})">
+                                        @foreach ($listadoViajes as $viaje)
+                                        <div class="card overflow-hidden card-resalte" wire:click="SeleccionoViaje({{$viaje->id}})">
                                             <div class="card-content rounded" style="background-color: #cda3a3;">
                                                 <div class="card-body cleartfix">
                                                     <div class="media align-items-stretch">
@@ -549,11 +704,11 @@
                                                             <i class="icon-pencil primary font-large-2 mr-2"></i>
                                                         </div>
                                                         <div class="media-body">
-                                                            <h6>{{ $paquete->nombre }}</h6>
-                                                            <span>{{ $paquete->descripcion}}</span>
+                                                            <h6>{{ $viaje->nombreviaje }}</h6>
+                                                            <span>{{ $viaje->descripcion}}</span>
                                                         </div>
                                                         <div class="align-self-center">
-                                                            <img class="m-2" src="{{ asset($paquete->fotourl)}}" alt="" style="width: 50px; height:50px ;">
+                                                            <img class="m-2" src="{{ asset($viaje->fotourl)}}" alt="" style="width: 50px; height:50px ;">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -569,38 +724,22 @@
                                 <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2 mt-2" type="text" value="" placeholder="Buscar Cliente" wire:model="FiltroCliente" wire:keyup="FiltrarCliente" style="background-color: whitesmoke; box-shadow: 5px 5px 15px gray;">
                                 @if($ocultarClientes)
                                 @else
-                                    @if($comprarPaquete)
-                                        {{-- <input class="form-control mx-3 btn col-11 align-self-center bg-red-200" type="text" value="" placeholder="Buscar Persona"> --}}
+                                    @if($comprarViaje)
                                         <div style="overflow-x: scroll; height: 240px;">
                                             @foreach($listadoClientes as $cliente)
                                             <div class="col-xl-12 col-md-12 m-4">
                                                 <h6  wire:click="SeleccionoCliente({{$cliente->id}})" class="card-resalte">{{ $cliente->apellido }}, {{ $cliente->nombre }} - {{ $cliente->dni }}</h6>
-                                                        {{-- <div class="card overflow-hidden card-resalte" wire:click="SeleccionoCliente({{$cliente->id}})">
-                                                            <div class="card-content rounded" style="background-color: #a6c49a;">
-                                                                <div class="card-body cleartfix">
-                                                                    <div class="media align-items-stretch">
-                                                                        <div class="media-body">
-                                                                            <h6>{{ $cliente->apellido }}, {{ $cliente->nombre }}</h6>
-                                                                            <span>{{ $paquete->descripcion}}</span>
-                                                                        </div>
-                                                                        <div class="align-self-center">
-                                                                            <img class="m-2" src="{{ asset('fotourl')}}" alt="" style="width: 50px; height:50px ;">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> --}}
                                             </div>
                                             @endforeach
                                         </div>
                                     @else
-                                        Seleccione un paquete
+                                        Seleccione un viaje
                                     @endif
                                 @endif
                             </div>
                             <div class="col-xl-11 col-md-11 m-4">
-                                @if($comprarPaquete>0 && $comprarCliente>0 and $precioPaqueteSeleccionado>0)
-                                    Monto del Paquete: $ <input class="btn" type="text" value="203" wire:model="precioPaqueteSeleccionado">
+                                @if($comprarViaje>0 && $comprarCliente>0 and $precioViajeSeleccionado>0)
+                                    Monto del Viaje: $ <input class="btn" type="text" value="203" wire:model="precioViajeSeleccionado">
                                     @if(!$ocultarVenta)
                                     <table>
                                         <tr>
@@ -633,14 +772,15 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    Monto de la cuota <input class="btn" type="text" value="{{ $precioPaqueteSeleccionado/$CantidadCuotas }}" disabled>
+                                    Monto de la cuota <input class="btn" type="text" value="{{ $precioViajeSeleccionado/$CantidadCuotas }}" disabled>
                                     @endif
 
                                 @else
-                                    Debe seleccionar un paquete y una persona
+                                    Debe seleccionar un viaje y una persona
                                 @endif
                             </div>
-                        </div>
+                            </div>
+                        @endif
                         <div class="d-flex justify-content-end mr-2 mb-2">
                             <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="ModalGestionVentas" >Cerrar</button>
                         </div>

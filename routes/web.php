@@ -19,6 +19,7 @@ use App\Http\Livewire\Seguimiento\SegumientoComponent;
 use App\Http\Livewire\Sucursal\SucursalComponent;
 use App\Http\Livewire\Tarifa\TarifaComponent;
 use App\Http\Livewire\Paqueteria\PaqueteriaComponent;
+use App\Http\Livewire\Viajes\ViajesComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +57,10 @@ Route::get('tarifas',TarifaComponent::class)->name('tarifas');
 // Route::get('menu-paqueteria',EncomiendaComponent::class)->name('menu-paqueteria');
 Route::get('encomiendas',EncomiendaComponent::class)->name('encomiendas');
 Route::get('paqueteria',PaqueteriaComponent::class)->name('paqueteria');
+Route::get('viajes',ViajesComponent::class)->name('viajes');
 
 Route::get('pdf/deuda', [VentasComponent::class, 'GenerarListadoVentasPDF']);
-Route::get('pdf/csv', [VentasComponent::class, 'GenerarCSV']);
+Route::get('pdf/csv/{codigoviaje}', [VentasComponent::class, 'GenerarCSV'])->name('csv');
 
 });
 

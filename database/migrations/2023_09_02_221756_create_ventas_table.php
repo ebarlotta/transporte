@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cliente_id');
-            $table->unsignedBigInteger('paquete_id');
+            $table->unsignedBigInteger('paquete_id')->nullable()->default(null);
+            $table->unsignedBigInteger('viaje_id')->nullable()->default(null);
             $table->double('total');
             $table->date('fecha');
             $table->timestamps();
 
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->foreign('paquete_id')->references('id')->on('paquetes');
+            $table->foreign('viaje_id')->references('id')->on('viajes');
         });
     }
 
