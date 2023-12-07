@@ -25,7 +25,9 @@
         <td>3</td>
     </tr>
 </table>
-{{ $saldo }}
+@foreach($saldo as $s)
+{{ $s }}
+@endforeach
 </body>
 
 </html>

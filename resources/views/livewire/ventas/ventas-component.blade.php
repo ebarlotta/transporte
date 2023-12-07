@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-xl-3 col-sm-6 col-12">
                     <div class="card card-resalte">
                         <div class="card-content">
@@ -172,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="row">
                 <div class="col-xl-3 col-sm-6 col-12">
@@ -315,7 +315,7 @@
                                             </a>
                                         </div>
                                         <table class="table table-hover text-nowrap">
-                                            <tr>
+                                            <tr style="background-color: grey;">
                                                 <td>Fecha</td>
                                                 <td>Cliente</td>
                                                 <td>Paquete</td>
@@ -325,12 +325,12 @@
                                             @foreach ($listadoPaquetesVendidos as $venta)
                                             <tr>
                                                 <td>{{ date('d-m-Y',strtotime($venta->fecha))}}</td>
-                                                <td>{{ $venta->apellido . ', ' . $venta->nombre }}</td>
-                                                <td>{{ $venta->nombrepaquete }}</td>
+                                                <td>{{ $venta->cliente->apellido . ', ' . $venta->cliente->nombre }}</td>
+                                                <td>{{ $venta->paquete->nombrepaquete }}</td>
                                                 <td>$ {{ number_format($venta->total,2)}}</td>
                                                 <td>
-                                                    {{$venta->paquete}}
-                                                    <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-info" data-toggle="modal" data-target="#ModalGestionPagos">
+                                                    {{-- {{$venta}} --}}
+                                                    <button type="button" wire:click="CargarIdVenta({{ $venta->id }})" class="btn btn-info" data-toggle="modal" data-target="#ModalGestionPagos">
                                                         Gestionar Pagos
                                                     </button>
                                                     {{-- <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-warning" data-toggle="modal" data-target="#ModalGestionPagos">
@@ -344,6 +344,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-12">
+                    <div class="card overflow-hidden">
                         <div class="card-content">
                             <div class="card-body cleartfix">
                                 <div class="media align-items-stretch">
@@ -358,7 +362,7 @@
                                             </a>
                                         </div>
                                         <table class="table table-hover text-nowrap">
-                                            <tr>
+                                            <tr style="background-color: grey;">
                                                 <td>Fecha</td>
                                                 <td>Cliente</td>
                                                 <td>Viaje</td>
@@ -368,11 +372,11 @@
                                             @foreach ($listadoViajesVendidos as $venta)
                                             <tr>
                                                 <td>{{ date('d-m-Y',strtotime($venta->fecha))}}</td>
-                                                <td>{{ $venta->apellido . ', ' . $venta->nombre }}</td>
-                                                <td>{{ $venta->nombrepaquete }}</td>
+                                                <td>{{ $venta->cliente->apellido . ', ' . $venta->cliente->nombre }}</td>
+                                                <td>{{ $venta->viaje->nombreviaje }}</td>
                                                 <td>$ {{ number_format($venta->total,2)}}</td>
                                                 <td>
-                                                    {{$venta->paquete}}
+                                                    {{-- {{$venta}} --}}
                                                     <button type="button" wire:click="CargarIdVenta({{$venta->id}})" class="btn btn-info" data-toggle="modal" data-target="#ModalGestionPagos">
                                                         Gestionar Pagos
                                                     </button>
@@ -440,7 +444,7 @@
                 <div class="modal-dialog modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                     <div class="modal-content" style="width: inherit">
                         <div class="modal-header">
-                            <h5 class="modal-title">Gestión de Envío de Paquetes</h5>
+                            <h5 class="modal-title">Gestión de Cuotas</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -578,6 +582,7 @@
                                 <!-- listado de paquetes -->
                                 <div class="col-xl-5 col-md-4 m-4" style="overflow-x: scroll; height;height: 300px;background-color: antiquewhite; box-shadow: 5px 5px 15px gray;">
                                     <input class="form-control mx-3 btn col-11 align-self-center bg-red-200 mb-2 mt-2" type="text" value="" placeholder="Buscar Paquete" wire:model="FiltroPaquete" wire:keyup="FiltrarPaquete" style="background-color: whitesmoke; box-shadow: 5px 5px 15px gray;">
+                                    {{-- {{ $listadoPaquetes }} --}}
                                     @if($ocultarPaquetes)
                                     @else
                                     @if($listadoPaquetes)

@@ -17,11 +17,14 @@ class Venta extends Model
     ];
 
     public function paquete() {
-        dd('paso');
         return $this->hasOne('App\Models\Paquete', 'id','paquete_id');
     }
 
-    // public function cliente_nombre() {
-    //     return $this->hasOne(Cliente::class,'cliente_id','id');
-    // }
+    public function cliente() {
+        return $this->hasOne('App\Models\Cliente', 'id','cliente_id');
+    }
+
+    public function viaje() {
+        return $this->hasOne('App\Models\Viaje', 'id','viaje_id');
+    }
 }

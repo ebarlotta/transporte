@@ -64,10 +64,8 @@ class VentasComponent extends Component
 
     public function SeleccionaVenta($producto) {
         switch ($producto) {
-            case 'Paquete': $this->MostrarDatosDePaquete=true; $this->ocultarPaquetes=true; $this->MostrarDatosDeViaje=false; $this->ocultarViajes=true; break;
-            case 'Viaje': $this->MostrarDatosDePaquete=false; $this->ocultarPaquetes=false;$this->MostrarDatosDeViaje=true; $this->ocultarPaquetes=true;
-            
-            break;
+            case 'Paquete': $this->MostrarDatosDePaquete=true; $this->ocultarPaquetes=false; $this->MostrarDatosDeViaje=false; $this->ocultarViajes=true; break;
+            case 'Viaje': $this->MostrarDatosDePaquete=false; $this->ocultarPaquetes=true;$this->MostrarDatosDeViaje=true; $this->ocultarViajes=false; break;
         }
     }
 
@@ -119,10 +117,21 @@ class VentasComponent extends Component
     }
 
     public function MostrarListadoVentas() {
-        $this->listadoPaquetesVendidos = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')
-        ->join('paquetes', 'paquetes.id', '=', 'ventas.paquete_id')->get();
-        $this->listadoViajesVendidos = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')
-        ->join('viajes', 'viajes.id', '=', 'ventas.viaje_id')->get();
+        // $this->listadoPaquetesVendidos = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')
+        // ->join('paquetes', 'paquetes.id', '=', 'ventas.paquete_id')->get();
+        $this->listadoPaquetesVendidos = Venta::where('paquete_id','>',0)->get();
+
+        // $this->listadoPaquetesVendidos = Venta::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
+        // ->join('paquetes', 'paquetes.id', '=', 'ventas.paquete_id')->get();
+        // $this->listadoViajesVendidos = Cliente::join('ventas', 'clientes.id', '=', 'ventas.cliente_id')
+        // ->join('viajes', 'viajes.id', '=', 'ventas.viaje_id')->get();
+        // $this->listadoViajesVendidos = Venta::join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
+        // ->join('viajes', 'viajes.id', '=', 'ventas.viaje_id')->get();
+        $this->listadoViajesVendidos = Venta::where('viaje_id','>',0)->get();
+        // ->join('clientes', 'clientes.id', '=', 'ventas.cliente_id')
+        // ->join('viajes', 'viajes.id', '=', 'ventas.viaje_id')->get();
+
+        // dd($this->listadoViajesVendidos);
         $this->mostrarlistadoventas=!$this->mostrarlistadoventas;
     }
 
@@ -178,6 +187,7 @@ class VentasComponent extends Component
 
     public function ConstructorVenta() {
         $this->listadoPaquetes=Paquete::all();
+        // dd($this->listadoPaquetes);
         $this->listadoViajes=Viaje::all();
         $this->listadoClientes=Cliente::all();
         $this->FechaVencimiento = date('Y-m-d'); 
@@ -233,16 +243,9 @@ class VentasComponent extends Component
         $this->Parcial = $dato;
     }
     public function GenerarListadoVentasPDF() {
-        // $pdf = app('dompdf.wrapper');
-        // $pdf = FacadePdf::make('dompdf.wrapper');
-
-        // $pdf->loadHTML('<h1>Styde.net</h1>');
-        // $data = [
-            // 'titulo' => 'Styde.net'
-        // ];
-$registros=10;
-$saldo =1000;
-$operacion='AFEPS-40595';
+        $registros=10;
+        $saldo = [10000,1000,100,10,1];
+        $operacion='AFEPS-40595';
         $pdf = PDF::loadView('livewire.ventas.pdf_view',compact('registros','saldo','operacion'));
 
         return $pdf->stream('archivo.pdf');
