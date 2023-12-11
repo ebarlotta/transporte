@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('telefono')->nullable();
             $table->string('email')->nullable();
             $table->date('fechanacimiento')->nullable();
-            $table->date('sexo')->default(0);
+            $table->integer('sexo')->default(0);
             $table->string('foto')->nullable()->default('img/sin_imagen.jpg');
 
             $table->unsignedBigInteger('nacionalidad_id')->default(1);
