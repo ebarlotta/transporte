@@ -286,7 +286,7 @@ class VentasComponent extends Component
                             'descripcion_documento'  => null,
                             'numero_documento'  => $item->dni,
                             'sexo'  => $item->sexo,
-                            'menor'  => $this->menor($item->fechanacimiento),
+                            'menor'  => $this->menor($item->fechanacimiento) ? 1 : 0,
                             'nacionalidad'  => 'AR',
                             'tripulante'  => 0,
                             'ocupa_butaca'  => 1
@@ -319,9 +319,9 @@ class VentasComponent extends Component
 
     public function menor($fechanacimiento) {    
         if((date("Y")-date("Y", strtotime($fechanacimiento))) < 18 ){
-            return 0;
+            return false;
         }else{
-            return 1;
+            return true;
         }
     }
 }

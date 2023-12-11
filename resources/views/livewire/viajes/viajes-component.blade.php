@@ -368,6 +368,11 @@
                         </table>
                     </div>
                 </div>
+                <a href="{{route('ventas')}}">
+                    <button type="button" class="btn btn-info">
+                        </i> Volver a Ventas 
+                    </button>
+                </a>
             </div>
         </div>
     </div>

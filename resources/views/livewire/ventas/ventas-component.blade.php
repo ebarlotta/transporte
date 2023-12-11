@@ -240,25 +240,27 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card-resalte">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <div class="media d-flex">
-                                    <div class="media-body text-left">
-                                        <h3 class="danger">15</h3>
-                                        <span>Generación de DUT</span>
+                    <a href="{{route('viajes')}}">
+                        <div class="card-resalte">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="danger">15</h3>
+                                            <span>Generación de DUT</span>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="icon-direction danger font-large-2 float-right"></i>
+                                        </div>
                                     </div>
-                                    <div class="align-self-center">
-                                        <i class="icon-direction danger font-large-2 float-right"></i>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 40%"
+                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                </div>
-                                <div class="progress mt-1 mb-0" style="height: 7px;">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 40%"
-                                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
