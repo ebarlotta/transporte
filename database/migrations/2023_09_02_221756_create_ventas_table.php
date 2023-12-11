@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cliente_id');
-            $table->unsignedBigInteger('paquete_id')->nullable()->default(null);
-            $table->unsignedBigInteger('viaje_id')->nullable()->default(null);
+            $table->unsignedBigInteger('paquete_id')->default(null);
+            $table->unsignedBigInteger('viaje_id')->default(null);
             $table->double('total');
             $table->date('fecha');
             $table->timestamps();
